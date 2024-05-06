@@ -1,23 +1,88 @@
 return {
   -- Telescope fuzzy finder.
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.6',
-    config = function()
-      local builtin = require("telescope.builtin")
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>fh', builtin.search_history, {})
-      vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
-      vim.keymap.set('n', '<leader>fr', builtin.resume, {})
-    end,
-    dependencies = { 
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = {
       -- I dont know what plenary is for.	
-      'nvim-lua/plenary.nvim', 
-      { 
-        -- This is useful for pretty icons.
-        'nvim-tree/nvim-web-devicons', 
-	enabled = vim.g.have_nerd_font 
-      }
-    }
+      {
+        'nvim-lua/plenary.nvim'
+      },
+      -- This is useful for pretty icons.
+      {
+        'nvim-tree/nvim-web-devicons',
+	enabled = vim.g.have_nerd_font
+      },
+      -- Better files fuzzy finds using fzf.
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end
+      },
+      -- Telescope UI for quick code actions.
+      {
+        'nvim-telescope/telescope-ui-select.nvim',
+      },
+      -- Live grep args for enabling passing args to the grep command.
+      {
+        'nvim-telescope/telescope-live-grep-args.nvim',
+        -- For major updates, this must be adjusted manually.
+        version = '^1.0.0',
+      },
+      -- Choose the directory before using live grep.
+      {
+        'smilovanovic/telescope-search-dir-picker.nvim'
+      },
+      -- Transform the cmdline for a better experience.
+      {
+        'jonarrien/telescope-cmdline.nvim',
+      },
+      -- This is for registering the telescope cmdline.
+      keys = {
+        { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
+      },
+
+    },
+    -- Configuration for Telescope.
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          layout_config = {
+            horizontal = { width = 0.9 };
+          },
+        },
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+            }
+          }
+        }
+      })
+
+      -- Enable telescope extensions if they are installed.
+      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("ui-select")
+      require("telescope").load_extension("live_grep_args")
+      require('telescope').load_extension('search_dir_picker')
+      require('telescope').load_extension('cmdline')
+
+      local builtin = require("telescope.builtin")
+      local live_grep_args = require('telescope').extensions.live_grep_args
+      local search_dir_picker = require('search_dir_picker')
+
+      -- Telescope pickers keymaps.
+      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sg', live_grep_args.live_grep_args, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+
+      -- Telescope cmdline.
+      vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+    end,
   },
 }
+

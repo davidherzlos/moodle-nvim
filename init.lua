@@ -1,6 +1,3 @@
--- Hacky thing to make SLP happy.
--- local vim = vim
-
 -- Require our module for vim options.
 require("vim-options")
 
