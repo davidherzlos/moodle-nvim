@@ -23,7 +23,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
 
-      -- Specify server here that i want to install.
+      -- Specify servers that that i want to install.
       lspconfig.lua_ls.setup({})
       lspconfig.phpactor.setup({})
 
