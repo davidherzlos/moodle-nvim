@@ -55,16 +55,15 @@ return {
             }
           },
           ["file_browser"] = {
-          theme = "ivy",
-          mappings = {
-            ["i"] = {
+            mappings = {
+              ["i"] = {
               -- your custom insert mode mappings
-            },
-            ["n"] = {
+              },
+              ["n"] = {
               -- your custom normal mode mappings
+              },
             },
           },
-        },
         }
       })
 
