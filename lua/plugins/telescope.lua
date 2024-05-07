@@ -35,15 +35,11 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
-      -- Transform the cmdline for a better experience.
+      --File browser extension for telescope.
       {
-        'jonarrien/telescope-cmdline.nvim',
-      },
-      -- This is for registering the telescope cmdline.
-      keys = {
-        { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
-      },
-
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+      }
     },
     -- Configuration for Telescope.
     config = function()
@@ -57,7 +53,18 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {
             }
-          }
+          },
+          ["file_browser"] = {
+          theme = "ivy",
+          mappings = {
+            ["i"] = {
+              -- your custom insert mode mappings
+            },
+            ["n"] = {
+              -- your custom normal mode mappings
+            },
+          },
+        },
         }
       })
 
@@ -65,12 +72,12 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("live_grep_args")
-      require('telescope').load_extension('search_dir_picker')
-      require('telescope').load_extension('cmdline')
+      require('telescope').load_extension("file_browser")
 
       local builtin = require("telescope.builtin")
       local live_grep_args = require('telescope').extensions.live_grep_args
       local search_dir_picker = require('search_dir_picker')
+      local file_browser = require('telescope').extensions.file_browser
 
       -- Telescope pickers keymaps.
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
@@ -79,9 +86,8 @@ return {
       vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-
-      -- Telescope cmdline.
-      vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+      vim.keymap.set('n', '<leader>fb', file_browser.file_browser, { desc = '[File] [B]rowser' })
+      vim.keymap.set("n", '<leader>fh', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[F]iles from [H]ere' })
     end,
   },
 }

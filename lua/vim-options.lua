@@ -24,3 +24,11 @@ vim.opt.scrolloff = 10
 -- Enable 24 bit colours in the terminal.
 vim.opt.termguicolors = true
 
+-- Preview substitutions when typing.
+vim.opt.inccommand = 'split'
+
+-- Display some whitespace characters.
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+

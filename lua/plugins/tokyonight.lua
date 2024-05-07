@@ -7,9 +7,10 @@ return {
     -- This little callback enables the colorscheme.
     config = function()
       require("tokyonight").setup({
-        on_highlights = function(hl, c)
+        on_highlights = function(hl)
           local kitty = "#1a1b26"
-          local blue = "#8fa6dc"
+          local blue = "#0db9d7"
+          local yellow = "#e0af68"
           hl.TelescopeNormal = {
             bg = kitty,
           }
@@ -19,15 +20,9 @@ return {
           }
           hl.TelescopePromptBorder = {
             bg = kitty,
-            fg = blue,
+            fg = yellow,
           }
           hl.TelescopePromptTitle = {
-            fg = blue,
-          }
-          hl.TelescopePreviewTitle = {
-            fg = blue,
-          }
-          hl.TelescopeResultsTitle = {
             fg = blue,
           }
         end,
