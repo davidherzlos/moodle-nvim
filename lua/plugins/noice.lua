@@ -2,7 +2,7 @@ return {
   -- Noice, to replace the cmdline by a floating window.
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    --event = "VeryLazy",
     opts = {
       -- add any options here
     },
