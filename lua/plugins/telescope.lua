@@ -85,9 +85,9 @@ return {
       vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>fb', file_browser.file_browser, { desc = '[File] [B]rowser' })
-      vim.keymap.set("n", '<leader>fh', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[F]iles from [H]ere' })
-    end,
+      vim.keymap.set('n', '<leader>FB', file_browser.file_browser, { desc = '[Files] [B]rowser' })
+      vim.keymap.set("n", '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[F]iles [B]rowser in Patch' })
+    end
   },
 }
 
