@@ -8,6 +8,7 @@ return {
       "TimerStart", "TimerRepeat"
     },
     dependencies = {
+      -- Optional if you want to use the notification windows.
       "rcarriga/nvim-notify",
     },
     opts = {

@@ -7,6 +7,7 @@ vim.g.maplocalleader = ' '
 
 -- Add line nunbers for easy jumping.
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = 'unnamedplus'
@@ -31,4 +32,15 @@ vim.opt.inccommand = 'split'
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Decrease update time
+vim.opt.updatetime = 250
 
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Hide cmdline when it is not being used.
+vim.opt.cmdheight = 0
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true

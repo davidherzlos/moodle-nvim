@@ -15,17 +15,29 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
           require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "phpactor" }
+            ensure_installed = { "lua_ls", "intelephense" }
           })
         end
       },
+
     },
     config = function()
       local lspconfig = require("lspconfig")
 
       -- Specify servers that that i want to install.
       lspconfig.lua_ls.setup({})
-      lspconfig.phpactor.setup({})
+      lspconfig.intelephense.setup({
+        settings = {
+          intelephense = {
+            files = {
+              maxSize = {
+                type = "number",
+                default = 1500000,
+              },
+            },
+          },
+        }
+      })
 
       -- Attach the lsp actions needed.
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -44,6 +56,7 @@ return {
           vim.keymap.set('n', '<leader>gr', telescope.lsp_references, opts('LSP: [G]oto [R]eferences'))
 
         end
+
       })
     end
   },
