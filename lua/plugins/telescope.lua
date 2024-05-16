@@ -4,7 +4,7 @@ return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
-      -- I dont know what plenary is for.	
+      -- I dont know what plenary is for but many plugins related to telescope require it.
       {
         'nvim-lua/plenary.nvim'
       },
@@ -35,15 +35,6 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
-      -- Transform the cmdline for a better experience.
-      {
-        'jonarrien/telescope-cmdline.nvim',
-      },
-      -- This is for registering the telescope cmdline.
-      keys = {
-        { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
-      },
-
     },
     -- Configuration for Telescope.
     config = function()
@@ -52,12 +43,25 @@ return {
           layout_config = {
             horizontal = { width = 0.9 };
           },
+          preview = {
+            treesitter = false
+          },
         },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {
             }
-          }
+          },
+          ["file_browser"] = {
+            mappings = {
+              ["i"] = {
+              -- your custom insert mode mappings
+              },
+              ["n"] = {
+              -- your custom normal mode mappings
+              },
+            },
+          },
         }
       })
 
@@ -65,8 +69,7 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("live_grep_args")
-      require('telescope').load_extension('search_dir_picker')
-      require('telescope').load_extension('cmdline')
+      require("telescope").load_extension("search_dir_picker")
 
       local builtin = require("telescope.builtin")
       local live_grep_args = require('telescope').extensions.live_grep_args
@@ -79,10 +82,7 @@ return {
       vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-
-      -- Telescope cmdline.
-      vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
-    end,
+    end
   },
 }
 
