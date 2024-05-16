@@ -44,3 +44,4 @@ vim.opt.cmdheight = 0
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
+

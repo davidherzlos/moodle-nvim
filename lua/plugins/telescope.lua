@@ -11,7 +11,7 @@ return {
       -- This is useful for pretty icons.
       {
         'nvim-tree/nvim-web-devicons',
-	enabled = vim.g.have_nerd_font
+        enabled = vim.g.have_nerd_font
       },
       -- Better files fuzzy finds using fzf.
       {
@@ -35,6 +35,7 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
+
     },
     -- Configuration for Telescope.
     config = function()
@@ -69,6 +70,7 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("live_grep_args")
+
       require("telescope").load_extension("search_dir_picker")
 
       local builtin = require("telescope.builtin")
