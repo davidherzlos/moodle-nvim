@@ -1,6 +1,6 @@
 return {
   -- Conform adds capabilities to neovim for consuming external formatter.
-  { 
+  {
     "stevearc/conform.nvim",
     lazy = true,
     event = { "BufWritePre" },

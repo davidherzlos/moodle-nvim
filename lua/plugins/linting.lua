@@ -14,10 +14,10 @@ return {
     config = function()
       -- Setup Mason.
       require("mason").setup({})
-      
+
       -- Configure nvim-lint.
       local lint = require('lint')
-      
+
       -- Create an auto command to trigger linting in my php files.
       vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "BufEnter", "BufReadPre", "BufWritePost", "CursorHold", "CursorHoldI" }, {
         callback = function()
@@ -28,7 +28,7 @@ return {
        })
       local phpcs = require('lint').linters.phpcs
       phpcs.args = {
-        '--standard=PSR12',
+        '--standard=PSR12,PSR1',
         '--report=json',
         '-',
       }
