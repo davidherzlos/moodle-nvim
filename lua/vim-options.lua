@@ -39,9 +39,6 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
--- Hide cmdline when it is not being used.
-vim.opt.cmdheight = 0
-
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
