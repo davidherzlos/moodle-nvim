@@ -12,12 +12,13 @@ return {
 
       -- Then specify servers that that i want to install.
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "intelephense" }
+        ensure_installed = { "bashls", "lua_ls", "intelephense" }
       })
 
       -- And configure the language servers.
       local lspconfig = require("lspconfig")
 
+      lspconfig.bashls.setup({})
       lspconfig.lua_ls.setup({})
       lspconfig.intelephense.setup({
         settings = {

@@ -19,6 +19,7 @@ return {
       require("conform").setup({
         formatters_by_ft = {
           php = { "phpcbf" },
+          sh = { "beautysh" },
         },
         formatters = {
           ["phpcbf"] = {
@@ -29,6 +30,14 @@ return {
             },
             stdin = false,
           },
+          ["beautysh"] = {
+            command = vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/beautysh",
+            args = {
+              "--indent-size=2",
+              "--force-function-style=paronly",
+              "-",
+            },
+          }
         },
         format_on_save = {
           lsp_fallback = false,
