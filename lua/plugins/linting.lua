@@ -27,8 +27,8 @@ return {
         end,
        })
       local phpcs = require('lint').linters.phpcs
+      phpcs.command = vim.loop.cwd() .. "vendor/bin/phpcs"
       phpcs.args = {
-        '--standard=PSR12,PSR1',
         '--report=json',
         '-',
       }
@@ -39,9 +39,7 @@ return {
 
       -- Configure mason-nvim-lint.
       require("mason-nvim-lint").setup({
-        ensure_installed = {
-            "phpcs"
-        }
+        ensure_installed = {}
       })
     end
   }

@@ -23,9 +23,8 @@ return {
         },
         formatters = {
           ["phpcbf"] = {
-            command = vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/phpcbf",
+            command = vim.loop.cwd() .. "vendor/bin/phpcbf",
             args = {
-              "--standard=PSR12,PSR1",
               "$FILENAME"
             },
             stdin = false,
@@ -47,9 +46,7 @@ return {
       })
       -- Configure mason-conform.
       require("mason-conform").setup({
-        ensure_installed = {
-          "phpcbf"
-        }
+        ensure_installed = {}
       })
     end
   },
