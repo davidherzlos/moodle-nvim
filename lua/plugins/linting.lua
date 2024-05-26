@@ -27,7 +27,7 @@ return {
         end,
        })
       local phpcs = require('lint').linters.phpcs
-      phpcs.command = vim.loop.cwd() .. "vendor/bin/phpcs"
+      phpcs.command = vim.loop.cwd() .. "/vendor/bin/phpcs"
       phpcs.args = {
         '--report=json',
         '-',

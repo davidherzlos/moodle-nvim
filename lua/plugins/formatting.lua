@@ -23,7 +23,7 @@ return {
         },
         formatters = {
           ["phpcbf"] = {
-            command = vim.loop.cwd() .. "vendor/bin/phpcbf",
+            command = vim.loop.cwd() .. "/vendor/bin/phpcbf",
             args = {
               "$FILENAME"
             },
