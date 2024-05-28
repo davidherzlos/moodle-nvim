@@ -13,7 +13,9 @@ return {
     "LittleEndianRoot/mason-conform", -- To ensure formaters are auto installed.
     config = function()
       -- Setup Mason
-      require("mason").setup({})
+      require("mason").setup({
+         log_level = vim.log.levels.DEBUG
+      })
 
       -- Configure conform.
       require("conform").setup({
@@ -22,14 +24,16 @@ return {
           sh = { "beautysh" },
         },
         formatters = {
-          ["phpcbf"] = {
+          phpcbf = {
+            inherit = false,
             command = vim.loop.cwd() .. "/vendor/bin/phpcbf",
             args = {
               "$FILENAME"
             },
             stdin = false,
           },
-          ["beautysh"] = {
+          beautysh = {
+            inherit = false,
             command = vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/beautysh",
             args = {
               "--indent-size=2",
@@ -44,11 +48,12 @@ return {
         },
         notify_on_error = true,
       })
+
       -- Configure mason-conform.
       require("mason-conform").setup({
-        ensure_installed = {}
+        ensure_installed = {},
+        quiet_mode = true,
       })
     end
   },
 }
-
