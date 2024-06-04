@@ -35,14 +35,16 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
-
     },
     -- Configuration for Telescope.
     config = function()
       require("telescope").setup({
         defaults = {
           layout_config = {
-            horizontal = { width = 0.9 };
+            horizontal = {
+              width = 0.95,
+              height = 0.80,
+            };
           },
           preview = {
             treesitter = false
@@ -52,16 +54,6 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {
             }
-          },
-          ["file_browser"] = {
-            mappings = {
-              ["i"] = {
-              -- your custom insert mode mappings
-              },
-              ["n"] = {
-              -- your custom normal mode mappings
-              },
-            },
           },
         }
       })
