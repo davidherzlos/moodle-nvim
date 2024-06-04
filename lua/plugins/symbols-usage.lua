@@ -28,7 +28,7 @@ local function text_format(symbol)
     end
     table.insert(res, round_start)
     table.insert(res, { '󰳽 ', 'SymbolUsageDef' })
-    table.insert(res, { symbol.definition .. ' defs', 'SymbolUsageContent' })
+    table.insert(res, { symbol.definition .. '', 'SymbolUsageContent' })
     table.insert(res, round_end)
   end
 
@@ -38,7 +38,7 @@ local function text_format(symbol)
     end
     table.insert(res, round_start)
     table.insert(res, { '󰡱 ', 'SymbolUsageImpl' })
-    table.insert(res, { symbol.implementation .. ' impls', 'SymbolUsageContent' })
+    table.insert(res, { symbol.implementation .. '', 'SymbolUsageContent' })
     table.insert(res, round_end)
   end
 
@@ -72,6 +72,7 @@ return {
 
       local SymbolKind = vim.lsp.protocol.SymbolKind
       require('symbol-usage').setup({
+      vt_position = 'end_of_line',
         kinds = {
           SymbolKind.Interface,
           SymbolKind.Class,
