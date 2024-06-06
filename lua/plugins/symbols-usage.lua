@@ -72,7 +72,7 @@ return {
 
       local SymbolKind = vim.lsp.protocol.SymbolKind
       require('symbol-usage').setup({
-      vt_position = 'end_of_line',
+      vt_position = 'above',
         kinds = {
           SymbolKind.Interface,
           SymbolKind.Class,
