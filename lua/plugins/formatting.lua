@@ -25,7 +25,6 @@ return {
         },
         formatters = {
           phpcbf = {
-            inherit = false,
             command = vim.loop.cwd() .. "/vendor/bin/phpcbf",
             args = {
               "$FILENAME"
@@ -33,7 +32,6 @@ return {
             stdin = false,
           },
           beautysh = {
-            inherit = false,
             command = vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/beautysh",
             args = {
               "--indent-size=2",
