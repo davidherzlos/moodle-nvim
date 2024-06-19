@@ -42,7 +42,7 @@ return {
         },
         format_on_save = {
           lsp_fallback = false,
-          timeout_ms = 1000,
+          timeout_ms = 3000,
         },
         notify_on_error = true,
       })
