@@ -19,7 +19,7 @@ return {
       local lint = require('lint')
 
       -- Create an auto command to trigger linting in my php files.
-      vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "BufEnter", "BufReadPre", "BufWritePost", "CursorHold", "CursorHoldI" }, {
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'TextChanged' }, {
         callback = function()
           -- try_lint without arguments runs the linters defined in `linters_by_ft`
           -- for the current filetype
