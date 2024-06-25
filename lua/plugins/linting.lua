@@ -1,31 +1,26 @@
+-- Add capabilities to neovim for consuming linters.
 return {
-  -- Nvim-lint adds neovim capabilities to consume linters. 
+  -- The order of the plugins setup matters.
   {
+    "williamboman/mason.nvim",
     'mfussenegger/nvim-lint',
-    -- event = {
-    --     "BufReadPre", "BufNewFile"
-    -- },
-    dependencies = {
-      "williamboman/mason.nvim", -- Mason is the package manager to install tools.
-    },
   },
   {
-    "rshkarin/mason-nvim-lint", -- To ensure linters are auto installed.
+    "rshkarin/mason-nvim-lint",
     config = function()
-      -- Setup Mason.
-      require("mason").setup({})
 
-      -- Configure nvim-lint.
+      -- Setup mason and nvim-lint first,
+      require("mason").setup({})
       local lint = require('lint')
 
-      -- Create an auto command to trigger linting in my php files.
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'TextChanged' }, {
+      -- Add autocmd to lint the current file on specific events.
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
         callback = function()
-          -- try_lint without arguments runs the linters defined in `linters_by_ft`
-          -- for the current filetype
-          lint.try_lint()
-        end,
-       })
+          require("lint").try_lint()
+        end
+      })
+
+      -- Configure php linter behavior.
       local phpcs = require('lint').linters.phpcs
       phpcs.command = vim.loop.cwd() .. "/vendor/bin/phpcs"
       phpcs.args = {
@@ -33,14 +28,16 @@ return {
         '-',
       }
 
+      -- Associate the configured linters to filetypes.
       lint.linters_by_ft = {
         php = { "phpcs" },
       }
 
-      -- Configure mason-nvim-lint.
+      -- Finally ensure all linters are installed.
       require("mason-nvim-lint").setup({
         ensure_installed = {}
       })
+
     end
   }
 }
