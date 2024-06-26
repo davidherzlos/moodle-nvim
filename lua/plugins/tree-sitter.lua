@@ -1,13 +1,13 @@
 return {
   {
-    -- Let neovim understand the structure of your document.
     "nvim-treesitter/nvim-treesitter",
-    commit = 'c579d18',
+    -- NOTE: You can use this commit as fallback for bugs in lastest commits.
+    -- commit = 'c579d18',
     build = ":TSUpdate",
     config = function ()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "php", "markdown", "markdown_inline" },
+        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "markdown", "markdown_inline", "php" },
         auto_install = true,
         sync_install = false,
         highlight = {
