@@ -63,7 +63,6 @@ return {
           })
         },
 
-
         -- Configure snippet expansion behaviour for nvim-cmp.
         snippet = {
           expand = function(args)
@@ -84,7 +83,7 @@ return {
           ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-i>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
+          ['<C-k>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
           ['<C-e>'] = cmp.mapping.abort(),
         }),
 
