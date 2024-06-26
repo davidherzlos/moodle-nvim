@@ -26,6 +26,7 @@ return {
 
       -- Require some variables for further configuration.
       local cmp = require'cmp'
+      local luasnip = require('luasnip')
       local lspkind = require('lspkind')
       lspkind.init()
 
@@ -58,13 +59,15 @@ return {
             maxwidth = 35,
             ellipsis_char = '...',
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
           })
         },
+
 
         -- Configure snippet expansion behaviour for nvim-cmp.
         snippet = {
           expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
 
@@ -76,14 +79,22 @@ return {
 
         -- Define some mappings to interact with the completion list.
         mapping = cmp.mapping.preset.insert({
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-i>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
           ['<C-e>'] = cmp.mapping.abort(),
         }),
 
         -- Tell nvim-cmp the sources for the completion list.
-        sources = cmp.config.sources({ { name = 'luasnip' }, { name = 'nvim_lsp' } }, { { name = 'buffer' } }) })
+        sources = cmp.config.sources({ { name = 'luasnip' }, { name = 'nvim_lsp' } }, { { name = 'buffer' } })
+      })
+
+      -- Configure luasnip for jumping around the confirmed snippets.
+      vim.keymap.set({ "i" }, "<C-k>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { silent = true })
 
       -- Broadcast capabilities for each lsp we have installed.
       local capabilities = require('cmp_nvim_lsp').default_capabilities()

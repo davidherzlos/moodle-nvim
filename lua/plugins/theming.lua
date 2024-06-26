@@ -16,7 +16,9 @@ return {
           treesitter_context = true,
           gitsigns = true,
           harpoon = true,
+          leap = true,
           mason = true,
+          cmp = true,
           telescope = {
             enabled = true,
             style = 'nvchad',
