@@ -47,7 +47,8 @@ return {
           end
 
           local telescope = require('telescope.builtin')
-          vim.keymap.set('n', '<leader>gd', telescope.lsp_definitions, opts('LSP: [G]oto [D]efinition'))
+          -- Configure some minimal keybindings.
+          vim.keymap.set('n', '<leader>gd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts('LSP: [G]oto [D]efinition'))
           vim.keymap.set('n', '<leader>gi', telescope.lsp_implementations, opts('LSP: [G]oto [I]mplementations'))
           vim.keymap.set('n', '<leader>gr', telescope.lsp_references, opts('LSP: [G]oto [R]eferences'))
         end
