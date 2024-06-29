@@ -7,7 +7,7 @@ return {
     config = function ()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "markdown", "markdown_inline", "php" },
+        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "markdown", "markdown_inline", "php", "html" },
         auto_install = true,
         sync_install = false,
         highlight = {
@@ -25,6 +25,7 @@ return {
           enable = true
         },
       })
+      vim.treesitter.language.register('html', 'mustache')  -- the someft filetype will use the python parser and queries.
     end
   }
 }
