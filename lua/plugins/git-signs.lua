@@ -4,18 +4,28 @@ return {
     config = function()
 
       local gitsigns = require('gitsigns')
+      
+
+
+      -- NOTE: 
       gitsigns.setup {
         signs = {
-          add          = { text = '+'  },
-          change       = { text = '+'  },
-        },
+          add          = { text = '󰐕' },
+          change       = { text = '󰐕' },
+          delete       = { text = '󰍴' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = 'ﰣ' },
+       },
         signs_staged = {
-          add          = { text = '+'  },
-          change       = { text = '+'  },
+          add          = { text = '󰐕' },
+          change       = { text = '󰐕' },
+          delete       = { text = '󰍴' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = 'ﰣ' },
         },
-        word_diff = true,
         current_line_blame = true,
-        sign_priority = 6,
+
+        --NOTE:
         max_file_length = 40000, -- Disable if file is longer than this (in lines)
         show_deleted = false,
 
@@ -47,7 +57,7 @@ return {
           -- Hunk operations.
           map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Gitsigns: [H]unk [R]eset' })
           map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Gitsigns: [H]unk [S]tage toggle' })
-          map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Gitsigns: [H]unk [P]review' })
+           map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Gitsigns: [H]unk [P]review' })
           map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end, { desc = 'Gitsigns: [H]unk [B]lame line' })
           map('n', '<leader>td', gitsigns.toggle_deleted, { desc = 'Gitsigns: [T]oggle [D]eleted' })
 

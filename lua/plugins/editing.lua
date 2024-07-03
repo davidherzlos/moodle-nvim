@@ -12,6 +12,7 @@ return {
     },
     opts = {
       signs = true,
+      sign_priority = 8,
       keywords = {
         FIX = {
           icon = "",

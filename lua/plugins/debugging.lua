@@ -70,10 +70,11 @@ return {
       -- Finally some icons customizations.
       -- NOTE: texthl is hardcoded to the one that has the desired color.
       local sign = vim.fn.sign_define
-      sign("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = ""})
-      sign("DapLogPoint", { text = " ", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
-      sign("DapStopped", { text = " ", texthl = "DapLogPoint", linehl = "", numhl = ""})
+      sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = ""})
+      sign("DapLogPoint", { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
+      sign("DapStopped", { text = "", texthl = "DapLogPoint", linehl = "", numhl = ""})
     end
+
   },
 }
 

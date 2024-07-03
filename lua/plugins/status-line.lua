@@ -15,10 +15,14 @@ return {
             "dapui_scopes", "dapui_console",
             "dapui_stacks", "dap-repl"
           },
-          -- Use the installed theme. 
-          theme = "catppuccin",
         },
         sections = {
+          lualine_b = {
+            {
+              'diagnostics',
+              symbols = { error ='', warn = '', info = '', hint = ''},
+            }
+          },
           lualine_c = {
             {
               -- We want the filename as a relative path.
