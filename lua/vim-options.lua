@@ -25,9 +25,8 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 1
+vim.opt.scrolloff = 100
 
--- Enable 24 bit colours in the terminal.
 vim.opt.termguicolors = true
 
 -- Preview substitutions when typing.
@@ -44,6 +43,17 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
--- Show which line your cursor is on
-vim.opt.cursorline = true
+-- Hide command line when it is not used.
+vim.opt.cmdheight =0
 
+-- Copy previous indentation on autoindenting.
+vim.opt.copyindent = true
+
+-- Disable ~ on non existing lines.
+vim.opt.fillchars = { eob = " " }
+
+-- Enable cursor blink.
+vim.opt.guicursor = "n:blinkon200,i-ci-ve:ver25"
+
+-- Give some space to signs and line number.
+vim.opt.statuscolumn = " %@SignCb@%s%=%T %@NumCb@%r  "
