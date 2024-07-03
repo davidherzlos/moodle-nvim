@@ -37,5 +37,16 @@ return {
       vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
       vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
     end
-  }
+  },
+  -- Highligh color column when needed by filetype.
+  {
+    "m4xshen/smartcolumn.nvim",
+      opts = {
+      colorcolumn = "100",
+      custom_colorcolumn = {
+        python = "80", php = "132"
+      },
+      scope = 'line'
+    }
+  },
 }
