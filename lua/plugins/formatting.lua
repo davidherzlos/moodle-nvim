@@ -1,57 +1,76 @@
+-- Conform adds capabilities to neovim for consuming formatters.
 return {
-  -- Conform adds capabilities to neovim for consuming external formatter.
   {
     "stevearc/conform.nvim",
     lazy = true,
     event = { "BufWritePre" },
     cmd = {"ConformInfo"},
     dependencies = {
-      "williamboman/mason.nvim", -- Mason is the package manager to install tools.
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-  },
-  {
-    "LittleEndianRoot/mason-conform", -- To ensure formaters are auto installed.
     config = function()
-      -- Setup Mason
-      require("mason").setup({
-         log_level = vim.log.levels.DEBUG
+      -- Add a helper to decide which formatter to use.
+      local php_main_formatter = function ()
+        if vim.fn.filereadable(vim.loop.cwd() .. '/vendor/bin/phpcbf') == 1 then
+          return 'phpcbf'
+        else
+          return 'php-cs-fixer'
+        end
+      end
+
+      -- Async format the file so we can rely slow formatters are gonna work.
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "*",
+        callback = function(args)
+          require("conform").format({
+            bufnr = args.buf,
+            async = true,
+            lsp_format = 'never',
+          },
+            function()
+              vim.cmd "checktime"
+            end)
+        end,
       })
 
-      -- Configure conform.
       require("conform").setup({
+
+        -- Notify and log any error when formatting.
+        notify_on_error = true,
+        log_level = vim.log.levels.ERROR,
+
+        -- Associate formatters with filetypes.
         formatters_by_ft = {
-          php = { "phpcbf" },
+          php = { php_main_formatter() },
           sh = { "beautysh" },
         },
+
+        -- Customize or override default behavior for some formatters.
         formatters = {
-          phpcbf = {
-            command = vim.loop.cwd() .. "/vendor/bin/phpcbf",
+          ['php-cs-fixer'] = {
+            command = require('conform.util').find_executable({
+              "tools/php-cs-fixer/vendor/bin/php-cs-fixer",
+              "vendor/bin/php-cs-fixer",
+              vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/php-cs-fixer"
+            }, "php-cs-fixer"),
             args = {
-              "$FILENAME"
+              "fix",
+              "$FILENAME",
+              "--using-cache=no",
+              "--rules=@Symfony",
+              "--no-interaction",
+              "--quiet",
             },
-            stdin = false,
           },
           beautysh = {
-            command = vim.loop.os_homedir() .. "/.local/share/nvim/mason/bin/beautysh",
-            args = {
+            prepend_args = {
               "--indent-size=2",
               "--force-function-style=paronly",
-              "-",
             },
           }
         },
-        format_on_save = {
-          lsp_fallback = false,
-          timeout_ms = 3000,
-        },
-        notify_on_error = true,
       })
 
-      -- Configure mason-conform.
-      require("mason-conform").setup({
-        ensure_installed = {},
-        quiet_mode = true,
-      })
     end
   },
 }
