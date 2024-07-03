@@ -1,6 +1,13 @@
 return {
   {
     'hrsh7th/nvim-cmp',                      -- Completion engine.
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
     dependencies = {
       'rafamadriz/friendly-snippets',        -- VSCode generic snippets.
       'ManuelGil/vscode-moodle-snippets',    -- VSCode snippets for Moodle Development.
@@ -12,7 +19,8 @@ return {
       },
       'doxnit/cmp-luasnip-choice',           -- Autochoice completion node.
       'hrsh7th/cmp-nvim-lsp',                -- Completion source for builting lsp's.
-      'onsails/lspkind.nvim'                 -- Some pretty icons for lsp completions.
+      'onsails/lspkind.nvim',                -- Some pretty icons for lsp completions.
+      "folke/lazydev.nvim",
     },
 
     -- TODO: Review these potential sources for completions:
