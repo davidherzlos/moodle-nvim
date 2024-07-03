@@ -9,17 +9,21 @@ return {
           add          = { text = '+'  },
           change       = { text = '+'  },
         },
+        signs_staged = {
+          add          = { text = '+'  },
+          change       = { text = '+'  },
+        },
+        word_diff = true,
         current_line_blame = true,
         sign_priority = 6,
         max_file_length = 40000, -- Disable if file is longer than this (in lines)
-        show_deleted = true,
+        show_deleted = false,
 
         -- Use this callback to attach some uselful keybindings.
         on_attach = function(bufnr)
           local function map(mode, l, r, opts)
             opts = opts or {}
             opts.buffer = bufnr
-            print(opts.desc)
             vim.keymap.set(mode, l, r, opts)
           end
 
@@ -41,14 +45,16 @@ return {
           end, { desc = 'Gitsigns: Previous Hunk'})
 
           -- Hunk operations.
-          map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'Gitsigns: [H]unk [R]eset' })
+          map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Gitsigns: [H]unk [R]eset' })
           map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Gitsigns: [H]unk [S]tage toggle' })
           map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Gitsigns: [H]unk [P]review' })
           map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end, { desc = 'Gitsigns: [H]unk [B]lame line' })
+          map('n', '<leader>td', gitsigns.toggle_deleted, { desc = 'Gitsigns: [T]oggle [D]eleted' })
 
         end
 
       }
+
     end
   }
 }
