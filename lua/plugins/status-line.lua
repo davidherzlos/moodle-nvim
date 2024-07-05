@@ -9,7 +9,7 @@ return {
       require('lualine').setup({
         options = {
           -- This will avoid to render the line in dap-ui elements.
-          globalstatus = false,
+          globalstatus = true,
           ignore_focus = {
             "dapui_watches", "dapui_breakpoints",
             "dapui_scopes", "dapui_console",

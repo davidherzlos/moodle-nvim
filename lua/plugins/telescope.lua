@@ -42,10 +42,13 @@ return {
         defaults = {
           layout_config = {
             horizontal = {
-              width = 0.95,
-              height = 0.80,
+              prompt_position = 'top',
+              width = { padding = 0 },
+              height = { padding = 0 },
+              preview_width = 0.5,
             };
           },
+          sorting_strategy = 'ascending',
           preview = {
             treesitter = false
           },
@@ -76,6 +79,30 @@ return {
       vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+
+       -- keeps track of current `tabline` and `statusline`, so we can restore it after closing telescope
+        local temp_showtabline
+        local temp_laststatus
+
+        function _G.global_telescope_find_pre()
+          temp_showtabline = vim.o.showtabline
+          temp_laststatus = vim.o.laststatus
+          vim.o.showtabline = 0
+          vim.o.laststatus = 0
+        end
+
+        function _G.global_telescope_leave_prompt()
+          vim.o.laststatus = temp_laststatus
+          vim.o.showtabline = temp_showtabline
+        end
+
+        vim.cmd([[
+          augroup MyAutocmds
+            autocmd!
+            autocmd User TelescopeFindPre lua global_telescope_find_pre()
+            autocmd FileType TelescopePrompt autocmd BufLeave <buffer> lua global_telescope_leave_prompt()
+          augroup END
+        ]])
     end
   },
 }
