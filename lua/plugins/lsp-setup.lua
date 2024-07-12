@@ -51,6 +51,7 @@ return {
           vim.keymap.set('n', '<leader>gd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts('LSP: [G]oto [D]efinition'))
           vim.keymap.set('n', '<leader>gi', telescope.lsp_implementations, opts('LSP: [G]oto [I]mplementations'))
           vim.keymap.set('n', '<leader>gr', telescope.lsp_references, opts('LSP: [G]oto [R]eferences'))
+          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts('LSP: [R]ename Symbol'))
         end
       })
 
