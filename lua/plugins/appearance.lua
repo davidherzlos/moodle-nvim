@@ -47,6 +47,9 @@ local tokyonight = {
       hl.CursorLine = {
         bg = c.bg
       }
+      hl.MiniIndentscopeSymbol = {
+        fg = "#515a81"
+      }
     end,
   },
 }

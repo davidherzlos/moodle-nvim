@@ -14,7 +14,7 @@ local function text_format(symbol)
       or ''
 
   if symbol.references then
-    local usage = symbol.references <= 1 and 'usage' or 'usages'
+    local usage = symbol.references <= 1 and 'reference' or 'references'
     local num = symbol.references == 0 and 'no' or symbol.references
     table.insert(res, round_start)
     table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
@@ -28,7 +28,7 @@ local function text_format(symbol)
     end
     table.insert(res, round_start)
     table.insert(res, { '󰳽 ', 'SymbolUsageDef' })
-    table.insert(res, { symbol.definition .. '', 'SymbolUsageContent' })
+    table.insert(res, { symbol.definition .. ' defined', 'SymbolUsageContent' })
     table.insert(res, round_end)
   end
 
@@ -38,7 +38,7 @@ local function text_format(symbol)
     end
     table.insert(res, round_start)
     table.insert(res, { '󰡱 ', 'SymbolUsageImpl' })
-    table.insert(res, { symbol.implementation .. '', 'SymbolUsageContent' })
+    table.insert(res, { symbol.implementation .. ' implemented', 'SymbolUsageContent' })
     table.insert(res, round_end)
   end
 
@@ -61,7 +61,9 @@ return {
     dependencies = {
       "neovim/nvim-lspconfig", -- Just ensure Lsp setup is finished.
     },
-    event = 'BufReadPre', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    keys = {
+      '<leader>st',
+    },
     config = function()
       -- hl-groups can have any name
       vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
@@ -81,8 +83,8 @@ return {
           SymbolKind.Method,
         },
         text_format = text_format,
-        request_pending_text = 'lsping...',
-        references = { enabled = false, include_declaration = false },
+        request_pending_text = '...',
+        references = { enabled = true, include_declaration = true },
         definition = { enabled = true },
         implementation = { enabled = true },
       })

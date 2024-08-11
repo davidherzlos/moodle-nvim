@@ -56,5 +56,5 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.guicursor = "n:blinkon200,i-ci-ve:ver25"
 
 -- Give some space to signs and line number.
-vim.opt.statuscolumn = " %@SignCb@%s%=%T %@NumCb@%r  "
+vim.opt.statuscolumn = " %@SignCb@%s%=%T%@NumCb@%r  "
 
