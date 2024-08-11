@@ -98,7 +98,7 @@ return {
         factor = 0.20
       },
       options = {
-        multiple_diag_under_cursor = false
+        multiple_diag_under_cursor = true
       }
     }
   },
