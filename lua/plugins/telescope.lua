@@ -35,6 +35,7 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
+      { "tsakirist/telescope-lazy.nvim" }
     },
     -- Configuration for Telescope.
     config = function()
@@ -52,6 +53,16 @@ return {
           preview = {
             treesitter = false
           },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--trim" -- add this value
+          }
         },
         extensions = {
           ["ui-select"] = {

@@ -19,8 +19,7 @@ return {
         zindex = 20, -- The Z-index of the context window
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
         })
-        vim.keymap.set("n", "<leader>tc", ":TSContextEnable<CR>", { desc = "[T]reesitter [Context] Enable"})
-        vim.keymap.set("n", "<leader>q", ":TSContextDisable<CR>", { desc = "[T]reesitter [Context] Disable"})
+        vim.keymap.set("n", "<leader>tc", ":TSContextToggle<CR>", { desc = "[T]reesitter [Context] Enable"})
     end
   }
 }
