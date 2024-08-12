@@ -41,7 +41,3 @@ vim.cmd.colorscheme 'tokyonight'
 
 -- Load our custom configuration.
 require("config")
-
--- This keymap is just a personal command i use to test some lua code.
--- vim.keymap.set("n", "<leader>rt", function () require('lua-guide.language-test').run() end, { desc = "[R]un Lua [T]ests"})
-
