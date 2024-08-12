@@ -97,7 +97,15 @@ return {
         }),
 
         -- Tell nvim-cmp the sources for the completion list.
-        sources = cmp.config.sources({ { name = 'luasnip' }, { name = 'nvim_lsp' } }, { { name = 'buffer' } })
+        sources = cmp.config.sources(
+          { 
+            { name = 'luasnip' },
+            { name = 'nvim_lsp' },
+          },
+          {
+            { name = 'buffer' }
+          }
+        )
       })
 
       -- Configure luasnip for jumping around the confirmed snippets.
