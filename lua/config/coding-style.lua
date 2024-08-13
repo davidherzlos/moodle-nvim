@@ -44,16 +44,15 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     vim.diagnostic.config({
       virtual_text = false
     })
-    -- Toggle on formatters_enabled on the current buffer.
-    vim.b.formatters_enabled = true
   end,
-  desc = 'Hide virtual text and set correct formatting toggle flag.'
+  desc = 'Hide virtual text on BufEnter.'
 })
 
 -- Add usercmd to toggle formatting for the current buffer.
 vim.api.nvim_create_user_command("ConformToggle", function ()
-  local state = vim.b.formatters_enabled
-  vim.b.formatters_enabled = not state
+  local state = vim.g.formatters_enabled
+  vim.g.formatters_enabled = not state
+  vim.print('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
 end, { desc = "Toggle formatting for the current buffer." })
 
 -- Add autocmd for custom format on save behavior.
@@ -61,7 +60,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
   pattern = { "*.sh", "*.php" },
   callback = function(args)
 
-    if not vim.b.formatters_enabled then
+    if not vim.g.formatters_enabled then
       vim.print('Formatting is not enabled on this buffer.')
       return
     end

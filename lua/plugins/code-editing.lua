@@ -102,4 +102,7 @@ return {
       }
     }
   },
+  {
+    "github/copilot.vim"
+  },
 }
