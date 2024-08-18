@@ -30,14 +30,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- And finally tell lazy to require our plugins.
-require("lazy").setup("plugins", {}, {
+require("lazy").setup("plugins", {
   ui = {
     icons = vim.g.have_nerd_font and {}
   }
 })
 
--- Once all is setup, load the colorscheme.
-vim.cmd.colorscheme 'tokyonight'
-
 -- Load our custom configuration.
 require("config")
+
+-- Once all is setup, load the colorscheme.
+vim.cmd.colorscheme 'tokyonight'

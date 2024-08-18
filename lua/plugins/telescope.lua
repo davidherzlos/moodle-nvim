@@ -35,7 +35,16 @@ return {
       {
         'smilovanovic/telescope-search-dir-picker.nvim'
       },
-      { "tsakirist/telescope-lazy.nvim" }
+      { "tsakirist/telescope-lazy.nvim" },
+      {
+        's1n7ax/nvim-window-picker',
+        name = 'window-picker',
+        event = 'VeryLazy',
+        version = '2.*',
+        config = function()
+          require'window-picker'.setup()
+        end,
+      }
     },
     -- Configuration for Telescope.
     config = function()
@@ -62,6 +71,26 @@ return {
             "--column",
             "--smart-case",
             "--trim" -- add this value
+          },
+          mappings = {
+            i = {
+              ['<C-g>'] = function(prompt_bufnr)
+                -- Use nvim-window-picker to choose the window by dynamically attaching a function
+                local action_set = require('telescope.actions.set')
+                local action_state = require('telescope.actions.state')
+
+                local picker = action_state.get_current_picker(prompt_bufnr)
+                picker.get_selection_window = function(picker, entry)
+                  local picked_window_id = require('window-picker').pick_window({hint='floating-big-letter'}) or vim.api.nvim_get_current_win()
+                  vim.print(require('window-picker').pick_window({ hint = 'floating-big-letter'}))
+                  -- Unbind after using so next instance of the picker acts normally
+                  picker.get_selection_window = nil
+                  return picked_window_id
+                end
+
+                return action_set.edit(prompt_bufnr, 'edit')
+              end,
+            },
           }
         },
         extensions = {
@@ -91,29 +120,29 @@ return {
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 
-       -- keeps track of current `tabline` and `statusline`, so we can restore it after closing telescope
-        local temp_showtabline
-        local temp_laststatus
+      -- keeps track of current `tabline` and `statusline`, so we can restore it after closing telescope
+      local temp_showtabline
+      local temp_laststatus
 
-        function _G.global_telescope_find_pre()
-          temp_showtabline = vim.o.showtabline
-          temp_laststatus = vim.o.laststatus
-          vim.o.showtabline = 0
-          vim.o.laststatus = 0
-        end
+      function _G.global_telescope_find_pre()
+        temp_showtabline = vim.o.showtabline
+        temp_laststatus = vim.o.laststatus
+        vim.o.showtabline = 0
+        vim.o.laststatus = 0
+      end
 
-        function _G.global_telescope_leave_prompt()
-          vim.o.laststatus = temp_laststatus
-          vim.o.showtabline = temp_showtabline
-        end
+      function _G.global_telescope_leave_prompt()
+        vim.o.laststatus = temp_laststatus
+        vim.o.showtabline = temp_showtabline
+      end
 
-        vim.cmd([[
+      vim.cmd([[
           augroup MyAutocmds
-            autocmd!
-            autocmd User TelescopeFindPre lua global_telescope_find_pre()
-            autocmd FileType TelescopePrompt autocmd BufLeave <buffer> lua global_telescope_leave_prompt()
+          autocmd!
+          autocmd User TelescopeFindPre lua global_telescope_find_pre()
+          autocmd FileType TelescopePrompt autocmd BufLeave <buffer> lua global_telescope_leave_prompt()
           augroup END
-        ]])
+          ]])
     end
   },
 }
