@@ -55,8 +55,5 @@ vim.opt.fillchars = { eob = " " }
 -- Enable cursor blink.
 vim.opt.guicursor = "n:blinkon200,i-ci-ve:ver25"
 
--- Give some space to signs and line number.
-vim.opt.statuscolumn = " %@SignCb@%s%=%T%@NumCb@%r  "
-
 -- Add global flag to toggle formatting.
 vim.g.formatters_enabled = false
