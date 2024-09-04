@@ -9,7 +9,6 @@ return {
       -- Mini file manager.
       require('mini.files').setup()
       vim.keymap.set("n", "<leader>fm", ":lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<CR>", { desc = "[M]ini [F]iles Open" })
-      vim.keymap.set("n", "<leader>FM", ":lua MiniFiles.open()<CR>", { desc = "[M]ini [F]iles Open Cwd" } )
 
       -- Animated indent scope line.
       require('mini.indentscope').setup({

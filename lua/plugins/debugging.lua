@@ -50,12 +50,16 @@ return {
       vim.keymap.set('n', '<F12>', dap.repl.toggle, { desc = 'Debugger: Repl toggle' })
 
       -- Breakpoints.
-      vim.keymap.set('n', '<Leader>l', function()dap.toggle_breakpoint(nil, nil, vim.fn.input('Expresion to log: '))end, { desc = 'Debugger: Set Logpoint' })
-      vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, { desc = 'Debugger: Toggle breakpoint' })
-      vim.keymap.set('n', '<Leader>B', dap.clear_breakpoints, { desc = 'Debugger: Clear breakpoints' })
+      vim.keymap.set('n', '<Leader>dl', function()dap.toggle_breakpoint(nil, nil, vim.fn.input('Expresion to log: '))end, { desc = 'Dap: [D]ebugger [L]ogpoint' })
+      vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint, { desc = 'Dap: [D]ebugger [B]reakpoint' })
+      vim.keymap.set('n', '<Leader>dC', function() dap.clear_breakpoints() require('notify')('Breakpoints cleared') end , { desc = 'Dap: [D]debugger [C]lear breakpoints' })
+      vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debugger: Continue' })
+      vim.keymap.set('n', '<F6>', dap.step_over, { desc = 'Debugger: Step Over' })
+      vim.keymap.set('n', '<F7>', dap.step_into, { desc = 'Debugger: Step Into' })
+      vim.keymap.set('n', '<F8>', dap.step_out, { desc = 'Debugger: Step Out' })
 
       -- Evaluate values under the cursor.
-      vim.keymap.set('n', '<space>?', function()require('dapui').eval(nil, { enter = true })end, { desc = 'Debugger: Eval variable'})
+      -- vim.keymap.set('n', '<space>?', function() require('dapui').eval(nil, { enter = true }) end, { desc = 'Debugger: Eval variable'})
 
       -- Some experimental keymaps for opening componentd as centered windows.
       --vim.keymap.set('n', '<Leader>df', function()local widgets = require('dap.ui.widgets')widgets.centered_float(widgets.frames)end)
