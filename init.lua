@@ -1,19 +1,6 @@
 -- Require our module for vim options.
 require("vim-options")
 
--- Set signs for diagnostic messages.
-local signs = {
-  Error = "",
-  Warn = "󰞏",
-  Hint = "",
-  Info = ""
-}
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- Then install lazy package manager.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 

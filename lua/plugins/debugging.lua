@@ -66,15 +66,7 @@ return {
       dap.listeners.before.launch.dapui_config = function()dapui.open()end
       dap.listeners.before.event_terminated.dapui_config = function()dapui.close()end
       dap.listeners.before.event_exited.dapui_config = function()dapui.close()end
-
-      -- Finally some icons customizations.
-      -- NOTE: texthl is hardcoded to the one that has the desired color.
-      local sign = vim.fn.sign_define
-      sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = ""})
-      sign("DapLogPoint", { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
-      sign("DapStopped", { text = "", texthl = "DapLogPoint", linehl = "", numhl = ""})
     end
-
   },
 }
 

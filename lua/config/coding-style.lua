@@ -36,18 +36,6 @@ conform.formatters = {
   },
 }
 
--- Add autocmd for some required initial state in the buffer.
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*" },
-  callback = function ()
-    -- Hide virtual text so the diagnostic perline can work.
-    vim.diagnostic.config({
-      virtual_text = false
-    })
-  end,
-  desc = 'Hide virtual text on BufEnter.'
-})
-
 -- Add usercmd to toggle formatting for the current buffer.
 vim.api.nvim_create_user_command("ConformToggle", function ()
   local state = vim.g.formatters_enabled
