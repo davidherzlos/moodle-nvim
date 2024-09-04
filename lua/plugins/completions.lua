@@ -124,6 +124,18 @@ return {
       require('lspconfig').intelephense.setup {
         capabilities = capabilities
       }
+      require('lspconfig').biome.setup {
+        capabilities = capabilities,
+        preferences = {
+          disableSuggestions = false
+        },
+      }
+      require('lspconfig').tsserver.setup {
+        capabilities = capabilities,
+        preferences = {
+          disableSuggestions = false
+        },
+      }
 
       -- Finally load some generic and Moodle specific vscode snippets packages.
       require("luasnip.loaders.from_vscode").lazy_load()

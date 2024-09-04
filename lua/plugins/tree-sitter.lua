@@ -7,7 +7,7 @@ return {
     config = function ()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "markdown", "markdown_inline", "php", "html" },
+        ensure_installed = { "bash", "regex", "vim", "vimdoc", "lua", "luadoc", "markdown", "markdown_inline", "php", "html", "javascript", "typescript"},
         auto_install = true,
         sync_install = false,
         highlight = {

@@ -13,7 +13,9 @@ local conform = require("conform")
 -- Map filetypes to formatter commands.
 conform.formatters_by_ft = {
   sh = { "beautysh" },
-  php = { php.is_moodle_codebase() and "phpcbf" or "php-cs-fixer" }
+  php = { php.is_moodle_codebase() and "phpcbf" or "php-cs-fixer" },
+  javascript = { "biome" },
+  json = { "biome" }
 }
 
 -- Override formatters behavior if needed.
@@ -45,7 +47,7 @@ end, { desc = "Toggle formatting for the current buffer." })
 
 -- Add autocmd for custom format on save behavior.
 vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
-  pattern = { "*.sh", "*.php" },
+  pattern = { "*.sh", "*.php", "*.js", "*.json" },
   callback = function(args)
 
     if not vim.g.formatters_enabled then
@@ -92,7 +94,10 @@ local lint = require('lint')
 
 -- Map filetypes to linters commands.
 lint.linters_by_ft = {
-  php = { "phpstan", "phpcs" }
+  php = { "phpstan", "phpcs" },
+  javascript = { "biome" },
+  json = { "biome" },
+  typescript = { "tsserver" },
 }
 
 -- Override formatters behavior if needed.
@@ -101,6 +106,9 @@ if php.is_moodle_codebase() then
   vim.print("Moodle codebase detected, increasing phpstan memory limit.")
   table.insert(lint.linters.phpstan.args, '--memory-limit=500M')
 end
+
+
+-- Commands.
 
 -- Add autocmd for linting the file on file save.
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

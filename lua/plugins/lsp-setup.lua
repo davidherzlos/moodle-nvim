@@ -12,7 +12,7 @@ return {
 
       -- Then specify servers that that i want to install.
       require("mason-lspconfig").setup({
-        ensure_installed = { "bashls", "lua_ls", "intelephense" }
+        ensure_installed = { "bashls", "lua_ls", "intelephense", "biome", "tsserver" }
       })
 
       -- Configure the language servers.
@@ -38,15 +38,29 @@ return {
         }
       })
 
-
-
-
-      vim.diagnostic.config({
-        virtual_text = {
-          prefix = '●',
-        },
+      -- Setup for nodejs programming.
+      lspconfig.biome.setup({
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx", -- Experimental.
+          "json",
+          "jsonc",
+          "astro",
+          "svelte",
+          "vue",
+          "css"
+        }
       })
 
+      -- Setup for typescript programming.
+      lspconfig.tsserver.setup({
+        {
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx"
+        }
+      })
     end
   },
 }
