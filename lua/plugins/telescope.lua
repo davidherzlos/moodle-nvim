@@ -49,6 +49,17 @@ return {
     -- Configuration for Telescope.
     config = function()
       require("telescope").setup({
+        pickers = {
+          lsp_definitions = {
+            show_line = false,
+          },
+          lsp_references = {
+            show_line = false,
+          },
+          lsp_implementations = {
+            show_line = false,
+          },
+        },
         defaults = {
           layout_config = {
             horizontal = {
@@ -60,7 +71,7 @@ return {
           },
           sorting_strategy = 'ascending',
           preview = {
-            treesitter = false
+            treesitter = true
           },
           vimgrep_arguments = {
             "rg",
@@ -91,7 +102,7 @@ return {
                 return action_set.edit(prompt_bufnr, 'edit')
               end,
             },
-          }
+          },
         },
         extensions = {
           ["ui-select"] = {
@@ -113,6 +124,8 @@ return {
       local search_dir_picker = require('search_dir_picker')
 
       -- Telescope pickers keymaps.
+      vim.keymap.set('n', '<leader>sc', builtin.git_status, { desc = '[S]earch Git [C]hanges' })
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch [W]ord' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sg', live_grep_args.live_grep_args, { desc = '[S]earch by [G]rep' })
