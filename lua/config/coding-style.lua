@@ -97,7 +97,7 @@ lint.linters_by_ft = {
   php = { "phpstan", "phpcs" },
   javascript = { "biome" },
   json = { "biome" },
-  typescript = { "tsserver" },
+  typescript = { "ts_ls" },
 }
 
 -- Override formatters behavior if needed.

@@ -130,7 +130,7 @@ return {
           disableSuggestions = false
         },
       }
-      require('lspconfig').tsserver.setup {
+      require('lspconfig').ts_ls.setup {
         capabilities = capabilities,
         preferences = {
           disableSuggestions = false

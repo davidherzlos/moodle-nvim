@@ -12,7 +12,7 @@ return {
 
       -- Then specify servers that that i want to install.
       require("mason-lspconfig").setup({
-        ensure_installed = { "bashls", "lua_ls", "intelephense", "biome", "tsserver" }
+        ensure_installed = { "bashls", "lua_ls", "intelephense", "biome", "ts_ls" }
       })
 
       -- Configure the language servers.
@@ -54,7 +54,7 @@ return {
       })
 
       -- Setup for typescript programming.
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         {
           "typescript",
           "typescriptreact",
