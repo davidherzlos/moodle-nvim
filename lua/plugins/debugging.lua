@@ -27,6 +27,12 @@ return {
         args = { vim.loop.os_homedir() .. '/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js' }
       }
 
+      -- NOTE: This is an alternative config for php, need to test.
+      -- dap.adapters.php = {
+      --   type = 'executable',
+      --   command = vim.fn.stdpath('data') .. '/mason/bin/php-debug-adapter',
+      -- }
+
       -- Tell dap how to use the adapters.
       dap.configurations.php = {
         {

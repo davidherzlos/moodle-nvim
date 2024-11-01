@@ -6,8 +6,17 @@ return {
 
     config = function()
 
+      -- Mini animate.
+      require('mini.animate').setup()
+
       -- Mini file manager.
-      require('mini.files').setup()
+      require('mini.files').setup({
+        mappings = {
+          close = '<Esc>'
+        }
+      })
+
+      -- Open it from the current buffer.
       vim.keymap.set("n", "<leader>fm", ":lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<CR>", { desc = "[M]ini [F]iles Open" })
 
       -- Animated indent scope line.

@@ -64,5 +64,18 @@ return {
       vim.g.lazygit_floating_window_scaling_factor = 1.0 -- scaling factor for floating window
       vim.g.lazygit_floating_window_use_plenary = 1 -- use plenary.nvim to manage floating window if available
     end
+  },
+  {
+    "sindrets/diffview.nvim",
+    opts = {
+      file_panel = {
+        listing_style = "list",             -- One of 'list' or 'tree'
+        win_config = {                      -- See |diffview-config-win_config|
+          position = "bottom",
+          width = 35,
+          win_opts = {},
+        },
+      },
+    }
   }
 }
