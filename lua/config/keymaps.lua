@@ -1,6 +1,10 @@
 -- This file contains all the keymaps for the plugins.
 vim.keymap.set('n', '<leader>su', function() require('symbol-usage').toggle() end, { desc = 'Symbols Usage: [S]ymbols [To]ggle' })
 
+-- Navigate easier in quickfixlists or location lists.
+vim.keymap.set("n", "]q", ":cnext<CR>", { desc = "QuickList: Next Item" })
+vim.keymap.set("n", "[q", ":cprev<CR>", { desc = "QuickList: Prev Item" })
+
 -- Language server Protocol.
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
