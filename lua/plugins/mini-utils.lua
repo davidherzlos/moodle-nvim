@@ -6,9 +6,6 @@ return {
 
     config = function()
 
-      -- Mini animate.
-      require('mini.animate').setup()
-
       -- Mini file manager.
       require('mini.files').setup({
         mappings = {

@@ -25,7 +25,7 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 100
+vim.opt.scrolloff = 2
 
 vim.opt.termguicolors = true
 
