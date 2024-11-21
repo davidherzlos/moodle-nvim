@@ -71,3 +71,11 @@ vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#1abc9c', bg = '#05261
 vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakPoint", linehl = "DapBreakPoint", numhl = "DapBreakPoint"})
 vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint"})
 vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped"})
+
+-- Gitsigns highlights
+vim.api.nvim_set_hl(0, 'GitSignsAddLn', { ctermbg = 0, bg = '#1a282e' })
+vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { ctermbg = 0, bg = '#1a282e' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedAddLn', { ctermbg = 0, bg = '#132a40' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedChangeLn', { ctermbg = 0, bg = '#132a40' })
+vim.api.nvim_set_hl(0, 'GitSignsDeleteVirtLn', { ctermbg = 0, bg = '#301014' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedChangedeleteLn', { ctermbg = 0, bg = '#301026' })

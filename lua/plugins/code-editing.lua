@@ -101,6 +101,7 @@ return {
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       api_key_cmd = nil,
       yank_register = "+",
@@ -277,7 +278,6 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
     }
   }

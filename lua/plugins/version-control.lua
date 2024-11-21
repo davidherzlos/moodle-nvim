@@ -1,45 +1,86 @@
--- nvim v0.8.0
 return {
   {
     'lewis6991/gitsigns.nvim',
-    config = function()
-      local gitsigns = require('gitsigns')
-      gitsigns.setup {
-        max_file_length = 40000, -- Disable if file is longer than this (in lines)
-        show_deleted = false,
-        on_attach = function(bufnr)
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
-
-          -- Navigation between Hunks.
-          map('n', ']h', function()
-            if vim.wo.diff then
-              vim.cmd.normal({']h', bang = true})
-            else
-              gitsigns.nav_hunk('next')
-            end
-          end, { desc = 'Gitsigns: Next Hunk' })
-
-          map('n', '[h', function()
-            if vim.wo.diff then
-              vim.cmd.normal({'[h', bang = true})
-            else
-              gitsigns.nav_hunk('prev')
-            end
-          end, { desc = 'Gitsigns: Previous Hunk'})
-
-          -- Hunk operations.
-          map('n', '<leader>gr', gitsigns.reset_hunk, { desc = ' Gitsigns: [G]it [R]eset' })
-          map('n', '<leader>gs', gitsigns.stage_hunk, { desc = 'Gitsigns: [G]it [S]tage toggle' })
-          map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
-          map('n', '<leader>gd', gitsigns.toggle_deleted, { desc = 'Gitsigns: [G]it [D]eleted' })
+    opts = {
+      signs = {
+        add          = { text = '┃' },
+        change       = { text = '┃' },
+        delete       = { text = '┃' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+      },
+      signs_staged = {
+        add          = { text = '┃' },
+        change       = { text = '┃' },
+        delete       = { text = '┃' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+      },
+      max_file_length = 40000, -- Disable if file is longer than this number of lines.
+      auto_attach = true,
+      numhl      = true,
+      on_attach = function(bufnr)
+        local gitsigns = require('gitsigns')
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
         end
-      }
 
-    end
+        -- Navigation between unstaged Hunks.
+        map('n', ']h', function()
+          if vim.wo.diff then
+            vim.cmd.normal({']h', bang = true})
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end, { desc = 'Git: Next Unstaged Hunk' })
+
+        map('n', '[h', function()
+          if vim.wo.diff then
+            vim.cmd.normal({'[h', bang = true})
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end, { desc = 'Git: Previous Unstaged Hunk'})
+
+        -- Navigation between staged Hunks.
+        map('n', ']]h', function()
+          if vim.wo.diff then
+            vim.cmd.normal({']]h', bang = true})
+          else
+            gitsigns.nav_hunk('next', { target = 'staged' })
+          end
+        end, { desc = 'Git: Next Staged Hunk' })
+
+        map('n', '[[h', function()
+          if vim.wo.diff then
+            vim.cmd.normal({'[[h', bang = true})
+          else
+            gitsigns.nav_hunk('prev', { target = 'staged' })
+          end
+        end, { desc = 'Git: Previous Staged Hunk'})
+
+        map('n', '<leader>gp', function()
+          gitsigns.toggle_linehl()
+        end, { desc = 'Git: [G]it [P]review' })
+
+        map('n', '<leader>gd', function()
+          gitsigns.toggle_deleted()
+        end, { desc = 'Git: [G]it [D]eleted' })
+
+        map('n', '<leader>hq', function() gitsigns.setqflist('all') end, { desc = 'Git: [H]unk [Q]quickfixList' })
+        map('n', '<leader>hl', function() gitsigns.setqflist(0) end, { desc = 'Git: [H]unk [L]ocation List' })
+
+        -- Buffer Hunks.
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Git: [H]unk [R]estore' })
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk [S]tage' })
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: [H]unk [U]nstage' })
+        map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
+      end
+    },
   },
   {
     "kdheepak/lazygit.nvim",
@@ -68,11 +109,12 @@ return {
   {
     "sindrets/diffview.nvim",
     opts = {
+      enhanced_diff_hl = true,
       file_panel = {
         listing_style = "list",             -- One of 'list' or 'tree'
         win_config = {                      -- See |diffview-config-win_config|
-          position = "bottom",
-          width = 35,
+          position = "top",
+          height = 10,
           win_opts = {},
         },
       },
