@@ -30,7 +30,7 @@ local tokyonight = require('tokyonight.config')
 tokyonight.options.on_highlights = function(hl, c)
   local prompt = c.bg
   hl.TelescopeNormal = {
-    bg = 'none',
+    bg = c.bg,
     fg = c.fg,
   }
   hl.TelescopeBorder = {

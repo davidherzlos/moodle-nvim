@@ -66,7 +66,7 @@ return {
               prompt_position = 'top',
               width = { padding = 0 },
               height = { padding = 0 },
-              preview_width = 0.5,
+              preview_width = 0.55,
             };
           },
           sorting_strategy = 'ascending',

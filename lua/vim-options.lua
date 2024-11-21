@@ -7,6 +7,8 @@ vim.g.maplocalleader = ' '
 
 -- Add line nunbers for easy jumping.
 vim.opt.relativenumber = true
+vim.opt.number = true
+vim.o.statuscolumn = "%s  %l%r  "
 
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = 'unnamedplus'
