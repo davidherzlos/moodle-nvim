@@ -61,6 +61,27 @@ return {
           },
         },
         defaults = {
+          mappings = {
+            i = {
+              ["<M-n>"] = require("telescope.actions").move_selection_next,
+              ["<M-p>"] = require("telescope.actions").move_selection_previous,
+              ["<M-c>"] = require("telescope.actions").close,
+              ["<M-x>"] = require("telescope.actions").select_horizontal,
+              ["<M-v>"] = require("telescope.actions").select_vertical,
+              ["<M-u>"] = require("telescope.actions").preview_scrolling_up,
+              ["<M-d>"] = require("telescope.actions").preview_scrolling_down,
+              ["<M-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+              ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+            },
+            n = {
+              ["<M-x>"] = require("telescope.actions").select_horizontal,
+              ["<M-v>"] = require("telescope.actions").select_vertical,
+              ["<M-u>"] = require("telescope.actions").preview_scrolling_up,
+              ["<M-d>"] = require("telescope.actions").preview_scrolling_down,
+              ["<M-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+              ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+            }
+          },
           layout_config = {
             horizontal = {
               prompt_position = 'top',
@@ -82,26 +103,6 @@ return {
             "--column",
             "--smart-case",
             "--trim" -- add this value
-          },
-          mappings = {
-            i = {
-              ['<C-g>'] = function(prompt_bufnr)
-                -- Use nvim-window-picker to choose the window by dynamically attaching a function
-                local action_set = require('telescope.actions.set')
-                local action_state = require('telescope.actions.state')
-
-                local picker = action_state.get_current_picker(prompt_bufnr)
-                picker.get_selection_window = function(picker, entry)
-                  local picked_window_id = require('window-picker').pick_window({hint='floating-big-letter'}) or vim.api.nvim_get_current_win()
-                  vim.print(require('window-picker').pick_window({ hint = 'floating-big-letter'}))
-                  -- Unbind after using so next instance of the picker acts normally
-                  picker.get_selection_window = nil
-                  return picked_window_id
-                end
-
-                return action_set.edit(prompt_bufnr, 'edit')
-              end,
-            },
           },
         },
         extensions = {

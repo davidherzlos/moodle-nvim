@@ -106,18 +106,4 @@ return {
       vim.g.lazygit_floating_window_use_plenary = 1 -- use plenary.nvim to manage floating window if available
     end
   },
-  {
-    "sindrets/diffview.nvim",
-    opts = {
-      enhanced_diff_hl = true,
-      file_panel = {
-        listing_style = "list",             -- One of 'list' or 'tree'
-        win_config = {                      -- See |diffview-config-win_config|
-          position = "top",
-          height = 10,
-          win_opts = {},
-        },
-      },
-    }
-  }
 }
