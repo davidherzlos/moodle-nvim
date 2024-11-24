@@ -30,3 +30,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts("LSP: [W]orkspace [S]ymbols"))
   end
 })
+
+-- Here I override some keymaps for a better navigation experience.
+vim.keymap.set('n', '<M-n>', '<cmd>bn<CR>', { desc = 'Buffers: Next buffer' })
+vim.keymap.set('n', '<M-p>', '<cmd>bp<CR>', { desc = 'Buffers: Previous buffer' })
+vim.keymap.set('n', '<M-c>', '<cmd>bd<CR>', { desc = 'Buffers: Delete buffer' })
+vim.keymap.set('n', '<M-d>', '<C-d>', { desc = 'Buffers: Move down' })
+vim.keymap.set('n', '<M-u>', '<C-u>', { desc = 'Buffers: Move up' })
+vim.keymap.set('n', '<M-w>', '<C-w>', { desc = 'Window: Window maps' })
+vim.keymap.set('n', '<M-w>m', '<cmd>resize | vertical resize<CR>', { noremap = true, silent = true })
+
+-- Add an utility function to toggle full screen on an active window in split view.
+local fullscreen = false
+local function toggle_fullscreen()
+  if not fullscreen then
+    vim.cmd("resize")
+    vim.cmd("vertical resize")
+    fullscreen = true
+  else
+    vim.cmd("wincmd =")
+    fullscreen = false
+  end
+end
+vim.keymap.set('n', '<M-CR>', toggle_fullscreen, { noremap = true, silent = true })
