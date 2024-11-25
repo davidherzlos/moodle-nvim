@@ -73,9 +73,10 @@ vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "DapLogPoint", lineh
 vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped"})
 
 -- Gitsigns highlights
-vim.api.nvim_set_hl(0, 'GitSignsAddLn', { ctermbg = 0, bg = '#1a282e' })
-vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { ctermbg = 0, bg = '#1a282e' })
-vim.api.nvim_set_hl(0, 'GitSignsStagedAddLn', { ctermbg = 0, bg = '#132a40' })
-vim.api.nvim_set_hl(0, 'GitSignsStagedChangeLn', { ctermbg = 0, bg = '#132a40' })
-vim.api.nvim_set_hl(0, 'GitSignsDeleteVirtLn', { ctermbg = 0, bg = '#301014' })
-vim.api.nvim_set_hl(0, 'GitSignsStagedChangedeleteLn', { ctermbg = 0, bg = '#301026' })
+vim.api.nvim_set_hl(0, 'GitSignsAddLn', { bg = '#1a282e' })
+vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { bg = '#1a282e' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedAddLn', { bg = '#132a40' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedChangeLn', { bg = '#132a40' })
+vim.api.nvim_set_hl(0, 'GitSignsDeleteVirtLn', { bg = '#301014' })
+vim.api.nvim_set_hl(0, 'GitSignsStagedChangedeleteLn', { bg = '#301026' })
+--vim.api.nvim_set_hl(0, 'MiniFilesNormal', { bg = '#1a1b26' })

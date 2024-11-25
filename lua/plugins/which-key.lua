@@ -4,9 +4,12 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      preset = "classic",
+      icons = {
+        group = (vim.g.fallback_icons_enabled and "+") or "",
+        rules = false,
+        separator = "-",
+      },
     },
     keys = {
       {
