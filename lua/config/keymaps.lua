@@ -34,7 +34,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Here I override some keymaps for a better navigation experience.
 vim.keymap.set('n', '<M-n>', '<cmd>bn<CR>', { desc = 'Buffers: Next buffer' })
 vim.keymap.set('n', '<M-p>', '<cmd>bp<CR>', { desc = 'Buffers: Previous buffer' })
-vim.keymap.set('n', '<M-c>', '<cmd>bd<CR>', { desc = 'Buffers: Delete buffer' })
 vim.keymap.set('n', '<M-d>', '<C-d>', { desc = 'Buffers: Move down' })
 vim.keymap.set('n', '<M-u>', '<C-u>', { desc = 'Buffers: Move up' })
 vim.keymap.set('n', '<M-w>', '<C-w>', { desc = 'Window: Window maps' })
