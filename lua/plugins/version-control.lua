@@ -42,6 +42,7 @@ return {
 
         map('n', '<leader>gw', "<cmd>Git difftool<cr>", { desc = 'Git: [G]it [W]ork hunks' })
         map('n', '<leader>gi', "<cmd>Git difftool --staged<cr>", { desc = 'Git: [G]it [I]ndex hunks' })
+        map('n', '<leader>gm', "<cmd>Gvdiffsplit!<cr>", { desc = 'Git: [G]it [M]erge conflicts' })
         map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Git: [H]unk [R]estore' })
         map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk toggle [S]tage' })
