@@ -69,4 +69,4 @@ vim.opt.cmdheight =0
 vim.opt.fillchars = { eob = " " }
 
 -- Current theme.
-vim.g.current_theme = 'rose-pine' -- solarized, tokyonight, rose-pine.
+vim.g.current_theme = 'tokyonight' -- solarized, tokyonight, rose-pine.
