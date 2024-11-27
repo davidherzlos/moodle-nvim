@@ -25,6 +25,3 @@ require("lazy").setup("plugins", {
 
 -- Load our custom configuration.
 require("config")
-
--- Once all is setup, load the colorscheme.
-vim.cmd.colorscheme 'tokyonight'
