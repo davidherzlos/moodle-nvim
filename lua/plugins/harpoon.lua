@@ -29,8 +29,7 @@ return {
 
       -- Define custom keymaps.
       vim.keymap.set("n", "<leader>hp", function() harpoon:list():add() end, { desc = "Harpoon: Pin"})
-      vim.keymap.set("n", "<leader>p", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Open" })
-      vim.keymap.set("n", "<leader>sp", function() toggle_telescope(harpoon:list()) end, { desc = "Harpoon: Open Telescope" })
+      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: List" })
       vim.keymap.set("n", "<M-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: Buffer 1" })
       vim.keymap.set("n", "<M-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: Buffer 2" })
       vim.keymap.set("n", "<M-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: Buffer 3" })

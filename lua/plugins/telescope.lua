@@ -61,6 +61,10 @@ return {
           },
         },
         defaults = {
+          cache_picker = {
+            num_pickers = 10,
+            limit_entries = 1000,
+          },
           mappings = {
             i = {
               ["<M-n>"] = require("telescope.actions").move_selection_next,
@@ -134,6 +138,7 @@ return {
       vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sl', builtin.resume, { desc = '[S]earch [L]ast' })
+      vim.keymap.set('n', '<leader>sp', builtin.pickers, { desc = '[S]earch cached [P]ickers' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 
       -- keeps track of current `tabline` and `statusline`, so we can restore it after closing telescope
