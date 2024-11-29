@@ -9,7 +9,7 @@ return {
       -- Mini file manager.
       require('mini.files').setup({
         mappings = {
-          close = '<Esc>'
+          close = '<M-c>'
         }
       })
 
