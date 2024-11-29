@@ -115,7 +115,6 @@ return {
       vim.o.background = 'light'
       require('solarized').setup(opts)
       vim.cmd.colorscheme 'solarized'
-      add_signs_config()
     end,
   },
   {
@@ -132,7 +131,6 @@ return {
         }
       })
       vim.cmd.colorscheme 'rose-pine-dawn'
-      add_signs_config()
     end
   }
 }
