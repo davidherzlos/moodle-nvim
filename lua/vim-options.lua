@@ -28,7 +28,7 @@ vim.opt.number = true
 vim.o.statuscolumn = "%s  %l%r  "
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 2
+vim.opt.scrolloff = 100
 
 -- Preview substitutions when typing.
 vim.opt.inccommand = 'split'
