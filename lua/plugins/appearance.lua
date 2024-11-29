@@ -104,7 +104,12 @@ return {
     'maxmx03/solarized.nvim',
     enabled = vim.g.current_theme == 'solarized',
     priority = 1000,
-    opts = {},
+    opts = {
+      transparent = {
+        enabled = true,
+        whichkey = false,
+      },
+    },
     config = function(_, opts)
       vim.o.termguicolors = true
       vim.o.background = 'light'
