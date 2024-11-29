@@ -70,6 +70,7 @@ return {
               ["<M-n>"] = require("telescope.actions").move_selection_next,
               ["<M-p>"] = require("telescope.actions").move_selection_previous,
               ["<M-c>"] = require("telescope.actions").close,
+              ["<esc>"] = require("telescope.actions").close,
               ["<M-x>"] = require("telescope.actions").select_horizontal,
               ["<M-v>"] = require("telescope.actions").select_vertical,
               ["<M-u>"] = require("telescope.actions").preview_scrolling_up,
