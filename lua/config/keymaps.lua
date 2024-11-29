@@ -31,13 +31,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
--- Here I override some keymaps for a better navigation experience.
-vim.keymap.set('n', '<M-n>', '<cmd>bn<CR>', { desc = 'Buffers: Next buffer' })
-vim.keymap.set('n', '<M-p>', '<cmd>bp<CR>', { desc = 'Buffers: Previous buffer' })
-vim.keymap.set('n', '<M-d>', '<C-d>', { desc = 'Buffers: Move down' })
-vim.keymap.set('n', '<M-u>', '<C-u>', { desc = 'Buffers: Move up' })
-vim.keymap.set('n', '<M-w>', '<C-w>', { desc = 'Window: Window maps' })
-vim.keymap.set('n', '<M-w>m', '<cmd>resize | vertical resize<CR>', { noremap = true, silent = true })
+-- Map buffer navigation commands using Alt.
+vim.keymap.set('n', '<M-n>', '<cmd>bprev<CR>', { noremap = true, silent = true, desc = 'Buffers: Next buffer' })
+vim.keymap.set('n', '<M-p>', '<cmd>bnext<CR>', { noremap = true, silent = true, desc = 'Buffers: Previous buffer' })
+vim.keymap.set('n', '<M-c>', '<cmd>bdel<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
+vim.keymap.set('n', '<M-s>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Switch previous buffer' })
+
+-- Remap some window using Alt instead of Ctrl.
+vim.keymap.set('n', '<M-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
+vim.keymap.set('n', '<M-d>', '<C-d>', { noremap = true, silent = true, desc = 'Navigation: Scroll down' })
+vim.keymap.set('n', '<M-e>', '<C-e>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one line)' })
+vim.keymap.set('n', '<M-y>', '<C-y>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one line)' })
+vim.keymap.set('n', '<M-f>', '<C-f>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one screen)' })
+vim.keymap.set('n', '<M-b>', '<C-b>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one screen)' })
+vim.keymap.set('n', '<M-i>', '<C-i>', { noremap = true, silent = true, desc = 'Navigation: Jump next cursor' })
+vim.keymap.set('n', '<M-o>', '<C-o>', { noremap = true, silent = true, desc = 'Navigation: Jump previous cursor' })
+vim.keymap.set('n', '<M-w>', '<C-w>', { noremap = true, silent = true, desc = 'Window: Window maps' })
+
+-- Remap some editing keys.
+vim.keymap.set('n', 'r', '<C-r>', { noremap = true, silent = true, desc = 'Editing: Redo' })
 
 -- Add an utility function to toggle full screen on an active window in split view.
 local fullscreen = false
