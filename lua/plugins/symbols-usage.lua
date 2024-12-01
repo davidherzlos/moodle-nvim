@@ -10,8 +10,8 @@ local function text_format(symbol)
 
   -- Indicator that shows if there are any other symbols in the same line
   local stacked_functions_content = symbol.stacked_count > 0
-      and ("+%s"):format(symbol.stacked_count)
-      or ''
+  and ("+%s"):format(symbol.stacked_count)
+  or ''
 
   if symbol.references then
     local usage = symbol.references <= 1 and 'reference' or 'references'
@@ -74,7 +74,7 @@ return {
 
       local SymbolKind = vim.lsp.protocol.SymbolKind
       require('symbol-usage').setup({
-      vt_position = 'above',
+        vt_position = 'above',
         kinds = {
           SymbolKind.Interface,
           SymbolKind.Class,
@@ -88,6 +88,7 @@ return {
         definition = { enabled = true },
         implementation = { enabled = true },
       })
+      vim.keymap.set('n', '<leader>su', function() require('symbol-usage').toggle() end, { desc = 'Symbols Usage: [S]ymbols [To]ggle' })
     end
   },
 }

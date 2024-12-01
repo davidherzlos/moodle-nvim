@@ -2,6 +2,14 @@ return {
   {
     'tpope/vim-fugitive',
     config = function ()
+      -- NOTE: Could be convenient to map this commands.
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gitdiffsplit<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gitvdiffsplit<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gread<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gwrite<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gedit :0<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>diffget<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- vim.keymap.set('n', '<leader>gd', "<cmd>diffput<cr>", { desc = 'Git: [G]it [H]unks' })
       vim.keymap.set('n', '<leader>gh', "<cmd>Git difftool<cr>", { desc = 'Git: [G]it [H]unks' })
       vim.keymap.set('n', '<leader>gi', "<cmd>Git difftool --staged<cr>", { desc = 'Git: [G]it [I]ndex' })
       vim.keymap.set('n', '<leader>gm', "<cmd>Gvdiffsplit!<cr>", { desc = 'Git: [G]it [M]erge conflicts' })
