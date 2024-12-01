@@ -47,7 +47,6 @@ end
 return {
   {
     "folke/tokyonight.nvim",
-    enabled = vim.g.current_theme == 'tokyonight' and true or false,
     priority = 1000,
     config = function ()
       require('tokyonight').setup({
@@ -95,14 +94,12 @@ return {
           }
         end,
       })
-      vim.cmd.colorscheme 'tokyonight-night'
       add_signs_config()
       tweak_highlights()
     end
   },
   {
     'maxmx03/solarized.nvim',
-    enabled = vim.g.current_theme == 'solarized',
     priority = 1000,
     opts = {
       transparent = {
@@ -114,13 +111,11 @@ return {
       vim.o.termguicolors = true
       vim.o.background = 'light'
       require('solarized').setup(opts)
-      vim.cmd.colorscheme 'solarized'
     end,
   },
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    enabled = vim.g.current_theme == 'rose-pine',
     config = function ()
       require('rose-pine').setup({
         variant = "dawn",
@@ -130,7 +125,6 @@ return {
           transparent = true,
         }
       })
-      vim.cmd.colorscheme 'rose-pine-dawn'
     end
   }
 }

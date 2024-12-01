@@ -1,5 +1,7 @@
--- Require our module for vim options.
-require("vim-options")
+-- Order matters here.
+
+-- Load default vim config options.
+require("config.options")
 
 -- Then install lazy package manager.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -16,12 +18,18 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- And finally tell lazy to require our plugins.
+-- Next require all default plugins.
 require("lazy").setup("plugins", {
   ui = {
     icons = vim.g.have_nerd_font and {}
   }
 })
 
--- Load our custom configuration.
-require("config")
+-- Load default autocommands.
+require("config.autocmds")
+
+-- Set default colorscheme.
+vim.cmd("colorscheme "..vim.g.default_colorscheme)
+
+-- Load default keymaps.
+require("config.keymaps")
