@@ -1,55 +1,21 @@
 -- TODO: Refactor this functions to use correctly the APIS.
-local function add_signs_config()
-  -- Configure editor signs and virtual text behavior for diagnostic messages.
-  vim.diagnostic.config{
-    virtual_text = false,
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = " ",
-        [vim.diagnostic.severity.WARN] = " 󰞏",
-        [vim.diagnostic.severity.HINT] = " ",
-        [vim.diagnostic.severity.INFO] = " ",
-      },
-      numhl = {
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-      },
-      linehl = {
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-      }
-    },
-  }
-end
-
-local function tweak_highlights()
-  -- Customize signs for Debugging.
-  vim.api.nvim_set_hl(0, 'DapBreakPoint', { ctermbg = 0, fg = '#db4b4b', bg = '#2c0f0f' })
-  vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#e0af68', bg = '#2d2315' })
-  vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#1abc9c', bg = '#05261f' })
-  vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakPoint", linehl = "DapBreakPoint", numhl = "DapBreakPoint"})
-  vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint"})
-  vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped"})
-
-  -- Gitsigns highlights
-  vim.api.nvim_set_hl(0, 'GitSignsAddLn', { bg = '#1a282e' })
-  vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { bg = '#1a282e' })
-  vim.api.nvim_set_hl(0, 'GitSignsStagedAddLn', { bg = '#132a40' })
-  vim.api.nvim_set_hl(0, 'GitSignsStagedChangeLn', { bg = '#132a40' })
-  vim.api.nvim_set_hl(0, 'GitSignsDeleteVirtLn', { bg = '#301014' })
-  vim.api.nvim_set_hl(0, 'GitSignsStagedChangedeleteLn', { bg = '#301026' })
-end
+-- Customize signs for Debugging.
+vim.api.nvim_set_hl(0, 'DapBreakPoint', { ctermbg = 0, fg = '#db4b4b', bg = '#2c0f0f' })
+vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#e0af68', bg = '#2d2315' })
+vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#1abc9c', bg = '#05261f' })
+vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakPoint", linehl = "DapBreakPoint", numhl = "DapBreakPoint"})
+vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint"})
+vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped"})
 
 return {
   {
     "folke/tokyonight.nvim",
+    enabled = vim.g.default_colorscheme == 'tokyonight',
+    lazy = true,
     priority = 1000,
     config = function ()
       require('tokyonight').setup({
+        style = 'night',
         transparent = true,
         styles = {
           floats = "transparent",
@@ -94,12 +60,19 @@ return {
           }
         end,
       })
-      add_signs_config()
-      tweak_highlights()
+      -- Customize highlights for GitSigns.
+      vim.api.nvim_set_hl(0, 'GitSignsAddLn', { bg = '#1a282e' })
+      vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { bg = '#1a282e' })
+      vim.api.nvim_set_hl(0, 'GitSignsStagedAddLn', { bg = '#132a40' })
+      vim.api.nvim_set_hl(0, 'GitSignsStagedChangeLn', { bg = '#132a40' })
+      vim.api.nvim_set_hl(0, 'GitSignsDeleteVirtLn', { bg = '#301014' })
+      vim.api.nvim_set_hl(0, 'GitSignsStagedChangedeleteLn', { bg = '#301026' })
     end
   },
   {
     'maxmx03/solarized.nvim',
+    enabled = vim.g.default_colorscheme == 'solarized',
+    lazy = true,
     priority = 1000,
     opts = {
       transparent = {
@@ -116,6 +89,8 @@ return {
   {
     "rose-pine/neovim",
     name = "rose-pine",
+    enabled = vim.g.default_colorscheme == 'solarized',
+    lazy = true,
     config = function ()
       require('rose-pine').setup({
         variant = "dawn",

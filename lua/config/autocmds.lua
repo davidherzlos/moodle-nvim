@@ -1,13 +1,13 @@
 local conform = require("conform")
 
--- Add usercmd to toggle formatting for the current buffer.
+-- Add usercmd to toggle format on save.
 vim.api.nvim_create_user_command("ConformToggle", function ()
   local state = vim.g.formatters_enabled
   vim.g.formatters_enabled = not state
   vim.print('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
 end, { desc = "Toggle formatting for the current buffer." })
 
--- Add autocmd for custom format on save behavior.
+-- Add autocmd to control the format on save behavior.
 vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
   pattern = { "*.sh", "*.php", "*.js", "*.json" },
   callback = function(args)
@@ -53,18 +53,17 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
 
 local lint = require('lint')
 
--- Add autocmd for linting the file on file save.
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.sh", "*.php" },
-  callback = function()
-    require("lint").try_lint()
-  end,
-  desc = 'Lint the current file when the buffer is saved.'
-})
-
 -- Add a usercmd to print available linters for this buffer.
 vim.api.nvim_create_user_command("LintInfo", function ()
   local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
   vim.print(linters)
 end, { desc = "Show availble linters for this buffer." })
 
+-- Add autocmd for linting the file on file save.
+vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "TextChanged", "BufWritePost" }, {
+  pattern = { "*.sh", "*.php", "*.js", "*.json" },
+  callback = function()
+    require("lint").try_lint()
+  end,
+  desc = 'Lint the current file when the buffer is saved.'
+})

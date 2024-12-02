@@ -58,5 +58,19 @@ vim.opt.cmdheight =0
 -- Disable ~ on non existing lines.
 vim.opt.fillchars = { eob = " " }
 
+-- Add nerdfont icons to the diagnostic signs.
+vim.diagnostic.config{
+  virtual_text = false,
+  underline = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " 󰞏",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+}
+
 -- Default theme. tokyonight|solarized|rose-pine.
-vim.g.default_colorscheme = 'solarized'
+vim.g.default_colorscheme = 'tokyonight'

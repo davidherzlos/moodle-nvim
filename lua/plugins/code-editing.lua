@@ -96,7 +96,7 @@ return {
       options = {
         multiple_diag_under_cursor = true
       }
-    }
+    },
   },
   {
     "jackMort/ChatGPT.nvim",

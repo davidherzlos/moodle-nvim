@@ -1,3 +1,5 @@
+local project = require("config.utils.project")
+
 -- Add capabilities to neovim to use formatters and linters.
 return {
   -- Tool installation.
@@ -28,7 +30,6 @@ return {
     },
     config = function ()
       local conform = require("conform")
-      local project = require("config.utils.project")
 
       -- Map filetypes to formatter commands.
       conform.formatters_by_ft = {
@@ -64,11 +65,9 @@ return {
   {
     'mfussenegger/nvim-lint',
     lazy = true,
-    event = { "TextChanged" },
     cmd = { "LintInfo" },
     config = function()
       local lint = require('lint')
-      local project = require("config.utils.project")
 
       -- Map filetypes to linters commands.
       lint.linters_by_ft = {
