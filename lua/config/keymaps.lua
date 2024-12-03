@@ -18,8 +18,8 @@ vim.keymap.set("n", "]]q", "<cmd>clast<CR>", { desc = "QuickList: Go to last" })
 -- Map buffer navigation commands using Alt.
 vim.keymap.set('n', '<M-n>', '<cmd>bprev<CR>', { noremap = true, silent = true, desc = 'Buffers: Next buffer' })
 vim.keymap.set('n', '<M-p>', '<cmd>bnext<CR>', { noremap = true, silent = true, desc = 'Buffers: Previous buffer' })
-vim.keymap.set('n', '<M-c>', '<cmd>bdel<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
-vim.keymap.set('n', '<M-l>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Last buffer' })
+vim.keymap.set('n', '<M-c>', '<cmd>bwipeout<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
+vim.keymap.set('n', '<M-s>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Switch ast buffer' })
 
 -- Remap some window using Alt instead of Ctrl.
 vim.keymap.set('n', '<M-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
