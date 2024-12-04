@@ -87,12 +87,12 @@ return {
 
         -- Define some mappings to interact with the completion list.
         mapping = cmp.mapping.preset.insert({
-          ['<M-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<M-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<M-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<M-d>'] = cmp.mapping.scroll_docs(4),
-          ['<M-k>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
-          ['<M-i>'] = cmp.mapping.abort(),
+          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ['<C-k>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
+          ['<C-i>'] = cmp.mapping.abort(),
         }),
 
         -- Tell nvim-cmp the sources for the completion list.
@@ -109,8 +109,8 @@ return {
       })
 
       -- Configure luasnip for jumping around the confirmed snippets.
-      vim.keymap.set({ "i", "s" }, "<M-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<M-k>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-k>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { silent = true })
       --
       -- Broadcast capabilities for each lsp we have installed.
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
