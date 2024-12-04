@@ -62,6 +62,7 @@ vim.opt.fillchars = { eob = " " }
 vim.diagnostic.config{
   virtual_text = false,
   underline = false,
+  update_in_insert = false,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = " ",

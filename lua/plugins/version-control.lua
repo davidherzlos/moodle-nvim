@@ -10,9 +10,20 @@ return {
       -- vim.keymap.set('n', '<leader>gd', "<cmd>Gedit :0<cr>", { desc = 'Git: [G]it [H]unks' })
       -- vim.keymap.set('n', '<leader>gd', "<cmd>diffget<cr>", { desc = 'Git: [G]it [H]unks' })
       -- vim.keymap.set('n', '<leader>gd', "<cmd>diffput<cr>", { desc = 'Git: [G]it [H]unks' })
-      vim.keymap.set('n', '<leader>gh', "<cmd>Git difftool<cr>", { desc = 'Git: [G]it [H]unks' })
-      vim.keymap.set('n', '<leader>gi', "<cmd>Git difftool --staged<cr>", { desc = 'Git: [G]it [I]ndex' })
+
+      -- Keymap to open a vimsplit view for merge conflicts.
       vim.keymap.set('n', '<leader>gm', "<cmd>Gvdiffsplit!<cr>", { desc = 'Git: [G]it [M]erge conflicts' })
+
+      -- Keymaps to get qflist and loclist from the git index.
+      vim.keymap.set('n', '<leader>ic', function()
+        vim.cmd('Git! difftool --staged')
+      end, { noremap = true, silent = true, desc = 'Git: [I]ndex qflist' })
+
+      vim.keymap.set("n", "<leader>il", function()
+        vim.cmd('Git! difftool --staged %') vim.cmd("cclose")
+        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
+      end, { noremap = true, silent = true, desc = "Git: [I]ndex [L]oclist" })
+
     end
   },
   {
@@ -53,9 +64,20 @@ return {
           gitsigns.toggle_deleted()
         end, { desc = 'Git: [G]it [D]eleted' })
 
-        map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
+        -- Keymaps to stage, unstage, restore and blame.
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Git: [H]unk [R]estore' })
-        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk toggle [S]tage' })
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk [S]tage' })
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: [H]unk [U]nstage' })
+        map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
+
+        -- Keymaps to get qflist and loclist from hunk.
+        vim.keymap.set('n', '<leader>hc', function()
+          require("gitsigns").setqflist("all", { use_location_list = false })
+        end, { noremap = true, silent = true, desc = 'Git: [H]unks qflist' })
+
+        vim.keymap.set('n', '<leader>hl', function()
+          require('gitsigns').setqflist(0, { use_location_list = true })
+        end, { noremap = true, silent = true, desc = 'Git: [H]unks loclist' })
       end
     },
   },
