@@ -70,25 +70,15 @@ return {
           },
           mappings = {
             i = {
-              ["<M-n>"] = require("telescope.actions").move_selection_next,
-              ["<M-p>"] = require("telescope.actions").move_selection_previous,
-              ["<M-c>"] = require("telescope.actions").close,
+              ["<C-n>"] = require("telescope.actions").move_selection_next,
+              ["<C-p>"] = require("telescope.actions").move_selection_previous,
               ["<esc>"] = require("telescope.actions").close,
-              ["<M-x>"] = require("telescope.actions").select_horizontal,
-              ["<M-v>"] = require("telescope.actions").select_vertical,
-              ["<M-u>"] = require("telescope.actions").preview_scrolling_up,
-              ["<M-d>"] = require("telescope.actions").preview_scrolling_down,
-              ["<M-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
-              ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+              ["<C-x>"] = require("telescope.actions").select_horizontal,
+              ["<C-v>"] = require("telescope.actions").select_vertical,
+              ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+              ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+              ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
             },
-            n = {
-              ["<M-x>"] = require("telescope.actions").select_horizontal,
-              ["<M-v>"] = require("telescope.actions").select_vertical,
-              ["<M-u>"] = require("telescope.actions").preview_scrolling_up,
-              ["<M-d>"] = require("telescope.actions").preview_scrolling_down,
-              ["<M-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
-              ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
-            }
           },
           layout_config = {
             horizontal = {
@@ -125,12 +115,8 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("live_grep_args")
-
-      require("telescope").load_extension("search_dir_picker")
-
       local builtin = require("telescope.builtin")
       local live_grep_args = require('telescope').extensions.live_grep_args
-      local search_dir_picker = require('search_dir_picker')
 
       -- Telescope pickers keymaps.
       vim.keymap.set('n', '<leader>sc', builtin.git_status, { desc = '[S]earch Git [C]hanges' })
@@ -140,7 +126,6 @@ return {
       vim.keymap.set('n', '<leader>s.', function() builtin.find_files({ cwd = vim.fn.expand('%:p:h') }) end)
       vim.keymap.set('n', '<leader>sg', live_grep_args.live_grep_args, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>s/', function() live_grep_args.live_grep_args({ cwd = vim.fn.expand('%:p:h') }) end)
-      vim.keymap.set('n', '<leader>sG', search_dir_picker.search_dir, { desc = '[Search] by [G]rep in directory' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sl', builtin.resume, { desc = '[S]earch [L]ast' })
       vim.keymap.set('n', '<leader>sp', builtin.pickers, { desc = '[S]earch cached [P]ickers' })
