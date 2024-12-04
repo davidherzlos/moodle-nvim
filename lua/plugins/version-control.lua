@@ -2,9 +2,8 @@ return {
   {
     'tpope/vim-fugitive',
     config = function ()
-      -- NOTE: Could be convenient to map this commands.
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gitdiffsplit<cr>", { desc = 'Git: [G]it [H]unks' })
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gitvdiffsplit<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- Add Keymaps to open diffviews.
+      vim.keymap.set('n', '<leader>gd', "<cmd>Gvdiffsplit<cr>", { desc = 'Git: [G]it [D]idd split' })
       -- vim.keymap.set('n', '<leader>gd', "<cmd>Gread<cr>", { desc = 'Git: [G]it [H]unks' })
       -- vim.keymap.set('n', '<leader>gd', "<cmd>Gwrite<cr>", { desc = 'Git: [G]it [H]unks' })
       -- vim.keymap.set('n', '<leader>gd', "<cmd>Gedit :0<cr>", { desc = 'Git: [G]it [H]unks' })
@@ -47,7 +46,8 @@ return {
       },
       max_file_length = 40000, -- Disable if file is longer than this number of lines.
       auto_attach = true,
-      numhl      = true,
+      numhl       = true,
+      linehl = true,
       on_attach = function(bufnr)
         local gitsigns = require('gitsigns')
         local function map(mode, l, r, opts)
@@ -56,19 +56,19 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
-        map('n', '<leader>gp', function()
+        -- Keymaps to stage, unstage, preview, restore and blame git hunks.
+        map('n', '<leader>hp', function()
           gitsigns.toggle_linehl()
-        end, { desc = 'Git: [G]it [P]review' })
+        end, { desc = 'Git: [H]unk [P]review' })
 
-        map('n', '<leader>gd', function()
+        map('n', '<leader>hd', function()
           gitsigns.toggle_deleted()
-        end, { desc = 'Git: [G]it [D]eleted' })
+        end, { desc = 'Git: [H]unk [D]eleted' })
 
-        -- Keymaps to stage, unstage, restore and blame.
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Git: [H]unk [R]estore' })
         map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk [S]tage' })
         map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: [H]unk [U]nstage' })
-        map('n', '<leader>gb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
+        map('n', '<leader>hb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
 
         -- Keymaps to get qflist and loclist from hunk.
         vim.keymap.set('n', '<leader>hc', function()
@@ -78,6 +78,10 @@ return {
         vim.keymap.set('n', '<leader>hl', function()
           require('gitsigns').setqflist(0, { use_location_list = true })
         end, { noremap = true, silent = true, desc = 'Git: [H]unks loclist' })
+
+        -- Toggle on git changes initially.
+        gitsigns.toggle_linehl(true)
+        gitsigns.toggle_deleted(true)
       end
     },
   },

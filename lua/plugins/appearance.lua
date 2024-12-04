@@ -81,9 +81,18 @@ return {
       },
     },
     config = function(_, opts)
+      opts.on_highlights = function (colors, color)
+        ---@type solarized.highlights
+        local groups = {
+            GitSignsStagedAddLn = { fg = colors.cyan, bg = colors.base2 },
+            GitSignsStagedChangeLn = { fg = colors.yellow, bg = colors.base2 },
+            GitSignsStagedChangedeleteLn = { fg = colors.red, bg = colors.base2 }
+        }
+        return groups
+      end
+      require('solarized').setup(opts)
       vim.o.termguicolors = true
       vim.o.background = 'light'
-      require('solarized').setup(opts)
     end,
   },
   {
