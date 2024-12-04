@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>lc", "<cmd>lclose<CR>", { noremap = true, silent =t
 -- Map buffer navigation commands using Alt.
 vim.keymap.set('n', '<M-n>', '<cmd>bprev<CR>', { noremap = true, silent = true, desc = 'Buffers: Next buffer' })
 vim.keymap.set('n', '<M-p>', '<cmd>bnext<CR>', { noremap = true, silent = true, desc = 'Buffers: Previous buffer' })
-vim.keymap.set('n', '<M-c>', '<cmd>bwipeout<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
+vim.keymap.set('n', '<M-q>', '<cmd>bd<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
 vim.keymap.set('n', '<M-s>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Switch ast buffer' })
 
 -- Remap some window using Alt instead of Ctrl.
@@ -59,4 +59,4 @@ local function toggle_fullscreen()
     fullscreen = false
   end
 end
-vim.keymap.set('n', '<M-CR>', toggle_fullscreen, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-CR>', toggle_fullscreen, { noremap = true, silent = true })
