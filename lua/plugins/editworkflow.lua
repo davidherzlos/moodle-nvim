@@ -280,5 +280,23 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim"
     }
-  }
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    enabled = false,
+  },
+  {
+    'yorickpeterse/nvim-pqf',
+    event = "UIEnter",
+    config = function ()
+      require('pqf').setup({
+        signs = {
+          error = { text = '', hl = 'DiagnosticSignError' },
+          warning = { text = '󰞏', hl = 'DiagnosticSignWarn' },
+          info = { text = '', hl = 'DiagnosticSignInfo' },
+          hint = { text = '', hl = 'DiagnosticSignHint' },
+        },
+      })
+    end
+  },
 }
