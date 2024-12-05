@@ -24,6 +24,7 @@ return {
           },
           keywords = {
             italic = false,
+            bold = true,
           },
         },
         dime_inactive = false,
