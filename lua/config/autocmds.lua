@@ -64,6 +64,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
   pattern = { "*.sh", "*.php", "*.js", "*.json" },
   callback = function()
     require("lint").try_lint()
+    vim.diagnostic.enable(true);
+  end,
+  desc = 'Lint the current file when the buffer is saved.'
+})
+
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+  pattern = { "*" },
+  callback = function()
+    vim.diagnostic.enable(false);
   end,
   desc = 'Lint the current file when the buffer is saved.'
 })

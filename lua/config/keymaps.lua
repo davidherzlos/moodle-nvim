@@ -34,14 +34,14 @@ vim.keymap.set('n', '<M-q>', '<cmd>bd<CR>', { noremap = true, silent = true, des
 vim.keymap.set('n', '<M-s>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Switch ast buffer' })
 
 -- Remap some window using Alt instead of Ctrl.
-vim.keymap.set('n', '<M-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
-vim.keymap.set('n', '<M-d>', '<C-d>', { noremap = true, silent = true, desc = 'Navigation: Scroll down' })
-vim.keymap.set('n', '<M-e>', '<C-e>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one line)' })
-vim.keymap.set('n', '<M-y>', '<C-y>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one line)' })
-vim.keymap.set('n', '<M-f>', '<C-f>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one screen)' })
-vim.keymap.set('n', '<M-b>', '<C-b>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one screen)' })
-vim.keymap.set('n', '<M-i>', '<C-i>', { noremap = true, silent = true, desc = 'Navigation: Jump next cursor' })
-vim.keymap.set('n', '<M-o>', '<C-o>', { noremap = true, silent = true, desc = 'Navigation: Jump previous cursor' })
+vim.keymap.set('n', '<C-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
+vim.keymap.set('n', '<C-d>', '<C-d>', { noremap = true, silent = true, desc = 'Navigation: Scroll down' })
+-- vim.keymap.set('n', '<M-e>', '<C-e>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one line)' })
+-- vim.keymap.set('n', '<M-y>', '<C-y>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one line)' })
+-- vim.keymap.set('n', '<M-f>', '<C-f>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one screen)' })
+-- vim.keymap.set('n', '<M-b>', '<C-b>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one screen)' })
+-- vim.keymap.set('n', '<M-i>', '<C-i>', { noremap = true, silent = true, desc = 'Navigation: Jump next cursor' })
+-- vim.keymap.set('n', '<M-o>', '<C-o>', { noremap = true, silent = true, desc = 'Navigation: Jump previous cursor' })
 vim.keymap.set('n', '<M-w>', '<C-w>', { noremap = true, silent = true, desc = 'Window: Window maps' })
 
 -- Remap some editing keys.
@@ -59,4 +59,4 @@ local function toggle_fullscreen()
     fullscreen = false
   end
 end
-vim.keymap.set('n', '<C-CR>', toggle_fullscreen, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-CR>', toggle_fullscreen, { noremap = true, silent = true })
