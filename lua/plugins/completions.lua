@@ -109,10 +109,9 @@ return {
       })
 
       -- Configure luasnip for jumping around the confirmed snippets.
-      vim.keymap.set({ "i", "s", "n" }, "<C-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { noremap = true, silent = true })
-      vim.keymap.set({ "i", "s", "n" }, "<C-k>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { noremap = true, silent = true })
-      --
-      -- Broadcast capabilities for each lsp we have installed.
+      vim.keymap.set({ "i", "s", "n" }, "<C-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { expr = true, silent = true })
+      vim.keymap.set({ "i", "s", "n" }, "<C-l>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { expr = true, silent = true })
+
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       require('lspconfig').bashls.setup {
