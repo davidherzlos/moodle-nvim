@@ -19,6 +19,12 @@ return {
         transparent = true,
         styles = {
           floats = "transparent",
+          comments = {
+            italic = false,
+          },
+          keywords = {
+            italic = false,
+          },
         },
         dime_inactive = false,
         on_colors = function (colors)
