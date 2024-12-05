@@ -91,7 +91,7 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-k>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, selected = true }), { "i", "c" }),
+          ['<C-k>'] = cmp.mapping(cmp.mapping.confirm({ selected = false }), { "i", "c" }),
           ['<C-i>'] = cmp.mapping.abort(),
         }),
 

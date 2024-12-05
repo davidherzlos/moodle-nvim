@@ -14,8 +14,8 @@ return {
       local conf = require("telescope.config").values
 
       -- Define custom keymaps.
-      vim.keymap.set("n", "<C-p>", function() harpoon:list():add() end, { desc = "Harpoon: Pin"})
-      vim.keymap.set("n", "<C-p>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: List" })
+      vim.keymap.set("n", "<C-h>", function() harpoon:list():add() end, { desc = "Harpoon: Pin"})
+      vim.keymap.set("n", "<C-h>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: List" })
       vim.keymap.set("n", "<M-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: Buffer 1" })
       vim.keymap.set("n", "<M-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: Buffer 2" })
       vim.keymap.set("n", "<M-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: Buffer 3" })
