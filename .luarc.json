@@ -1,0 +1,6 @@
+{
+    "diagnostics.globals": [
+        "vim"
+    ],
+    "workspace.library": ["/path/to/nvim/runtime", "/path/to/solarized.nvim"]
+}

@@ -1,94 +1,58 @@
-
-local function toggle_hunks_preview()
-  local gitsigns = require('gitsigns')
-  gitsigns.toggle_linehl(true)
-  gitsigns.toggle_deleted(true)
-end
-
 return {
   {
     'tpope/vim-fugitive',
+    dependencies = {
+      'echasnovski/mini.nvim',
+    },
     config = function ()
-      -- Add Keymaps to open diffviews for comparing and merge conflicts.
-      vim.keymap.set('n', '<leader>gd', "<cmd>Gvdiffsplit<cr>", { desc = 'Git: [G]it [D]idd split' })
-      vim.keymap.set('n', '<leader>gm', "<cmd>Gvdiffsplit!<cr>", { desc = 'Git: [G]it [M]erge conflicts' })
+      -- Use Minidiff to preview changes on the working tree, index changes are not supported yet.
+      require('mini.diff').setup()
+      vim.keymap.set('n', '<leader>Gp', '<cmd>lua MiniDiff.toggle_overlay()<CR>', { silent = true, desc = '[G]it [p]review worktree' })
 
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gread<cr>", { desc = 'Git: [G]it [H]unks' })
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gwrite<cr>", { desc = 'Git: [G]it [H]unks' })
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>Gedit :0<cr>", { desc = 'Git: [G]it [H]unks' })
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>diffget<cr>", { desc = 'Git: [G]it [H]unks' })
-      -- vim.keymap.set('n', '<leader>gd', "<cmd>diffput<cr>", { desc = 'Git: [G]it [H]unks' })
+      -- Add Keymaps to open diff split views for changes and conflicts.
+      vim.keymap.set('n', '<leader>Gwd', function ()
+        vim.cmd('Gvdiffsplit')
+        vim.opt.laststatus = 3
+      end, { desc = '[G]it [w]orktree [d]iffsplit' })
+      vim.keymap.set('n', '<leader>Gid', function ()
+        vim.cmd('Gvdiffsplit HEAD')
+        vim.opt.laststatus = 3
+      end, { desc = '[G]it [i]ndex [d]iffsplit' })
+      vim.keymap.set('n', '<leader>Gmd', function ()
+       vim.cmd('Gvdiffsplit!')
+        vim.opt.laststatus = 3
+      end, { desc = '[G]it [m]erge [d]iffsplit' })
 
-      -- Keymaps to get qflist and loclist from the git index.
-      vim.keymap.set('n', '<leader>ic', function()
-        vim.cmd('Git! difftool --staged')
-        toggle_hunks_preview()
-      end, { noremap = true, silent = true, desc = 'Git: [I]ndex qflist' })
+      -- Keymaps to open qflists and loclists of changes to the worktree.
+      vim.keymap.set('n', '<leader>Gwc', function()
+        vim.cmd('Git difftool')
+      end, { noremap = true, silent = true, desc = '[G]it [w]orktree [c]open' })
 
-      vim.keymap.set("n", "<leader>il", function()
-        vim.cmd('Git! difftool --staged %') vim.cmd("cclose")
+      vim.keymap.set("n", "<leader>Gwl", function()
+        vim.cmd('Git difftool %') vim.cmd("cclose")
         vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
-        toggle_hunks_preview()
-      end, { noremap = true, silent = true, desc = "Git: [I]ndex [L]oclist" })
+      end, { noremap = true, silent = true, desc = '[G]it [w]orktree [l]open' })
 
-    end
-  },
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function ()
-      require('gitsigns').setup({
-        signs = {
-          add          = { text = '┃' },
-          change       = { text = '┃' },
-          delete       = { text = '┃' },
-          topdelete    = { text = '‾' },
-          changedelete = { text = '~' },
-          untracked    = { text = '┆' },
-        },
-        signs_staged = {
-          add          = { text = '┃' },
-          change       = { text = '┃' },
-          delete       = { text = '┃' },
-          topdelete    = { text = '‾' },
-          changedelete = { text = '~' },
-          untracked    = { text = '┆' },
-        },
-        max_file_length = 40000, -- Disable if file is longer than this number of lines.
-        auto_attach = true,
-        numhl       = true,
-        on_attach = function(bufnr)
-          local gitsigns = require('gitsigns')
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
+      -- Keymaps to open qflists and loclists of changes to the index.
+      vim.keymap.set('n', '<leader>Gic', function()
+        vim.cmd('Git difftool --staged')
+      end, { noremap = true, silent = true, desc = '[G]it [i]ndex [c]open' })
 
-          -- Keymaps to stage, unstage, preview, restore and blame git hunks.
-          map('n', '<leader>hp', function()
-            gitsigns.toggle_linehl()
-          end, { desc = 'Git: [H]unk [P]review' })
+      vim.keymap.set("n", "<leader>Gil", function()
+        vim.cmd('Git difftool --staged %') vim.cmd("cclose")
+        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
+      end, { noremap = true, silent = true, desc = '[G]it [i]ndex [l]open' })
 
-          map('n', '<leader>hd', function()
-            gitsigns.toggle_deleted()
-          end, { desc = 'Git: [H]unk [D]eleted' })
+      -- Keymaps to open qflists and loclists of merge conflicts.
+      vim.keymap.set('n', '<leader>Gmc', function()
+        vim.cmd('Git mergetool')
+      end, { noremap = true, silent = true, desc = '[G]it [m]erge [c]open' })
 
-          map('n', '<leader>hr', gitsigns.reset_hunk, { desc = ' Git: [H]unk [R]estore' })
-          map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: [H]unk [S]tage' })
-          map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: [H]unk [U]nstage' })
-          map('n', '<leader>hb', gitsigns.blame, { desc = 'Gitsigns: [G]it [B]lame' })
-        end
-      })
-      -- Keymaps to get qflist and loclist from hunk.
-      vim.keymap.set('n', '<leader>hc', function()
-        require("gitsigns").setqflist("all", { use_location_list = false })
-        toggle_hunks_preview()
-      end, { noremap = true, silent = true, desc = 'Git: [H]unks qflist' })
+      vim.keymap.set("n", "<leader>Gml", function()
+        vim.cmd('Git mergetool %') vim.cmd("cclose")
+        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
+      end, { noremap = true, silent = true, desc = '[G]it [m]erge [l]open' })
 
-      vim.keymap.set('n', '<leader>hl', function()
-        require('gitsigns').setqflist(0, { use_location_list = true })
-        toggle_hunks_preview()
-      end, { noremap = true, silent = true, desc = 'Git: [H]unks loclist' })
     end
   },
   {

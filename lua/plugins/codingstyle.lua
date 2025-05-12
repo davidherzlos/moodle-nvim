@@ -1,10 +1,11 @@
-local project = require("config.utils.project")
+local utils = require("config.utils")
 
 -- Add capabilities to neovim to use formatters and linters.
 return {
   -- Tool installation.
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    enabled = true,
     dependencies = {
       "williamboman/mason.nvim",
     },
@@ -34,7 +35,7 @@ return {
       -- Map filetypes to formatter commands.
       conform.formatters_by_ft = {
         sh = { "beautysh" },
-        php = { project.moodle_project and "phpcbf" or "php-cs-fixer" },
+        php = { utils.is_moodle_project and "phpcbf" or "php-cs-fixer" },
         javascript = { "biome" },
         json = { "biome" }
       }
@@ -71,19 +72,17 @@ return {
 
       -- Map filetypes to linters commands.
       lint.linters_by_ft = {
-        php = { "phpstan", "phpcs" },
+        php = { "phpcs", "phpstan" },
         javascript = { "biome" },
         json = { "biome" },
         typescript = { "ts_ls" },
       }
 
       -- Override formatters behavior if needed.
-      if project.moodle_project() then
+      if utils.is_moodle_project() then
         -- Moodle needs more memory so phpstan can work properly.
-        vim.print("Moodle codebase detected, increasing phpstan memory limit.")
         table.insert(lint.linters.phpstan.args, '--memory-limit=500M')
       end
-
     end
   },
 }

@@ -15,12 +15,13 @@ return {
       {
         "L3MON4D3/LuaSnip",                  -- Snippets expansion engine.
         version = "v2.*",
-	build = "make install_jsregexp"
+        build = "make install_jsregexp"
       },
       'doxnit/cmp-luasnip-choice',           -- Autochoice completion node.
       'hrsh7th/cmp-nvim-lsp',                -- Completion source for builting lsp's.
       'onsails/lspkind.nvim',                -- Some pretty icons for lsp completions.
       "folke/lazydev.nvim",
+      'hrsh7th/cmp-buffer',
     },
 
     -- TODO: Review these potential sources for completions:
@@ -38,31 +39,32 @@ return {
       local lspkind = require('lspkind')
       luasnip.setup({ history = true }) -- NOTE: This option is deprecated, but it is useful for going back to child snippets.
       lspkind.init()
-
       cmp.setup({
-
+        matching = {
+          disallow_fuzzy_matching = false,
+        },
         -- Configure some icons to be shown on the completion list.
         formatting = {
           format = lspkind.cmp_format({
             preset = 'codicons', -- VsCode like icon.
             -- These are some custom icon overridings.
             symbol_map = {
-               Text = "󰉿",
-               Function = "󰡱",
-               Constructor = "󰒕",
-               Field = "󰜢",
-               Variable = "󱕂",
-               Property = "󰜢",
-               Enum = "",
-               Snippet = "",
-               File = "",
-               Folder = "󰉋",
-               EnumMember = "",
-               Constant = "󰏿",
-               Struct = "󰙅",
-               Event = "",
-               Operator = "󰆕",
-               TypeParameter = "",
+              Text = "󰉿",
+              Function = "󰡱",
+              Constructor = "󰒕",
+              Field = "󰜢",
+              Variable = "󱕂",
+              Property = "󰜢",
+              Enum = "",
+              Snippet = "",
+              File = "",
+              Folder = "󰉋",
+              EnumMember = "",
+              Constant = "󰏿",
+              Struct = "󰙅",
+              Event = "",
+              Operator = "󰆕",
+              TypeParameter = "",
             },
             mode = 'symbol_text',
             maxwidth = 35,
@@ -87,30 +89,36 @@ return {
 
         -- Define some mappings to interact with the completion list.
         mapping = cmp.mapping.preset.insert({
-          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<M-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<M-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-k>'] = cmp.mapping(cmp.mapping.confirm({ selected = false }), { "i", "c" }),
-          ['<C-i>'] = cmp.mapping.abort(),
+          ['<M-l>'] = cmp.mapping(cmp.mapping.confirm({ selected = true }), { "i", "c" }),
+          ['<M-i>'] = cmp.mapping.abort(),
         }),
 
         -- Tell nvim-cmp the sources for the completion list.
         sources = cmp.config.sources(
           {
             { name = 'luasnip' },
+            { name = 'buffer' },
             { name = 'nvim_lsp' },
-            { name = 'vim-dadbod-completion' }
-          },
-          {
-            { name = 'buffer' }
+            { name = 'vim-dadbod-completion' },
           }
         )
       })
 
       -- Configure luasnip for jumping around the confirmed snippets.
-      vim.keymap.set({ "i", "s", "n" }, "<C-j>", function() if luasnip.jumpable(-1) then luasnip.jump(-1) end end, { expr = true, silent = true })
-      vim.keymap.set({ "i", "s", "n" }, "<C-l>", function() if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end end, { expr = true, silent = true })
+      vim.keymap.set({ "i", "s", "n" }, "<M-,>", function()
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end, { expr = true, silent = true })
+      vim.keymap.set({ "i", "s", "n" }, "<M-;>", function()
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end, { expr = true, silent = true })
 
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -138,6 +146,8 @@ return {
 
       -- Finally load some generic and Moodle specific vscode snippets packages.
       require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./lua/config/snippets" } })
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.local/share/nvim/lazy/vscode-moodle-snippets" } })
 
     end
   },

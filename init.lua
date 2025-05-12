@@ -1,11 +1,10 @@
 -- Order matters here.
 
--- Load default vim config options.
+-- Load vim config options.
 require("config.options")
 
--- Then install lazy package manager.
+-- Bootstrap lazy.nvim.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -16,20 +15,36 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     lazypath,
   })
 end
+
+-- Put lazy into the runtimepath.
 vim.opt.rtp:prepend(lazypath)
 
--- Next require all default plugins.
+-- Require the plugins folder.
 require("lazy").setup("plugins", {
   ui = {
     icons = vim.g.have_nerd_font and {}
   }
 })
 
--- Load default autocommands.
+-- Load commands.
 require("config.autocmds")
 
--- Set default colorscheme.
+-- Load keymaps.
+require("config.keymaps")
+
+-- Set the colorscheme.
 vim.cmd("colorscheme "..vim.g.default_colorscheme)
 
--- Load default keymaps.
-require("config.keymaps")
+-- Add new signs for Dap (look for a better location).
+vim.fn.sign_define("DapBreakpoint", {
+  text = " ",
+  texthl = "DapBreakPoint",
+})
+vim.fn.sign_define("DapLogPoint", {
+  text = " ",
+  texthl = "DapLogPoint",
+})
+vim.fn.sign_define("DapStopped", {
+  text = " ",
+  texthl = "DapStopped",
+})

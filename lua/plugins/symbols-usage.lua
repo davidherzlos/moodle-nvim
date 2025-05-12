@@ -89,6 +89,9 @@ return {
         implementation = { enabled = true },
       })
       vim.keymap.set('n', '<leader>su', function() require('symbol-usage').toggle() end, { desc = 'Symbols Usage: [S]ymbols [To]ggle' })
+
+      local client = vim.lsp.get_active_clients()[1]
+      print(vim.inspect(client.server_capabilities))
     end
   },
 }

@@ -1,3 +1,13 @@
+-- Add autocmd to highlight text when yanking text.
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank({ timeout = 100 }) -- Highlight for 300ms
+  end,
+})
+
+-- Formatting.
 local conform = require("conform")
 
 -- Add usercmd to toggle format on save.
@@ -60,19 +70,54 @@ vim.api.nvim_create_user_command("LintInfo", function ()
 end, { desc = "Show availble linters for this buffer." })
 
 -- Add autocmd for linting the file on file save.
-vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
-  pattern = { "*.sh", "*.php", "*.js", "*.json" },
-  callback = function()
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
+  pattern = { "*.php" },
+  callback = function(args)
+    local filetype = vim.bo.filetype
+    if filetype == 'php' and args.event == 'InsertLeave' then
+      require("lint").try_lint('phpcs')
+      return
+    end
+    if filetype == 'php' and args.event == 'TextChanged' then
+      require("lint").try_lint('phpcs')
+      return
+    end
+    if filetype == 'php' and args.event == 'BufWritePost' then
+      require("lint").try_lint('phpstan')
+      return
+    end
     require("lint").try_lint()
-    vim.diagnostic.enable(true);
   end,
   desc = 'Lint the current file when the buffer is saved.'
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+-- Add autocmd to toggle diagnostics on insertmode.
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
   pattern = { "*" },
-  callback = function()
-    vim.diagnostic.enable(false);
+  callback = function(args)
+    if args.event == "InsertEnter" then
+      vim.diagnostic.enable(false)
+    end
+    if args.event == "InsertLeave" then
+      vim.diagnostic.enable(true)
+    end
   end,
   desc = 'Lint the current file when the buffer is saved.'
+})
+
+-- Add autocmd for adjusting lines on qflists and loclists.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.wrap = false
+    vim.opt_local.linebreak = false
+  end,
+})
+
+-- Add autocmd for allowing LSP renaming on mini-files.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionRename",
+  callback = function(event)
+    Snacks.rename.on_rename_file(event.data.from, event.data.to)
+  end,
 })
