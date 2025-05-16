@@ -1,5 +1,8 @@
 --[[General configuration]]--
 
+-- Default indentation.
+vim.opt.shiftwidth = 4
+
 -- Set <space> as the leader key.
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -9,14 +12,15 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Decrease mapped sequence wait time (Displays which-key popup sooner).
 vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-
+vim.opt.timeoutlen = 500
 
 --[[Editor]]--
 
 -- Enable relative linenumbers for easy jumping.
 vim.opt.relativenumber = true
-vim.o.statuscolumn = "%s  %l%r  "
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 100
@@ -46,14 +50,8 @@ vim.opt.termguicolors = true
 -- Indicate we hava e nerd font installed.
 vim.g.have_nerd_font = true
 
--- Show mode in status line off, we have a custom status line.
-vim.opt.showmode = false
-
 -- Set highlight on search.
 vim.opt.hlsearch = true
-
--- Hide command line when it is not used.
-vim.opt.cmdheight =0
 
 -- Disable ~ on non existing lines.
 vim.opt.fillchars = { eob = " " }
@@ -62,16 +60,16 @@ vim.opt.fillchars = { eob = " " }
 vim.diagnostic.config{
   virtual_text = false,
   underline = false,
-  update_in_insert = false,
+  update_in_insert = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " 󰞏",
-      [vim.diagnostic.severity.HINT] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "󰞏",
+      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.INFO] = "",
     },
   },
 }
 
--- Default theme. tokyonight|solarized|rose-pine.
+-- Default theme. ayu|solarized|tokyonight|dawnfox.
 vim.g.default_colorscheme = 'tokyonight'
