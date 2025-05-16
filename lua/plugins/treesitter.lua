@@ -1,8 +1,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    -- NOTE: You can use this commit as fallback for bugs in lastest commits.
-    -- commit = 'c579d18',
     build = ":TSUpdate",
     config = function ()
       local configs = require("nvim-treesitter.configs")
