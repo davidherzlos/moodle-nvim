@@ -10,9 +10,7 @@ return {
       require('mini.files').setup()
 
       -- Open it from the current buffer.
-      vim.keymap.set("n", "<leader>fm", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, silent = true, desc = "Minifiles: [F]ile [M]anager open" })
-      vim.keymap.set("n", "<leader>f.", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<CR>", { noremap = true, silent = true, desc = "Minifiles: [File] [M]anager open local" })
-      vim.keymap.set("n", "<Esc>", "<cmd>lua MiniFiles.close()<CR>", { noremap = true, silent = true, desc = "[M]ini [F]iles Open" })
+      vim.keymap.set("n", "<leader>fm", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<CR>", { noremap = true, silent = true, desc = "Minifiles: [File] [M]anager open local" })
 
       -- Animated indent scope line.
       require('mini.indentscope').setup({
