@@ -1,7 +1,7 @@
 -- Define utility function for getting some colors.
 local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
 
--- And add another longer for formatting the text returned by the LSP.
+-- Define another for formatting the text returned by the LSP.
 local function text_format(symbol)
   local res = {}
 
@@ -54,15 +54,15 @@ local function text_format(symbol)
 
   return res
 end
--- Now install and configure the plugins for symbols usage.
+
 return {
   {
     'Wansmer/symbol-usage.nvim',
     dependencies = {
-      "neovim/nvim-lspconfig", -- Just ensure Lsp setup is finished.
+      "neovim/nvim-lspconfig",
     },
     keys = {
-      '<leader>st',
+      '<leader>su',
     },
     config = function()
       -- hl-groups can have any name
@@ -88,7 +88,6 @@ return {
         definition = { enabled = true },
         implementation = { enabled = true },
       })
-      vim.keymap.set('n', '<leader>su', function() require('symbol-usage').toggle() end, { desc = 'Symbols Usage: [S]ymbols [To]ggle' })
     end
   },
 }
