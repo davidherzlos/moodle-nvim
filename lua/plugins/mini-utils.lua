@@ -14,6 +14,9 @@ return {
 
       -- Animated indent scope line.
       require('mini.indentscope').setup({
+        draw = {
+          delay = 500,
+        },
         options = {
           border = 'top',
           try_as_border = true,
@@ -32,6 +35,5 @@ return {
         },
       })
     end
-
   },
 }
