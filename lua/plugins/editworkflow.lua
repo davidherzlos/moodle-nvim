@@ -22,13 +22,12 @@ return {
         TEST = { icon = " ", color = "info", alt = { "PASSED", "FAILED" } },
       },
     }
-
   },
   -- Add this little plugin to jum anywhere with 3 keystrokes at most.
   { 'ggandor/leap.nvim',
     config = function()
-      vim.keymap.set('n',        's', '<Plug>(leap)')
-      vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
+      vim.keymap.set('n', 's', '<Plug>(leap)')
+      vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
       vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
       vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
     end
@@ -46,7 +45,6 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = true,
     event = "VeryLazy",
     opts = {
       cmdline = {
@@ -70,35 +68,27 @@ return {
         command_palette = false, -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
     },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as to
-      "rcarriga/nvim-notify",
-    }
+    dependencies = { "MunifTanjim/nui.nvim" }
   },
+  -- Diagnostics inline.
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
     opts = {
-      signs = {
-        left = "",
-        right = "",
-        arrow = "",
-        up_arrow = "",
-      },
-      blend = {
-        factor = 0.20
-      },
+      preset = 'powerline',
+      signs = { arrow = "" },
       options = {
+        show_source = true,
         multiple_diag_under_cursor = true,
+        enable_on_insert = false,
         throttle = 0,
       }
     },
   },
+  -- Better quickfix lists.
   {
     'yorickpeterse/nvim-pqf',
     event = "UIEnter",
