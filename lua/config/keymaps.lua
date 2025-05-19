@@ -6,24 +6,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true, silent = t
 --[[Quickfixlists]]--
 
 -- Navigate easier in quickfixlists or location lists.
-vim.keymap.set("n", "]c", "<cmd>cnext<CR>", { noremap = true, silent =true, desc = "QuickList: Go to next" })
-vim.keymap.set("n", "[c", "<cmd>cprev<CR>", { noremap = true, silent =true, desc = "QuickList: Go to prev" })
-vim.keymap.set("n", "[[c", "<cmd>cfirst<CR>", { noremap = true, silent =true, desc = "QuickList: Go to first" })
-vim.keymap.set("n", "]]c", "<cmd>clast<CR>", { noremap = true, silent =true, desc = "QuickList: Go to last" })
-vim.keymap.set("n", "]l", "<cmd>lnext<CR>", { noremap = true, silent =true, desc = "LocationList: Go to next" })
-vim.keymap.set("n", "[l", "<cmd>lprev<CR>", { noremap = true, silent =true, desc = "LocationList: Go to prev" })
-vim.keymap.set("n", "[[l", "<cmd>lfirst<CR>", { noremap = true, silent =true, desc = "LocationList: Go to first" })
-vim.keymap.set("n", "]]l", "<cmd>llast<CR>", { noremap = true, silent =true, desc = "QuickList: Go to last" })
-vim.keymap.set("n", "<leader>co", "<cmd>copen<CR>", { noremap = true, silent =true, desc = "QuickList: Open" })
-vim.keymap.set("n", "<leader>cc", "<cmd>cclose<CR>", { noremap = true, silent =true, desc = "QuickList: Close" })
-vim.keymap.set("n", "<leader>lo", "<cmd>lopen<CR>", { noremap = true, silent =true, desc = "LocationList: Open" })
-vim.keymap.set("n", "<leader>lc", "<cmd>lclose<CR>", { noremap = true, silent =true, desc = "LocationList: Close" })
-
--- Map buffer navigation commands using Alt.
-vim.keymap.set('n', '<M-n>', '<cmd>bprev<CR>', { noremap = true, silent = true, desc = 'Buffers: Next buffer' })
-vim.keymap.set('n', '<M-p>', '<cmd>bnext<CR>', { noremap = true, silent = true, desc = 'Buffers: Previous buffer' })
-vim.keymap.set('n', '<M-q>', '<cmd>bd<CR>', { noremap = true, silent = true, desc = 'Buffers: Delete buffer' })
-vim.keymap.set('n', '<M-s>', '<C-^>', { noremap = true, silent = true, desc = 'Buffers: Switch ast buffer' })
+vim.keymap.set("n", "<leader>co", "<cmd>copen<CR>", { noremap = true, silent = true, desc = "QuickList: Open" })
+vim.keymap.set("n", "<leader>cc", "<cmd>cclose<CR>", { noremap = true, silent = true, desc = "QuickList: Close" })
+vim.keymap.set("n", "<leader>lo", "<cmd>lopen<CR>", { noremap = true, silent = true, desc = "LocationList: Open" })
+vim.keymap.set("n", "<leader>lc", "<cmd>lclose<CR>", { noremap = true, silent = true, desc = "LocationList: Close" })
 
 -- Remap some window using Alt instead of Ctrl.
 vim.keymap.set('n', '<C-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
