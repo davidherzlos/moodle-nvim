@@ -32,17 +32,7 @@ return {
       vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
     end
   },
-  -- Highligh color column when needed by filetype.
-  {
-    "m4xshen/smartcolumn.nvim",
-    opts = {
-      colorcolumn = "100",
-      custom_colorcolumn = {
-        python = "80", php = "132", lua = "100", javascript = "100"
-      },
-      scope = 'line'
-    }
-  },
+  -- Some UI improvements for the editor.
   {
     "folke/noice.nvim",
     event = "VeryLazy",
