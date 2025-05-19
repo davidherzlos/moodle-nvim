@@ -41,5 +41,20 @@ return
           cursorcolumn = {},
         },
       }
-    }
+    },
+    -- Highligh color column when needed by filetype.
+    {
+      "m4xshen/smartcolumn.nvim",
+      opts = {
+        disabled_filetypes = {
+          "snacks_dashboard",
+          "qf",
+        },
+        colorcolumn = "100",
+        custom_colorcolumn = {
+          python = "80", php = "132", lua = "100", javascript = "100",
+        },
+        scope = 'line'
+      }
+    },
   }
