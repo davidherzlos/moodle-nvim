@@ -11,30 +11,51 @@ vim.keymap.set("n", "<leader>cc", "<cmd>cclose<CR>", { noremap = true, silent = 
 vim.keymap.set("n", "<leader>lo", "<cmd>lopen<CR>", { noremap = true, silent = true, desc = "LocationList: Open" })
 vim.keymap.set("n", "<leader>lc", "<cmd>lclose<CR>", { noremap = true, silent = true, desc = "LocationList: Close" })
 
--- Remap some window using Alt instead of Ctrl.
-vim.keymap.set('n', '<C-u>', '<C-u>', { noremap = true, silent = true, desc = 'Navigation: Scroll up' })
-vim.keymap.set('n', '<C-d>', '<C-d>', { noremap = true, silent = true, desc = 'Navigation: Scroll down' })
--- vim.keymap.set('n', '<M-e>', '<C-e>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one line)' })
--- vim.keymap.set('n', '<M-y>', '<C-y>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one line)' })
--- vim.keymap.set('n', '<M-f>', '<C-f>', { noremap = true, silent = true, desc = 'Navigation: Scroll down (one screen)' })
--- vim.keymap.set('n', '<M-b>', '<C-b>', { noremap = true, silent = true, desc = 'Navigation: Scroll up (one screen)' })
--- vim.keymap.set('n', '<M-i>', '<C-i>', { noremap = true, silent = true, desc = 'Navigation: Jump next cursor' })
--- vim.keymap.set('n', '<M-o>', '<C-o>', { noremap = true, silent = true, desc = 'Navigation: Jump previous cursor' })
-vim.keymap.set('n', '<M-w>', '<C-w>', { noremap = true, silent = true, desc = 'Window: Window maps' })
+-- Utility function to go first on qf and loc lists.
+local function first_on_list()
+  local loclist = vim.fn.getloclist(0, { idx = 0, size = 1 })
+  if loclist.size > 0 then
+    vim.cmd('lfirst')
+  end
+  local qflist = vim.fn.getqflist({ idx = 0, size = 1 })
+  if qflist.size > 0 then
+    vim.cmd('cfirst')
+  end
+end
 
--- Remap some editing keys.
-vim.keymap.set('n', 'r', '<C-r>', { noremap = true, silent = true, desc = 'Editing: Redo' })
+-- Utility function to go next on qf and loc lists.
+local function next_on_list()
+  local loclist = vim.fn.getloclist(0, { idx = 0, size = 1 })
+  if loclist.size > 0 and loclist.idx ~= loclist.size then
+    vim.cmd('lnext')
+  end
+  local qflist = vim.fn.getqflist({ idx = 0, size = 1 })
+  if qflist.size > 0 and qflist.idx ~= qflist.size then
+    vim.cmd('cnext')
+  end
+end
 
--- Add an utility function to toggle full screen on an active window in split view.
-local fullscreen = false
-local function toggle_fullscreen()
-  if not fullscreen then
-    vim.cmd("resize")
-    vim.cmd("vertical resize")
-    fullscreen = true
-  else
-    vim.cmd("wincmd =")
-    fullscreen = false
+-- Utility function to go prev on qf and loc lists.
+local function prev_on_list()
+  local loclist = vim.fn.getloclist(0, { idx = 0, size = 1 })
+  if loclist.size > 0 and loclist.idx ~= 1 then
+    vim.cmd('lprev')
+  end
+  local qflist = vim.fn.getqflist({ idx = 0, size = 1 })
+  if qflist.size > 0 and qflist.idx ~= 1 then
+    vim.cmd('cprev')
+  end
+end
+
+-- Utility function to go last on qf and loc lists.
+local function last_on_list()
+  local loclist = vim.fn.getloclist(0, { idx = 0, size = 1 })
+  if loclist.size > 0 then
+    vim.cmd('llast')
+  end
+  local qflist = vim.fn.getqflist({ idx = 0, size = 1 })
+  if qflist.size > 0 then
+    vim.cmd('clast')
   end
 end
 vim.keymap.set('n', '<M-CR>', toggle_fullscreen, { noremap = true, silent = true })
