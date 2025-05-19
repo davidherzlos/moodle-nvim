@@ -70,9 +70,22 @@ vim.api.nvim_create_user_command("LintInfo", function ()
 end, { desc = "Show availble linters for this buffer." })
 
 -- Add autocmd for linting the file on file save.
-vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
-  pattern = { "*.sh", "*.php", "*.js", "*.json" },
-  callback = function()
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
+  pattern = { "*.php" },
+  callback = function(args)
+    local filetype = vim.bo.filetype
+    if filetype == 'php' and args.event == 'InsertLeave' then
+      require("lint").try_lint('phpcs')
+      return
+    end
+    if filetype == 'php' and args.event == 'TextChanged' then
+      require("lint").try_lint('phpcs')
+      return
+    end
+    if filetype == 'php' and args.event == 'BufWritePost' then
+      require("lint").try_lint('phpstan')
+      return
+    end
     require("lint").try_lint()
     vim.diagnostic.enable(true);
   end,
