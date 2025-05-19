@@ -104,3 +104,20 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
   end,
   desc = 'Lint the current file when the buffer is saved.'
 })
+
+-- Add autocmd for adjusting lines on qflists and loclists.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.wrap = false
+    vim.opt_local.linebreak = false
+  end,
+})
+
+-- Add autocmd for allowing LSP renaming on mini-files.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionRename",
+  callback = function(event)
+    Snacks.rename.on_rename_file(event.data.from, event.data.to)
+  end,
+})
