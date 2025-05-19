@@ -1,3 +1,8 @@
+-- Add signs for DapUI.
+vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakPoint", })
+vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "DapLogPoint", })
+vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", })
+
 return {
   {
     "folke/tokyonight.nvim",
