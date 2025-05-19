@@ -87,15 +87,20 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
       return
     end
     require("lint").try_lint()
-    vim.diagnostic.enable(true);
   end,
   desc = 'Lint the current file when the buffer is saved.'
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+-- Add autocmd to toggle diagnostics on insertmode.
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
   pattern = { "*" },
-  callback = function()
-    vim.diagnostic.enable(false);
+  callback = function(args)
+    if args.event == "InsertEnter" then
+      vim.diagnostic.enable(false)
+    end
+    if args.event == "InsertLeave" then
+      vim.diagnostic.enable(true)
+    end
   end,
   desc = 'Lint the current file when the buffer is saved.'
 })
