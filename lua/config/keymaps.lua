@@ -3,9 +3,7 @@
 -- Clear highlight search when pressing <Esc> in normal mode.
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true })
 
--- Open diagnostic quickfixlists and locationlists easier.
-vim.keymap.set("n", "<leader>dc", "<cmd>lua vim.diagnostic.setqflist()<CR>", { noremap = true, silent =true, desc = "Diagnostics: Open qflist" })
-vim.keymap.set("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent =true, desc = "Diagnostics: Open loclist" })
+--[[Quickfixlists]]--
 
 -- Navigate easier in quickfixlists or location lists.
 vim.keymap.set("n", "]c", "<cmd>cnext<CR>", { noremap = true, silent =true, desc = "QuickList: Go to next" })
