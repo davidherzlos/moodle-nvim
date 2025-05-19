@@ -58,4 +58,33 @@ local function last_on_list()
     vim.cmd('clast')
   end
 end
-vim.keymap.set('n', '<M-CR>', toggle_fullscreen, { noremap = true, silent = true })
+
+-- Navigate on quickfixlists and locationlists.
+vim.keymap.set("n", "<M-K>", first_on_list, { noremap = true, silent = true, desc = "Quickfixlists: first" })
+vim.keymap.set("n", "<M-j>", next_on_list, { noremap = true, silent = true, desc = "Quickfixlists: next" })
+vim.keymap.set("n", "<M-k>", prev_on_list, { noremap = true, silent = true, desc = "Quickfixlists: prev" })
+vim.keymap.set("n", "<M-J>", last_on_list, { noremap = true, silent = true, desc = "Quickfixlists: last" })
+
+--[[Diagnostics]]--
+
+-- Open/close diagnostics quickfixlists and locationlists.
+vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Diagnostics: Open quickfixlist" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Diagnostics: Open locationlist" })
+
+-- Open/close todo-comments quickfixlists and locationlists.
+vim.keymap.set("n", "<leader>td", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "TodoComments: TodoQuickFix" })
+
+--[[Windows and Buffers]]--
+
+vim.keymap.set('n', '<leader>oo', function ()
+  vim.cmd('only')
+  vim.opt.laststatus = 2
+end, { desc = 'Only this window' })
+
+-- Remap some window using Alt instead of Ctrl.
+vim.keymap.set('n', '<M-l>', '<C-^>', { noremap = true, silent = true, desc = 'Buffer: Last visited buffer' })
+
+--[[Neovim utils]]--
+
+-- Source the current file.
+vim.keymap.set('n', '<leader>x', function() vim.cmd('luafile %') print('File was sourced') end, { noremap = true, silent = true, desc = 'Neovim: source file' })
