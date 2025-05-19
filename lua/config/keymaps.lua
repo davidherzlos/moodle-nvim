@@ -1,7 +1,7 @@
 --[[General]]--
 
 -- Clear highlight search when pressing <Esc> in normal mode.
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true })
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true, silent = true, desc = "No hightlight search!"})
 
 --[[Quickfixlists]]--
 
