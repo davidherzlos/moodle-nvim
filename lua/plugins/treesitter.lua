@@ -33,7 +33,7 @@ return {
     dependencies = { { "nvim-treesitter/nvim-treesitter" } },
     config = function()
       require'treesitter-context'.setup{
-        enable = true,
+        enable = false,
         multiwindow = true,
         line_numbers = false,
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
