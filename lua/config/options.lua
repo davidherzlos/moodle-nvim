@@ -63,13 +63,13 @@ vim.diagnostic.config{
   update_in_insert = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "󰞏",
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
     },
   },
 }
 
--- Default theme. ayu|solarized|tokyonight|dawnfox.
+-- Default theme. solarized|tokyonight|gruvbox-material|everforest
 vim.g.default_colorscheme = 'tokyonight'
