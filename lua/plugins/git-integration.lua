@@ -1,19 +1,8 @@
 return {
-  -- MiniDiff to highlight signs with git changes.
-  {
-    'echasnovski/mini.nvim',
-    config = function ()
-      vim.keymap.set('n', '<leader>Gp', function ()
-        vim.cmd('MiniDiff.toggle_overlay()')
-      end, { desc = '[G]it [p]review worktree'})
-    end
-  },
   -- Vim fugitive to integrate a wide range of git operations on vim cmd.
   {
     'tpope/vim-fugitive',
     config = function ()
-      require('mini.diff').setup()
-
       -- Add Keymaps to open diff split views for changes and conflicts.
       vim.keymap.set('n', '<leader>Gwd', function ()
         vim.cmd('Gvdiffsplit')
@@ -61,29 +50,4 @@ return {
       end, { noremap = true, silent = true, desc = '[G]it [m]erge [l]open' })
     end
   },
-  -- Lazygit foe more visual git users.
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit: [G]it [C]onsole" },
-      { "<leader>lG", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit: [G]it [C]onsole" }
-    },
-    config = function ()
-      vim.g.lazygit_floating_window_scaling_factor = 1.0 -- scaling factor for floating window
-      vim.g.lazygit_floating_window_use_plenary = 1 -- use plenary.nvim to manage floating window if available
-    end
-  },
 }
-
