@@ -1,7 +1,7 @@
 -- Define utility function for getting some colors.
 local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
 
--- And add another longer for formatting the text returned by the LSP.
+-- Define another for formatting the text returned by the LSP.
 local function text_format(symbol)
   local res = {}
 
@@ -10,8 +10,8 @@ local function text_format(symbol)
 
   -- Indicator that shows if there are any other symbols in the same line
   local stacked_functions_content = symbol.stacked_count > 0
-      and ("+%s"):format(symbol.stacked_count)
-      or ''
+  and ("+%s"):format(symbol.stacked_count)
+  or ''
 
   if symbol.references then
     local usage = symbol.references <= 1 and 'reference' or 'references'
@@ -54,15 +54,15 @@ local function text_format(symbol)
 
   return res
 end
--- Now install and configure the plugins for symbols usage.
+
 return {
   {
     'Wansmer/symbol-usage.nvim',
     dependencies = {
-      "neovim/nvim-lspconfig", -- Just ensure Lsp setup is finished.
+      "neovim/nvim-lspconfig",
     },
     keys = {
-      '<leader>st',
+      '<leader>su',
     },
     config = function()
       -- hl-groups can have any name
@@ -74,7 +74,7 @@ return {
 
       local SymbolKind = vim.lsp.protocol.SymbolKind
       require('symbol-usage').setup({
-      vt_position = 'above',
+        vt_position = 'above',
         kinds = {
           SymbolKind.Interface,
           SymbolKind.Class,

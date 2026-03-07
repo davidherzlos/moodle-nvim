@@ -1,8 +1,7 @@
 return {
+  -- Treesitter configurarions.
   {
     "nvim-treesitter/nvim-treesitter",
-    -- NOTE: You can use this commit as fallback for bugs in lastest commits.
-    -- commit = 'c579d18',
     build = ":TSUpdate",
     config = function ()
       local configs = require("nvim-treesitter.configs")
@@ -26,6 +25,20 @@ return {
         },
       })
       vim.treesitter.language.register('html', 'mustache')  -- the someft filetype will use the python parser and queries.
+    end
+  },
+  -- Show the context of the current content as it is navigated.
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { { "nvim-treesitter/nvim-treesitter" } },
+    config = function()
+      require'treesitter-context'.setup{
+        enable = false,
+        multiwindow = true,
+        line_numbers = false,
+        multiline_threshold = 20, -- Maximum number of lines to show for a single context
+        mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+      }
     end
   }
 }
