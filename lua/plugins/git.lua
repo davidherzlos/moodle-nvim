@@ -2,7 +2,19 @@ return {
   -- Vim fugitive to integrate a wide range of git operations on vim cmd.
   {
     'tpope/vim-fugitive',
+    dependencies = {
+      'nvim-mini/mini.nvim',
+      version = false,
+    },
     config = function ()
+      -- MiniDiff to highlight signs with git changes.
+      require('mini.diff').setup({
+        view = {
+          signs = { add = '█', change = '█', delete = '█' },
+        },
+      })
+      vim.keymap.set('n', '<leader>Gp', "<cmd>lua MiniDiff.toggle_overlay()<CR>", { desc = '[G]it [p]review worktree'})
+
       -- Add Keymaps to open diff split views for changes and conflicts.
       vim.keymap.set('n', '<leader>Gwd', function ()
         vim.cmd('Gvdiffsplit')

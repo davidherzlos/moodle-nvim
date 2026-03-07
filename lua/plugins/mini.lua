@@ -4,14 +4,6 @@ return {
     'nvim-mini/mini.nvim',
     version = false,
     config = function()
-      -- MiniDiff to highlight signs with git changes.
-      require('mini.diff').setup({
-        view = {
-          signs = { add = '█', change = '█', delete = '█' },
-        },
-      })
-      vim.keymap.set('n', '<leader>Gp', "<cmd>lua MiniDiff.toggle_overlay()<CR>", { desc = '[G]it [p]review worktree'})
-
       -- Mini file manager.
       require('mini.files').setup({ mappings = { close = '<ESC>' } })
 
