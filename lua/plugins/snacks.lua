@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      notifier = { enabled = true },
+      notifier = { enabled = false },
       rename = { enabled = true },
       git = { enabled = true },
       statuscolumn = {
@@ -12,7 +12,9 @@ return {
         right = { "mark", "sign" }, -- priority of signs on the left (high to low)
         left = { "fold", "git" }, -- priority of signs on the right (high to low)
       },
-      words = { enabled = true },
+      words = { 
+        enabled = true,
+      },
       scratch = {
         enabled = true,
         win = {
