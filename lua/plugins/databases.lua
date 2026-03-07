@@ -3,8 +3,7 @@ return {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
       { 'tpope/vim-dadbod', lazy = true },
-      -- Completion course.
-      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'pgsql' }, lazy = true },
     },
     cmd = {
       'DBUI',
