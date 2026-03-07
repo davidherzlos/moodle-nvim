@@ -10,16 +10,17 @@ return {
       sign_priority = 8,
       keywords = {
         FIX = {
-          icon = " ",
+          icon = "󰁨 ",
           color = "error", -- It accepts also hex values.
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- Map this keyword too.
         },
         TODO = { icon = " ", color = "info" },
         HACK = { icon = " ", color = "warning" },
-        WARN = { icon = " ", color = "warning", alt = { "WARNING" } },
-        PERF = { icon = " ", alt = { "PERFORMANCE" } },
-        NOTE = { icon = " ", color = "hint", alt = { "INFO", "SPIKE" } },
-        TEST = { icon = " ", color = "info", alt = { "PASSED", "FAILED" } },
+        WARN = { icon = "󰒡 ", color = "warning", alt = { "WARNING" } },
+        PERF = { icon = "󰺓 ", alt = { "PERFORMANCE" } },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO", "SPIKE" } },
+        TEST = { icon = " ", color = "info", alt = { "PASSED", "FAILED" } },
+        REFACTOR = { icon = " ", color = "info", alt = { "STRUCTURE", "REF" } },
       },
     }
   },
