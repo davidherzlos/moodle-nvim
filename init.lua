@@ -26,6 +26,9 @@ require("lazy").setup("plugins", {
   }
 })
 
+-- Add native config for lsp.
+require("config.lsp-support")
+
 -- Load commands.
 require("config.autocmds")
 

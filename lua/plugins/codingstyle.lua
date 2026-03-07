@@ -11,6 +11,7 @@ return {
     opts = {
       ensure_installed = {
         "beautysh",
+        "biome",
         "php-cs-fixer",
         "phpstan",
         "phpcs",
