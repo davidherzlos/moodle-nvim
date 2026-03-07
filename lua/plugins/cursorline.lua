@@ -18,25 +18,28 @@ return
     {
       -- Define finer behavior of cursorline.
       'tummetott/reticle.nvim',
-      enabled = true,
       event = 'VeryLazy', -- optionally lazy load the plugin
       opts = {
         on_startup = {
           cursorline = true,
           cursorcolumn = false,
         },
+        always_highlight_number = true,
         follow = {
           cursorline = false,
         },
+        disable_in_diff = false,
         never = {
           cursorline = {
+            'nofile',
             'DressingInput',
             'TelescopePrompt',
             'dapui_stacks',
             'dapui_breakpoints',
             'dapui_scopes',
             'dapui_console',
-            'dap-repl',
+            'dap-view',
+            'terminal'
           },
           cursorcolumn = {},
         },

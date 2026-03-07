@@ -11,7 +11,7 @@ return {
       icons = {
         group = (vim.g.fallback_icons_enabled and "+") or "",
         rules = false,
-        separator = ">",
+        separator = "󰌌",
       },
     },
     keys = {
