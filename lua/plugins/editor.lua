@@ -79,8 +79,7 @@ return {
         throttle = 0,
       }
     },
-  },
-  -- Better quickfix lists.
+  }, 
   {
     'yorickpeterse/nvim-pqf',
     event = "UIEnter",
@@ -92,6 +91,8 @@ return {
           info = { text = ' ', hl = 'DiagnosticSignInfo' },
           hint = { text = ' ', hl = 'DiagnosticSignHint' },
         },
+        max_filename_length = 65,
+        filename_truncate_prefix = '[...]',
       })
     end
   },
