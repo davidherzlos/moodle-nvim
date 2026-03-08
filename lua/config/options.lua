@@ -73,3 +73,6 @@ vim.diagnostic.config{
 
 -- Default theme. solarized|tokyonight|gruvbox-material|everforest
 vim.g.default_colorscheme = 'tokyonight'
+
+-- Plugins local path for development.
+vim.g.plugins_local_dev_path = '~/repos'
