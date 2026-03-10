@@ -38,6 +38,16 @@ return {
               },
             },
           },
+          windows = {
+            size = 0.5,
+            position = "right",
+            terminal = {
+              size = 0.5,
+              position = "left",
+              -- List of debug adapters for which the terminal should be ALWAYS hidden
+              hide = {},
+            },
+          },
           -- Controls how to jump when selecting a breakpoint or navigating the stack
           -- Comma separated list, like the built-in 'switchbuf'. See :help 'switchbuf'
           -- Only a subset of the options is available: newtab, useopen, usetab and uselast
@@ -50,7 +60,6 @@ return {
       },
     },
     config = function()
-
       -- Type checking and autocompletions (not for PHP).
       require("lazydev").setup({
         library = { "nvim-dap-ui" },
@@ -59,29 +68,29 @@ return {
       require("mason").setup()
 
       -- Ensure adapters are installed properly.
+      -- NOTE: if the debugger doesn't work first time, try running :MasonInstall php-debug-adapter
       require("mason-nvim-dap").setup({
-        ensure_installed = { "php" }
+        ensure_installed = { "php" },
+        automatic_installation = true,
       })
 
       -- Configure the adapters.
       local dap = require('dap')
-      local adapter = '/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js'
 
+      -- Register the adapter for php.
       dap.adapters.php = {
         type = 'executable',
-        command = 'node',
-        --TEST: Alternative config for php dap adapter.
-        --command = vim.fn.stdpath('data') .. '/mason/bin/php-debug-adapter',
-        args = { vim.loop.os_homedir() .. adapter }
+        command = vim.fn.stdpath('data') .. '/mason/bin/php-debug-adapter',
       }
 
       -- Tell dap how to use the adapters.
       dap.configurations.php = {
         {
+          name = 'Listen for Xdebug',
           type = 'php',
           request = 'launch',
-          name = 'Listen for Xdebug',
           port = 9003,
+          -- Path mappings are needed when editing the code from the host.
           pathMappings = {
             ["/var/www/html"] = "${workspaceFolder}"
           }
