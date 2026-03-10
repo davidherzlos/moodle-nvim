@@ -25,7 +25,7 @@ require("lazy").setup("plugins", {
     icons = vim.g.have_nerd_font and {}
   },
   dev = {
-    path = vim.g.plugins_local_dev_path,
+    path = vim.g.plugins_dev_path,
     fallback = true, -- Use github if local dir does not exist.
   },
 })

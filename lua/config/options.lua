@@ -75,4 +75,4 @@ vim.diagnostic.config{
 vim.g.default_colorscheme = 'tokyonight'
 
 -- Plugins local path for development.
-vim.g.plugins_local_dev_path = '~/repos'
+vim.g.plugins_dev_path = '~/repos'
