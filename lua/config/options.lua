@@ -16,6 +16,9 @@ vim.opt.timeoutlen = 500
 
 --[[Editor]]--
 
+-- Disable the visual indicator for the current mode.
+vim.opt.showmode = false
+
 -- Enable relative linenumbers for easy jumping.
 vim.opt.relativenumber = true
 
@@ -57,6 +60,9 @@ vim.g.have_nerd_font = true
 -- Set highlight on search.
 vim.opt.hlsearch = true
 
+-- Hide cmdline when not being used.
+vim.opt.cmdheight = 0
+
 -- Disable ~ on non existing lines.
 vim.opt.fillchars = { eob = " " }
 
@@ -75,8 +81,8 @@ vim.diagnostic.config{
   },
 }
 
--- Default theme. solarized|tokyonight|gruvbox-material|everforest
-vim.g.default_colorscheme = 'tokyonight'
-
 -- Plugins local path for development.
 vim.g.plugins_dev_path = '~/repos'
+
+-- Default theme. solarized|tokyonight|gruvbox-material|everforest
+vim.g.default_colorscheme = 'tokyonight'
