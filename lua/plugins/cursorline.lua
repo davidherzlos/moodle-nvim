@@ -5,14 +5,14 @@ return
       "sphamba/smear-cursor.nvim", 
       opts = {
         -- Smear cursor when switching buffers or windows.
-        smear_between_buffers = true,
+        smear_between_buffers = false,
         -- Smear cursor when moving within line or to neighbor lines.
-        smear_between_neighbor_lines = false,
+        smear_between_neighbor_lines = true,
         -- Draw the smear in buffer space instead of screen space when scrolling
         scroll_buffer_space = false,
         -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
         -- Smears will blend better on all backgrounds.
-        legacy_computing_symbols_support = true,
+        legacy_computing_symbols_support = false,
       }
     },
     {
@@ -26,9 +26,10 @@ return
         },
         always_highlight_number = true,
         follow = {
-          cursorline = false,
+          cursorline = true,
         },
-        disable_in_diff = false,
+        disable_in_insert = true,
+        disable_in_diff = true,
         never = {
           cursorline = {
             'nofile',
@@ -39,9 +40,7 @@ return
             'dapui_scopes',
             'dapui_console',
             'dap-view',
-            'terminal'
           },
-          cursorcolumn = {},
         },
       }
     },
