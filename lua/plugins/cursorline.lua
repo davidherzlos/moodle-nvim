@@ -5,40 +5,42 @@ return
       "sphamba/smear-cursor.nvim", 
       opts = {
         -- Smear cursor when switching buffers or windows.
-        smear_between_buffers = true,
+        smear_between_buffers = false,
         -- Smear cursor when moving within line or to neighbor lines.
-        smear_between_neighbor_lines = false,
+        smear_between_neighbor_lines = true,
         -- Draw the smear in buffer space instead of screen space when scrolling
         scroll_buffer_space = false,
         -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
         -- Smears will blend better on all backgrounds.
-        legacy_computing_symbols_support = true,
+        legacy_computing_symbols_support = false,
       }
     },
     {
       -- Define finer behavior of cursorline.
       'tummetott/reticle.nvim',
-      enabled = true,
       event = 'VeryLazy', -- optionally lazy load the plugin
       opts = {
         on_startup = {
           cursorline = true,
           cursorcolumn = false,
         },
+        always_highlight_number = true,
         follow = {
-          cursorline = false,
+          cursorline = true,
         },
+        disable_in_insert = true,
+        disable_in_diff = true,
         never = {
           cursorline = {
+            'nofile',
             'DressingInput',
             'TelescopePrompt',
             'dapui_stacks',
             'dapui_breakpoints',
             'dapui_scopes',
             'dapui_console',
-            'dap-repl',
+            'dap-view',
           },
-          cursorcolumn = {},
         },
       }
     },

@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      notifier = { enabled = true },
+      notifier = { enabled = false },
       rename = { enabled = true },
       git = { enabled = true },
       statuscolumn = {
@@ -12,7 +12,9 @@ return {
         right = { "mark", "sign" }, -- priority of signs on the left (high to low)
         left = { "fold", "git" }, -- priority of signs on the right (high to low)
       },
-      words = { enabled = true },
+      words = { 
+        enabled = true,
+      },
       scratch = {
         enabled = true,
         win = {
@@ -21,11 +23,11 @@ return {
       },
     },
     keys = {
-      { "<C-n>", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t", }},
-      { "<C-p>", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t", }},
-      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<C-f>", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n" }},
+      { "<C-b>", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n" }},
+      { "<leader>..",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>.l",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       { "<leader>rf", function() Snacks.rename.rename_file() end, desc = "LSP:[R]ename [F]ile" },
-    }
+    },
   }
 }

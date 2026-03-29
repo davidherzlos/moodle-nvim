@@ -1,3 +1,3 @@
 lazy-lock.json
-lua/plugins/plugin-development.lua
-lua/plugins/experimental/*
+experimental.lua
+dev.lua

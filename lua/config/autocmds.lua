@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ timeout = 100 }) -- Highlight for 300ms
+    vim.hl.on_yank({ timeout = 100 }) -- Highlight for 300ms
   end,
 })
 
@@ -14,7 +14,7 @@ local conform = require("conform")
 vim.api.nvim_create_user_command("ConformToggle", function ()
   local state = vim.g.formatters_enabled
   vim.g.formatters_enabled = not state
-  vim.print('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
+  vim.notify('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
 end, { desc = "Toggle formatting for the current buffer." })
 
 -- Add autocmd to control the format on save behavior.
@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
   callback = function(args)
 
     if not vim.g.formatters_enabled then
-      vim.print('Formatting is not enabled on this buffer.')
+      vim.notify('Formatting is not enabled on this buffer.')
       return
     end
 
@@ -69,28 +69,6 @@ vim.api.nvim_create_user_command("LintInfo", function ()
   vim.print(linters)
 end, { desc = "Show availble linters for this buffer." })
 
--- Add autocmd for linting the file on file save.
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
-  pattern = { "*.php" },
-  callback = function(args)
-    local filetype = vim.bo.filetype
-    if filetype == 'php' and args.event == 'InsertLeave' then
-      require("lint").try_lint('phpcs')
-      return
-    end
-    if filetype == 'php' and args.event == 'TextChanged' then
-      require("lint").try_lint('phpcs')
-      return
-    end
-    if filetype == 'php' and args.event == 'BufWritePost' then
-      require("lint").try_lint('phpstan')
-      return
-    end
-    require("lint").try_lint()
-  end,
-  desc = 'Lint the current file when the buffer is saved.'
-})
-
 -- Add autocmd to toggle diagnostics on insertmode.
 vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
   pattern = { "*" },
@@ -119,5 +97,14 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "MiniFilesActionRename",
   callback = function(event)
     Snacks.rename.on_rename_file(event.data.from, event.data.to)
+  end,
+})
+
+-- Terminal autocmds.
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.schedule(function()
+      vim.opt_local.cursorline = false
+    end)
   end,
 })

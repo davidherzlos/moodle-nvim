@@ -14,7 +14,7 @@ return {
       'dap-repl',
     }
     local ignored_buf_types = {
-      'prompt'
+      'prompt',
     }
     return {
       statusline = {

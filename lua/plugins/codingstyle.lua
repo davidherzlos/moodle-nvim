@@ -11,6 +11,7 @@ return {
     opts = {
       ensure_installed = {
         "beautysh",
+        "biome",
         "php-cs-fixer",
         "phpstan",
         "phpcs",
@@ -82,6 +83,29 @@ return {
         -- Moodle needs more memory so phpstan can work properly.
         table.insert(lint.linters.phpstan.args, '--memory-limit=500M')
       end
+
+      -- Add autocmd for linting the file on file save.
+      vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
+        pattern = { "*.php" },
+        callback = function(args)
+          local filetype = vim.bo.filetype
+          if filetype == 'php' and args.event == 'InsertLeave' then
+            -- require("lint").try_lint('phpcs')
+            return
+          end
+          if filetype == 'php' and args.event == 'TextChanged' then
+            -- require("lint").try_lint('phpcs')
+            return
+          end
+          if filetype == 'php' and args.event == 'BufWritePost' then
+            require("lint").try_lint('phpstan')
+            return
+          end
+          require("lint").try_lint()
+        end,
+        desc = 'Lint the current file when the buffer is saved.'
+      })
+
     end
   },
 }

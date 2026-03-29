@@ -16,6 +16,9 @@ vim.opt.timeoutlen = 500
 
 --[[Editor]]--
 
+-- Disable the visual indicator for the current mode.
+vim.opt.showmode = false
+
 -- Enable relative linenumbers for easy jumping.
 vim.opt.relativenumber = true
 
@@ -41,6 +44,10 @@ vim.opt.guicursor = "n:blinkon200,i-ci-ve:ver25"
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Disable default sql completion.
+vim.g.omni_sql_no_default_maps = 1
+vim.g.loaded_sql_completion = 1
+
 
 --[[UI and appearance]]--
 
@@ -53,6 +60,9 @@ vim.g.have_nerd_font = true
 -- Set highlight on search.
 vim.opt.hlsearch = true
 
+-- Hide cmdline when not being used.
+vim.opt.cmdheight = 0
+
 -- Disable ~ on non existing lines.
 vim.opt.fillchars = { eob = " " }
 
@@ -63,13 +73,16 @@ vim.diagnostic.config{
   update_in_insert = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "󰞏",
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
     },
   },
 }
 
--- Default theme. ayu|solarized|tokyonight|dawnfox.
+-- Plugins local path for development.
+vim.g.plugins_dev_path = '~/repos'
+
+-- Default theme. solarized|tokyonight|gruvbox-material|everforest
 vim.g.default_colorscheme = 'tokyonight'

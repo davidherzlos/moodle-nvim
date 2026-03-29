@@ -23,11 +23,19 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   ui = {
     icons = vim.g.have_nerd_font and {}
-  }
+  },
+  dev = {
+    path = vim.g.plugins_dev_path,
+    fallback = true, -- Use github if local dir does not exist.
+  },
 })
+
+-- Add native config for lsp.
+require("config.lsp")
 
 -- Load commands.
 require("config.autocmds")
+require("config.usercmds")
 
 -- Load keymaps.
 require("config.keymaps")
