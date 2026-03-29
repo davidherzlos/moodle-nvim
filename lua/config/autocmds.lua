@@ -99,3 +99,12 @@ vim.api.nvim_create_autocmd("User", {
     Snacks.rename.on_rename_file(event.data.from, event.data.to)
   end,
 })
+
+-- Terminal autocmds.
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.schedule(function()
+      vim.opt_local.cursorline = false
+    end)
+  end,
+})

@@ -106,7 +106,14 @@ vim.keymap.set('n', '<leader>oo', function ()
   vim.opt.laststatus = 2
 end, { desc = 'Only this window' })
 
---[[Neovim utils]]--
+--[[Terminal]]--
 
--- Source the current file.
-vim.keymap.set('n', '<leader>x', function() vim.cmd('luafile %') print('File was sourced') end, { noremap = true, silent = true, desc = 'Neovim: source file' })
+-- Return to Terminal Normal mode.
+vim.keymap.set('t', '<leader><Esc>', function()
+  local chan_id = vim.b.terminal_job_id
+  if chan_id then
+    local proc_name = vim.fn.jobpid(chan_id)
+    -- Add logic based on process if needed
+    vim.cmd('stopinsert')
+  end
+end, { silent = true })
