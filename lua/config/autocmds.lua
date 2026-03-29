@@ -14,7 +14,7 @@ local conform = require("conform")
 vim.api.nvim_create_user_command("ConformToggle", function ()
   local state = vim.g.formatters_enabled
   vim.g.formatters_enabled = not state
-  vim.print('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
+  vim.notify('Formatting is now ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
 end, { desc = "Toggle formatting for the current buffer." })
 
 -- Add autocmd to control the format on save behavior.
@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "BufWritePost" }, {
   callback = function(args)
 
     if not vim.g.formatters_enabled then
-      vim.print('Formatting is not enabled on this buffer.')
+      vim.notify('Formatting is not enabled on this buffer.')
       return
     end
 
