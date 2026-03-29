@@ -18,6 +18,7 @@ lsp_configs['bash-language-server'] = {
 }
 
 -- Setup LSP for lua programming.
+
 -- https://luals.github.io/wiki/settings/
 lsp_configs['lua-language-server'] = {
   cmd = { 'lua-language-server' },
@@ -75,12 +76,13 @@ lsp_configs['lua-language-server'] = {
 
 -- Setup LSP for php programming.
 
+
 -- Intelephense (license)
 -- https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
 lsp_configs['intelephense'] = {
   cmd = { 'intelephense', '--stdio' },
   filetypes = { 'php' },
-  root_markers = { '.git', 'composer.json' },
+  root_markers = utils.get_project_root_markers(),
   settings = {
     intelephense = {
       completion = {
@@ -90,8 +92,8 @@ lsp_configs['intelephense'] = {
         enable = false
       },
       environment = {
-        -- TODO: make this dynamic to the Moodle version declared in config.php
-        phpVersion = "8.2.0"
+        documentRoot = "${workspaceFolder}",
+        phpVersion = utils.get_php_version()
       },
       codeLens = {
         references = {
@@ -122,7 +124,7 @@ lsp_configs['intelephense'] = {
 lsp_configs['phpactor'] = {
   cmd = { 'phpactor', 'language-server' },
   filetypes = { 'php' },
-  root_markers = { '.git', 'composer.json', '.phpactor.json', '.phpactor.yml' },
+  root_markers = { 'composer.json', '.phpactor.json', '.phpactor.yml' },
   workspace_required = true,
   init_options = { 
     ["language_server_phpstan.enabled"] = false,

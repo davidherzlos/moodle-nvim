@@ -74,6 +74,7 @@ return {
       signs = { arrow = "" },
       options = {
         show_source = true,
+        show_code = false, -- Display the diagnostic code of diagnostics (e.g., "F401", "no-dupe-args").
         multiple_diag_under_cursor = true,
         enable_on_insert = false,
         throttle = 0,
