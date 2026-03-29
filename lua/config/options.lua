@@ -41,6 +41,10 @@ vim.opt.guicursor = "n:blinkon200,i-ci-ve:ver25"
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Disable default sql completion.
+vim.g.omni_sql_no_default_maps = 1
+vim.g.loaded_sql_completion = 1
+
 
 --[[UI and appearance]]--
 

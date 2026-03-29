@@ -95,16 +95,19 @@ return {
             },
           },
         },
+        cmdline = { enabled = false },
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline' },
           per_filetype = {
-            sql = { 'snippets', 'dadbod', 'buffer' },
+            sql = { 'dadbod', 'snippets', 'buffer' },
+            mysql = { 'dadbod', 'snippets', 'buffer' },
+            plsql = { 'dadbod', 'snippets', 'buffer' },
           },
           providers = {
             dadbod = { name = 'Dadbod', module = "vim_dadbod_completion.blink" },
             snippets = {
               opts = {
-                friendly_snippets = true, -- default
+                friendly_snippets = true,
               }
             }
           }
