@@ -1,6 +1,7 @@
 -- Telescope for fuzzy finding almost anything.
 return {
   'nvim-telescope/telescope.nvim',
+  version = '*',
   branch = 'master', -- branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -13,10 +14,7 @@ return {
     },
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install'
     },
     {
       "nvim-telescope/telescope-live-grep-args.nvim" ,
@@ -28,6 +26,47 @@ return {
     local lga_actions = require("telescope-live-grep-args.actions")
     require("telescope").setup({
       defaults = {
+        debounce = 100,
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          -- Ignore some patterns to speed up.
+          '--glob=!node_modules',
+          '--glob=!vendor',
+          '--glob=!*.min.js',
+          '--glob=!*.min.css',
+        },
+        file_ignore_patterns = {
+          "node_modules",
+          "vendor/",
+          "%.git/",
+          "%.cache/",
+          "%.min%.css$",
+          "%.min%.js$",
+          "%.min.js$",
+          "%-min.js$",
+          "%.min.js.map$",
+          "%.idea/",
+          "%.vscode/",
+          "nbproject/",
+          "%.settings/",
+          "node_modules/",
+          "vendor/",
+          "yui/build/",
+          "%-coverage%.js$",
+          "%.cache/",
+          "%.phpunit%.result%.cache",
+          "jsdoc/",
+          "admin/tool/componentlibrary/docs/",
+          "%.DS_Store",
+          "%.phar$",
+        },
+        borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
         cache_picker = {
           num_pickers = 10,
           limit_entries = 1000,
@@ -51,10 +90,13 @@ return {
         },
         sorting_strategy = 'ascending',
         preview = {
-          treesitter = true
+          treesitter = false
         },
       },
       pickers = {
+        find_files = {
+          hidden = true,
+        },
         lsp_definitions = {
           show_line = false,
         },
@@ -73,7 +115,7 @@ return {
           auto_quoting = false, -- enable/disable auto-quoting
           mappings = { -- extend mappings
             i = {
-              ["<C-'>"] = lga_actions.quote_prompt(),
+              ["''"] = lga_actions.quote_prompt(),
             },
           },
         },

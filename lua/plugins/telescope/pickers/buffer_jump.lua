@@ -149,7 +149,7 @@ local function buffer_jump(opts)
   pickers
     .new(opts, {
       prompt_title = "Jump to line",
-      prompt_prefix = "     ",
+      prompt_prefix = "   ",
       selection_caret = "  ",
       layout_strategy = 'bottom_pane',
       borders = true,
