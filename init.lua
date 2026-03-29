@@ -35,6 +35,7 @@ require("config.lsp")
 
 -- Load commands.
 require("config.autocmds")
+require("config.usercmds")
 
 -- Load keymaps.
 require("config.keymaps")

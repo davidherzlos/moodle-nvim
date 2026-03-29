@@ -1,6 +1,7 @@
 -- Configure the communication between neovim and the LSPs.
 -- See more servers configs: https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 
+local utils = require('config.utils')
 local lsp_configs = {}
 
 -- Setup LSP for bash programming.
