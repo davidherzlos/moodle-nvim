@@ -1,5 +1,10 @@
 --[[General]]--
 
+--[[Neovim utils]]--
+
+-- Source the current file.
+vim.keymap.set('n', '<leader>sf', function() vim.cmd('luafile %') vim.notify('File sourced!') end, { noremap = true, silent = true, desc = 'Neovim: source file' })
+
 -- Clear highlight search when pressing <Esc> in normal mode.
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true, silent = true, desc = "No hightlight search!"})
 
@@ -84,7 +89,7 @@ local function last_on_list()
 end
 
 -- Navigate on quickfixlists and locationlists.
--- TODO: redefine this keymas with a new layer.
+-- TODO: redefine this keymaps with a new layer.
 vim.keymap.set("n", "<C-h>", first_on_list, { noremap = true, silent = true, desc = "Quickfixlists: first" })
 vim.keymap.set("n", "<C-j>", next_on_list, { noremap = true, silent = true, desc = "Quickfixlists: next" })
 vim.keymap.set("n", "<C-k>", prev_on_list, { noremap = true, silent = true, desc = "Quickfixlists: prev" })
