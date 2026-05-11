@@ -120,14 +120,12 @@ return {
         linehl = "",
         numhl = ""
       })
-
       vim.fn.sign_define("DapLogPoint", {
         text = "󰝥 ",
         texthl = "DapLogPoint",
         linehl = "",
         numhl = ""
       })
-
       vim.fn.sign_define("DapStopped", {
         text = " ",
         texthl = "DapStopped",
