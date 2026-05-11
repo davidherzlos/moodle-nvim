@@ -146,20 +146,10 @@ return {
     vim.keymap.set('n', '<leader>bb', telescope.buffers, { desc = 'Telescope: buffers' })
 
     -- Files.
-    vim.keymap.set('n', '<leader>ff', telescope.find_files, { desc = 'Telescope: files' })
-    vim.keymap.set('n', '<leader>f.', function() telescope.find_files({ search_dirs = { utils.git_root() } }) end, { desc = 'Telescope: files (current)'})
-    vim.keymap.set('n', '<leader>fc', function() telescope.find_files({ cwd = utils.config_path() }) end, { desc = 'Telescope: files (config)'})
-    vim.keymap.set('n', '<leader>fp', function() telescope.find_files({ cwd = utils.plugins_path() }) end, { desc = 'Telescope: files (plugins)'})
-    vim.keymap.set('n', '<leader>fo', telescope.oldfiles, { desc = 'Telescope: files (old)' })
     vim.keymap.set('n', '<leader>ip', '<cmd>Telescope lazy<CR>', { desc = 'Telescope: inspect plugins' })
 
-    -- Grep.
-    vim.keymap.set('n', '<leader>gg', function() live_grep_args() end, { desc = 'Telescope: grep' })
-    vim.keymap.set('n', '<leader>g.', function() live_grep_args({ cwd = utils.git_root() }) end, { desc = 'Telescope: grep(currentdir)'})
-    vim.keymap.set('n', '<leader>gc', function() live_grep_args({ cwd = utils.config_path() }) end, { desc = 'Telescope: grep(config)'})
-    vim.keymap.set('n', '<leader>gp', function() live_grep_args({ cwd = utils.plugins_path() }) end, { desc = 'Telescope: grep(plugins)'})
-    vim.keymap.set('n', '<leader>gw', function() live_grep_args_shortcuts.grep_word_under_cursor() end, { desc = 'Telescope: grep(word:word)'})
-    vim.keymap.set('n', '<leader><leader>', buffer_jump, { desc = 'Telescope: jump on buffer' })
+    -- Buffer.
+    vim.keymap.set('n', '<leader>jj', buffer_jump, { desc = 'Telescope: jump on buffer' })
 
     -- Language server Protocol.
     vim.api.nvim_create_autocmd('LspAttach', {
