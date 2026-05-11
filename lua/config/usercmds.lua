@@ -4,7 +4,7 @@ local utils = require('config.utils')
 -- Terminal related commands.
 
 -- Create a floating window with default dimensions
-vim.api.nvim_create_user_command("OpenTerm", function ()
+vim.api.nvim_create_user_command("TermOpen", function ()
   term.open_term()
 end, {})
 
@@ -12,7 +12,7 @@ end, {})
 
 -- Run Moodle test buffer.
 -- TODO: validate test file before running.
-vim.api.nvim_create_user_command("MoodleRunTestBuffer", function ()
+vim.api.nvim_create_user_command("MoodleTestBuffer", function ()
   local relative_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
   term.open_term()
   local job_id = vim.bo.channel
@@ -21,7 +21,7 @@ end, { desc = "Moodle run TestBuffer" })
 
 -- Run Moodle test path.
 -- TODO: validate test path before running.
-vim.api.nvim_create_user_command("MoodleRunTestPath", function (opts)
+vim.api.nvim_create_user_command("MoodleTestPath", function (opts)
   local test_path = opts.args ~= "" and opts.args or nil
   if test_path then
     term.open_term()
@@ -44,7 +44,7 @@ vim.api.nvim_create_user_command("MoodleRunTestPath", function (opts)
 end, { nargs = "?", complete = 'file', desc = "Moodle run TestDir" })
 
 -- Run Moodle test suite.
-vim.api.nvim_create_user_command("MoodleRunTestSuite", function (opts)
+vim.api.nvim_create_user_command("MoodleTestSuite", function (opts)
   local component = opts.args ~= "" and opts.args or nil
 
   -- Parameter was passed from the cmdline.
@@ -79,7 +79,7 @@ vim.api.nvim_create_user_command("MoodlePurgeCaches", function ()
   vim.fn.chansend(job_id, run_cmd)
 end, { desc = "Purge Moodle caches" })
 
--- Add a usercmd to run the Moodle upgrade script with no user interaction.
+-- Add a usercmd to run the Moodle upgrade script in non interactive mode.
 vim.api.nvim_create_user_command("MoodleUpgrade", function ()
   term.open_term()
   local job_id = vim.bo.channel
@@ -87,7 +87,15 @@ vim.api.nvim_create_user_command("MoodleUpgrade", function ()
   vim.fn.chansend(job_id, run_cmd)
 end, { desc = "Upgrade Moodle non Interactive" })
 
--- Add a usercmd to run the Grunt compile Javascript.
+-- Add a usercmd to run the Moodle all cron jobs.
+vim.api.nvim_create_user_command("MoodleCron", function ()
+  term.open_term()
+  local job_id = vim.bo.channel
+  local run_cmd = "php -d xdebug.mode=off admin/cli/cron.php\n"
+  vim.fn.chansend(job_id, run_cmd)
+end, { desc = "Moodle Cron" })
+
+-- Add a usercmd to run Grunt JS compile task.
 vim.api.nvim_create_user_command("MoodleCompileJS", function ()
   local git_root = utils.git_root({ relative = true })
   if not git_root or git_root == "" then

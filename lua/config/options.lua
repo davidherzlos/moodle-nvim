@@ -82,7 +82,7 @@ vim.diagnostic.config{
 }
 
 -- Plugins local path for development.
-vim.g.plugins_dev_path = '~/repos'
+vim.g.plugins_dev_path = '~/repos/nvim-plugins/'
 
 -- Default theme. solarized|tokyonight|gruvbox-material|everforest
 vim.g.default_colorscheme = 'tokyonight'
