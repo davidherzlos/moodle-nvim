@@ -2,7 +2,7 @@ return
   {
     {
       -- Animate the cursor.
-      "sphamba/smear-cursor.nvim", 
+      "sphamba/smear-cursor.nvim",
       opts = {
         -- Smear cursor when switching buffers or windows.
         smear_between_buffers = false,

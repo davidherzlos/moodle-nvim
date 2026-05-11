@@ -51,8 +51,6 @@ return {
           info = { text = ' ', hl = 'DiagnosticSignInfo' },
           hint = { text = ' ', hl = 'DiagnosticSignHint' },
         },
-        max_filename_length = 65,
-        filename_truncate_prefix = '[...]',
       })
     end
   },
