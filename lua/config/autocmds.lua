@@ -62,7 +62,7 @@ local lint = require("lint")
 
 -- One linter at a time.
 local function debounce(fn, delay)
-  local timer = vim.uv.new_timer()
+  local timer = (vim.uv or vim.loop).new_timer()
   return function()
     timer:stop()
     timer:start(delay, 0, vim.schedule_wrap(fn))

@@ -7,7 +7,7 @@ local M = {}
 
 local function live_multigrep (opts)
   opts = opts or {}
-  opts.cwd = opts.cwd or vim.uv.cwd()
+  opts.cwd = opts.cwd or (vim.uv or vim.loop).cwd()
   local finder = finders.new_async_job({
     command_generator = function (prompt)
       if not prompt or prompt == '' then

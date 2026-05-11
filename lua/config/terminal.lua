@@ -4,7 +4,7 @@ local M = {}
 local function _detect_shell()
 
   -- First try the $SHELL environment variable
-  local env_shell = vim.loop.os_getenv("SHELL") or ""
+  local env_shell = (vim.uv or vim.loop).os_getenv("SHELL") or ""
 
   -- Clean up whitespace/newlines
   env_shell = env_shell:gsub("%s+", "")
@@ -27,7 +27,7 @@ local function _detect_shell()
 
   for _, shell_info in ipairs(common_shells) do
     local shell_path, shell_name = shell_info[1], shell_info[2]
-    local stat = vim.loop.fs_stat(shell_path)
+    local stat = (vim.uv or vim.loop).fs_stat(shell_path)
     if stat and stat.type == "file" then
       return shell_path, shell_name
     end
@@ -41,7 +41,6 @@ local function _detect_shell()
 
   return proc_shell, proc_shell
 end
-
 
 -- Create a terminal in a vertical split window.
 local function _open_terminal()

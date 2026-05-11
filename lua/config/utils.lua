@@ -1,5 +1,4 @@
----@diagnostic disable-next-line: undefined-field
-local cwd = vim.loop.cwd()
+local cwd = (vim.uv or vim.loop).cwd()
 
 -- Utils module.
 local M = {}
