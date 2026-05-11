@@ -78,7 +78,6 @@ end
 
 M.open_term = function ()
   _open_terminal()
-  vim.cmd("startinsert")
 end
 
 return M
