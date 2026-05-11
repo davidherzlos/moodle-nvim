@@ -77,7 +77,7 @@ return {
         snippets = { preset = 'luasnip' },
         completion = {
           documentation = {
-            auto_show = true,
+            auto_show = false,
             window = {
               min_width = 20,
               max_width = 40,
@@ -97,7 +97,7 @@ return {
         },
         cmdline = { enabled = false },
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline' },
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
           per_filetype = {
             sql = { 'dadbod', 'snippets', 'buffer' },
             mysql = { 'dadbod', 'snippets', 'buffer' },
@@ -114,22 +114,19 @@ return {
         },
         -- Experimental signature help support
         signature = {
-          enabled = true,
-          trigger = {
-            show_on_insert = true,
-          },
+          enabled = false,
           window = {
             min_width = 1,
             max_width = 100,
             max_height = 10,
-            border = 'single',
+            border = 'none',
             treesitter_highlighting = true,
-            show_documentation = false,
+            show_documentation = true,
           },
         }
       })
 
-      -- Lazy load snipets. 
+      -- Lazy load snipets.
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./lua/config/snippets" } })
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.local/share/nvim/lazy/vscode-moodle-snippets" } })

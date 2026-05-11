@@ -1,0 +1,29 @@
+# Selene configuration file.
+
+[selene]
+base = 'lua51'
+
+[globals]
+vim = { any = true }
+describe = { any = true }
+it = { any = true }
+before_each = { any = true }
+after_each = { any = true }
+setup = { any = true }
+teardown = { any = true }
+assert = { any = true }
+stub = { any = true }
+spy = { any = true }
+mock = { any = true }
+pending = { any = true }
+
+[rules]
+global_usage = "warn"
+undefined_variable = "warn"
+incorrect_standard_library_use = "allow"
+mixed_table = "allow"
+shadowing = "allow"
+unused_variable = "warn"
+multiple_statements = "warn"
+deprecated = "warn"
+

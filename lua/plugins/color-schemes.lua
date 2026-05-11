@@ -38,33 +38,41 @@ return {
           highlights.DapStopped = { fg = colors.blue }
 
           -- Floats
-          highlights.NormalFloat = { bg = colors.bg_dark, fg = colors.fg, }
-          highlights.FloatBorder = { bg = colors.bg_dark, fg = colors.bg_dark, }
-          highlights.FloatTitle = { bg = colors.bg_dark, fg = colors.fg, }
+          highlights.NormalFloat = { bg = colors.bg, fg = colors.fg, }
+          highlights.FloatBorder = { bg = colors.bg, fg = colors.border_highlight, }
+          highlights.FloatTitle = { bg = colors.bg, fg = colors.fg, }
 
           -- MsgArea
-          highlights.MsgArea = { bg = colors.bg_dark, }
+          highlights.MsgArea = { bg = colors.bg_dark }
 
           -- Mini
-          highlights.MiniFilesTitleFocused = { bg = colors.bg_dark, fg = colors.fg, }
+          highlights.MiniFilesNormal= { bg = colors.bg }
+          highlights.MiniFilesTitleFocused = { bg = colors.bg, fg = colors.yellow, } -- We may not need this one.
+
+          -- Snacks
+          highlights.SnacksPickerInputBorder = { bg = colors.none, fg = colors.yellow }
+          highlights.SnacksPickerInputTitle = { bg = colors.bg_dark, fg = colors.yellow }
+          highlights.SnacksPickerInputCursorLine = { bg = colors.none, fg = colors.fg }
+          highlights.SnacksPickerListTitle = { bg = colors.bg_dark, fg = colors.border_highlight }
+          highlights.SnacksPickerPreviewTitle = { bg = colors.bg_dark, fg = colors.border_highlight }
+
 
           -- Tabline
-          highlights.TabLine = { bg = colors.bg_dark }
-          highlights.TabLineFill = { bg = colors.bg_dark1 }
+          highlights.TabLine = { bg = colors.bg }
+          highlights.TabLineFill = { bg = colors.diff.change }
 
           -- Telescope
-          highlights.TelescopeNormal = { bg = colors.bg_dark, fg = colors.fg_dark, }
-          highlights.TelescopeBorder = { bg = colors.bg_dark, fg = colors.bg_dark, }
-          highlights.TelescopePromptNormal = { bg = colors.bg_dark, fg = colors.fg_dark, }
-          highlights.TelescopePromptBorder = { bg = colors.bg_dark, fg = colors.bg_dark, }
-          highlights.TelescopePromptTitle = { bg = colors.bg_dark, fg = colors.fg_dark, }
-          highlights.TelescopePreviewTitle = { bg = colors.bg_dark, fg = colors.bg_dark, }
-          highlights.TelescopeResultsTitle = { bg = colors.bg_dark, fg = colors.bg_dark, }
+          highlights.TelescopeNormal = { bg = colors.bg, }
+          highlights.TelescopeBorder = { bg = colors.bg, fg = colors.border_highlight, }
+          highlights.TelescopePromptBorder = { bg = colors.bg, fg = colors.yellow, }
+          highlights.TelescopePromptTitle = { bg = colors.bg_dark, fg = colors.yellow, }
+          highlights.TelescopePreviewTitle = { bg = colors.bg_dark, fg = colors.border_highlight, }
+          highlights.TelescopeResultsTitle = { bg = colors.bg_dark, fg = colors.border_highlight, }
 
           -- Treesitter context.
           highlights.TreesitterContext = { bg = colors.bg_dark }
           highlights.TreesitterContextBottom = { bg = colors.bg_dark }
-          highlights.TreesitterContextLineNumber = { bg = colors.bg_dark, fg = colors.blue }
+          highlights.TreesitterContextLineNumber = { bg = colors.bg_dark, fg = colors.yellow }
         end
       })
     end
@@ -151,7 +159,6 @@ return {
           -- Git highlights.
           set_hl('diffAdded', palette.none, palette.bg_visual_green) 
           set_hl('diffRemoved', palette.none, palette.bg_visual_red) 
-          set_hl('CurrentWord', palette.none, palette.bg_visual_yellow)
 
           -- Dap highlights.
           set_hl('DapBreakpoint', palette.red, palette.none, 'bold')
@@ -174,9 +181,61 @@ return {
     config = function()
       vim.g.everforest_background = 'medium'
       vim.g.everforest_better_performance = 1
-      vim.g.everforest_enable_italic = 1
+      vim.g.everforest_enable_italic = 0
       vim.g.everforest_disable_italic_comment = 1
-      vim.g.everforest_float_style = 'none'
+      vim.g.everforest_float_style = 'dim'
+
+      if vim.g.default_colorscheme == 'everforest' then
+        vim.api.nvim_create_autocmd('ColorScheme', {
+          group = vim.api.nvim_create_augroup('custom_highlights_everforest', {}),
+          pattern = 'everforest',
+          callback = function()
+            local config = vim.fn['everforest#get_configuration']()
+            local palette = vim.fn['everforest#get_palette'](config.background, config.colors_override)
+            local set_hl = vim.fn['everforest#highlight']
+
+            -- Dap
+            set_hl('DapBreakpoint', palette.red, palette.none)
+            set_hl('DapLogPoint', palette.yellow, palette.none)
+            set_hl('DapStopped', palette.blue, palette.none)
+
+            -- Floats
+            set_hl('NormalFloat', palette.fg, palette.bg0)
+            set_hl('FloatBorder', palette.grey1, palette.bg0)
+            set_hl('FloatTitle', palette.fg, palette.bg0)
+
+            -- Git fugitive
+            set_hl('diffAdded', palette.green, palette.bg_green)
+            set_hl('diffRemoved', palette.red, palette.bg_red)
+
+            -- MsgArea
+            set_hl('MsgArea', palette.fg, palette.bg1)
+
+            -- Mini
+            set_hl('MiniFilesNormal', palette.fg, palette.bg0)
+
+          -- Snacks
+            set_hl('SnacksPickerInputBorder', palette.green, palette.none)
+            set_hl('SnacksPickerInputTitle', palette.green, palette.bg_dim)
+            set_hl('SnacksPickerPreviewTitle', palette.fg, palette.bg_dim)
+            set_hl('SnacksPickerListTitle', palette.fg, palette.bg_dim)
+
+            -- Telescope
+            set_hl('TelescopePromptBorder', palette.green, palette.none)
+            set_hl('TelescopePromptTitle', palette.green, palette.bg_dim)
+            set_hl('TelescopePreviewTitle', palette.fg, palette.bg_dim)
+            set_hl('TelescopeResultsTitle', palette.fg, palette.bg_dim)
+
+          -- Treesitter context.
+            set_hl('TreesitterContext', palette.none, palette.bg_dim)
+            set_hl('TreesitterContextBottom', palette.none, palette.bg_dim)
+            set_hl('TreesitterContextLineNumber', palette.none, palette.bg_dim)
+
+          -- Treesitter context.
+            set_hl('WhichKeyNormal', palette.none, palette.bg_dim)
+          end
+        })
+      end
     end
   },
 }

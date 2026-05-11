@@ -1,23 +1,7 @@
+-- Add capabilities to Neovim to use formatters and linters.
 local utils = require("config.utils")
-
--- Add capabilities to neovim to use formatters and linters.
+local tooling = require("config.tooling")
 return {
-  -- Tool installation.
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        "beautysh",
-        "biome",
-        "php-cs-fixer",
-        "phpstan",
-        "phpcs",
-      },
-    },
-  },
   -- Formatting.
   {
     "stevearc/conform.nvim",
@@ -29,83 +13,24 @@ return {
       notify_on_error = true,
       log_level = vim.log.levels.ERROR,
     },
-    config = function ()
+    config = function()
       local conform = require("conform")
-
       -- Map filetypes to formatter commands.
-      conform.formatters_by_ft = {
-        sh = { "beautysh" },
-        php = { utils.is_moodle_project and "phpcbf" or "php-cs-fixer" },
-        javascript = { "biome" },
-        json = { "biome" }
-      }
-
+      conform.formatters_by_ft = tooling.formatters_by_ft()
       -- Override formatters behavior if needed.
-      conform.formatters = {
-        beautysh = {
-          prepend_args = {
-            "--indent-size=2",
-            "--force-function-style=paronly",
-          },
-        },
-        ['php-cs-fixer'] = {
-          args = {
-            "fix",
-            "$FILENAME",
-            "--using-cache=no",
-            "--rules=@Symfony",
-            "--no-interaction",
-            "--quiet",
-          },
-        },
-      }
-
-    end
+      conform.formatters = tooling.export_formatters_specs()
+    end,
   },
+
   -- Linting.
   {
-    'mfussenegger/nvim-lint',
+    "mfussenegger/nvim-lint",
     lazy = true,
     cmd = { "LintInfo" },
     config = function()
-      local lint = require('lint')
-
+      local lint = require("lint")
       -- Map filetypes to linters commands.
-      lint.linters_by_ft = {
-        php = { "phpcs", "phpstan" },
-        javascript = { "biome" },
-        json = { "biome" },
-        typescript = { "ts_ls" },
-      }
-
-      -- Override formatters behavior if needed.
-      if utils.is_moodle_project() then
-        -- Moodle needs more memory so phpstan can work properly.
-        table.insert(lint.linters.phpstan.args, '--memory-limit=500M')
-      end
-
-      -- Add autocmd for linting the file on file save.
-      vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufWritePost" }, {
-        pattern = { "*.php" },
-        callback = function(args)
-          local filetype = vim.bo.filetype
-          if filetype == 'php' and args.event == 'InsertLeave' then
-            -- require("lint").try_lint('phpcs')
-            return
-          end
-          if filetype == 'php' and args.event == 'TextChanged' then
-            -- require("lint").try_lint('phpcs')
-            return
-          end
-          if filetype == 'php' and args.event == 'BufWritePost' then
-            require("lint").try_lint('phpstan')
-            return
-          end
-          require("lint").try_lint()
-        end,
-        desc = 'Lint the current file when the buffer is saved.'
-      })
-
-    end
+      lint.linters_by_ft = tooling.linters_by_ft()
+    end,
   },
 }
