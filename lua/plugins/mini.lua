@@ -5,7 +5,19 @@ return {
     version = false,
     config = function()
       -- Mini file manager.
-      require('mini.files').setup({ mappings = { close = '<ESC>' } })
+      require('mini.files').setup({
+        mappings = {
+          close = '<ESC>',
+          synchronize = ':w<CR>',
+        },
+        options = {
+          permanent_delete = false,
+        },
+        windows = {
+          width_focus = 50,
+          width_nofocus = 25,
+        },
+      })
 
       -- Open it from the current buffer.
       vim.keymap.set(
