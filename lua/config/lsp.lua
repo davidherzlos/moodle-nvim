@@ -1,10 +1,10 @@
--- Configure the communication between neovim and the LSPs.
+-- Configure the communication between Neovim and the LSPs.
 -- See more servers configs: https://github.com/neovim/nvim-lspconfig/tree/master/lsp
-
 local utils = require('config.utils')
 local lsp_configs = {}
 
 -- Setup LSP for bash programming.
+
 -- https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 lsp_configs['bash-language-server'] = {
   cmd = { 'bash-language-server', 'start' },
@@ -19,6 +19,7 @@ lsp_configs['bash-language-server'] = {
 
 -- Setup LSP for lua programming.
 
+--https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/lua_ls.lua
 -- https://luals.github.io/wiki/settings/
 lsp_configs['lua-language-server'] = {
   cmd = { 'lua-language-server' },
@@ -35,26 +36,23 @@ lsp_configs['lua-language-server'] = {
   },
   on_init = function(client)
     if client.workspace_folders then
+      -- NOTE: if the project contains a luarc file, the lsp will used it, otherwise defaults the lsp config.
       local path = client.workspace_folders[1].name
-      if
-        path ~= vim.fn.stdpath('config')
-        and vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+      if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
         return
       end
     end
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
         version = 'LuaJIT',
-        path = {
-          'lua/?.lua',
-          'lua/?/init.lua',
-        },
       },
       workspace = {
         checkThirdParty = false,
         library = {
           vim.env.VIMRUNTIME,
-          '~/.local/share/nvim/lazy/solarized.nvim',
+          "/usr/share/nvim/runtime/lua",
+          '${3rd}/luv/library',
+          -- Depending on the usage, you might want to add additional paths here.
         }
       }
     })
@@ -68,14 +66,13 @@ lsp_configs['lua-language-server'] = {
         enable = true,
       },
       hover = {
-        enable = true;
-      }
+        enable = true,
+      },
     }
   }
 }
 
 -- Setup LSP for php programming.
-
 
 -- Intelephense (license)
 -- https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
@@ -115,7 +112,8 @@ lsp_configs['intelephense'] = {
     },
   },
   on_attach = function(client, bufnr)
-    client.server_capabilities.signatureHelpProvider = false
+    -- client.server_capabilities.hoverProvider = false
+    -- vim.print(client.server_capabilities)
   end,
 }
 
@@ -126,7 +124,7 @@ lsp_configs['phpactor'] = {
   filetypes = { 'php' },
   root_markers = { 'composer.json', '.phpactor.json', '.phpactor.yml' },
   workspace_required = true,
-  init_options = { 
+  init_options = {
     ["language_server_phpstan.enabled"] = false,
     ["language_server_psalm.enabled"] = false,
   },
@@ -139,20 +137,28 @@ lsp_configs['phpactor'] = {
     client.server_capabilities.workspaceSymbolProvider = false
     client.server_capabilities.renameProvider = false
     client.server_capabilities.hoverProvider = false
+    client.server_capabilities.signatureHelpProvider = false
     -- vim.print(client.server_capabilities)
   end,
 }
 
--- TODO: Integrate phptools from devsense.
+-- Expose as module so it can be handled externally.
+local M = {}
 
--- Install lsp dependencies.
-require('mason-tool-installer').setup({
-  ensure_installed = vim.tbl_keys(lsp_configs)
-})
-
--- Pass config and enable lsp.
-for server, config in pairs(lsp_configs) do
-  vim.lsp.config(server, config)
-  vim.lsp.enable(server)
+-- Export the tools names.
+function M.export_names()
+  return vim.tbl_keys(lsp_configs)
 end
 
+-- Pass config and enable the lsps.
+function M.setup()
+  for server, config in pairs(lsp_configs) do
+    vim.lsp.config(server, config)
+    vim.lsp.enable(server)
+    -- vim.lsp.inlay_hint.enable(true)
+  end
+end
+
+M.setup()
+
+return M
