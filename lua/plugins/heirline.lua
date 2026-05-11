@@ -33,11 +33,27 @@ return {
         lib.component.compiler_state(),
         lib.component.virtual_env(),
         lib.component.cmd_info(),
-        lib.component.nav({
-          condition = function ()
+        require("heirline-components.core.utils").surround(
+          "right",
+          "nav_bg",
+          {
+            hl = require("heirline-components.core.hl").get_attributes "nav",
+            update = { "CursorMoved", "CursorMovedI", "BufEnter" },
+            {
+              provider = function()
+                local line = vim.fn.line "."
+                local char = vim.fn.virtcol "."
+                local total = vim.fn.line "$"
+                return string.format(" %d:%d/%d", line, char, total)
+              end,
+            },
+            { provider = require("heirline-components.core.provider").percentage { padding = { left = 1 } } },
+            { provider = require("heirline-components.core.provider").scrollbar { padding = { left = 1 } }, hl = { fg = "scrollbar" } },
+          },
+          function()
             return not conditions.buffer_matches({ filetype = ignored_file_types, buftype = ignored_buf_types })
           end
-        }),
+        ),
       },
     }
   end,
