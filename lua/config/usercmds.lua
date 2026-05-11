@@ -1,5 +1,29 @@
 local term = require('config.terminal')
 local utils = require('config.utils')
+local lint = require('lint')
+
+-- Formatting and linting commands.
+
+-- Add usercmd to toggle format on save.
+vim.api.nvim_create_user_command("ConformToggle", function ()
+  local state = vim.g.formatters_enabled
+  vim.g.formatters_enabled = not state
+  vim.notify('Conform ' .. (vim.g.formatters_enabled and 'enabled' or 'disabled') .. '.')
+end, { desc = "Toggle formatting for the current buffer." })
+
+-- Add a usercmd to print available linters for this buffer.
+vim.api.nvim_create_user_command("LintInfo", function ()
+  local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
+  local linters_str = ''
+  for _, value in ipairs(linters) do
+    linters_str = linters_str .. value .. ' '
+  end
+  if linters_str == '' then
+    vim.print("No active linters." )
+    return
+  end
+  vim.print("Active linters: " .. linters_str)
+end, { desc = "Show availble linters for this buffer." })
 
 -- Terminal related commands.
 

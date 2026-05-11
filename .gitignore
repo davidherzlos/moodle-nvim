@@ -1,3 +1,6 @@
+/luarocks
+/lua_modules
+/.luarocks
 lazy-lock.json
 experimental.lua
 dev.lua

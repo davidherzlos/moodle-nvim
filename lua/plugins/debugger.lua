@@ -4,7 +4,6 @@ return {
     'mfussenegger/nvim-dap',
     dependencies = {
       "nvim-neotest/nvim-nio",
-      "folke/lazydev.nvim",
       "williamboman/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
       "rcarriga/nvim-dap-ui",
@@ -60,11 +59,6 @@ return {
       },
     },
     config = function()
-      -- Type checking and autocompletions (not for PHP).
-      require("lazydev").setup({
-        library = { "nvim-dap-ui" },
-      })
-
       require("mason").setup()
 
       -- Ensure adapters are installed properly.
