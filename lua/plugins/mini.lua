@@ -22,7 +22,13 @@ return {
       -- Open it from the current buffer.
       vim.keymap.set(
         "n", "<leader>fm",
-        "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<CR>",
+        function()
+          local buf_name = vim.api.nvim_buf_get_name(0)
+          local path = (buf_name ~= "" and vim.fn.filereadable(buf_name) == 1)
+            and buf_name
+            or (vim.uv or vim.loop).cwd()
+          MiniFiles.open(path, false)
+        end,
         { noremap = true, silent = true, desc = "Minifiles: [File] [M]anager open local" }
       )
 
@@ -37,10 +43,16 @@ return {
         },
       })
 
+      vim.api.nvim_create_autocmd('TermOpen', {
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+
       -- Automatic pairing characters.
       require('mini.pairs').setup({})
 
-      -- Highlight hex colors and custom patterns 
+      -- Highlight hex colors and custom patterns
       local hipatterns = require('mini.hipatterns')
       hipatterns.setup({
         highlighters = {

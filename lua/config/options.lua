@@ -22,6 +22,9 @@ vim.opt.showmode = false
 -- Enable relative linenumbers for easy jumping.
 vim.opt.relativenumber = true
 
+-- Disable wrap by default.
+vim.opt.wrap = false
+
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 

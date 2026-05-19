@@ -114,7 +114,7 @@ end, { desc = 'Only this window' })
 --[[Terminal]]--
 
 -- Return to Terminal Normal mode.
-vim.keymap.set('t', '<leader><Esc>', function()
+vim.keymap.set('t', '<C-q>', function()
   local chan_id = vim.b.terminal_job_id
   if chan_id then
     local proc_name = vim.fn.jobpid(chan_id)
