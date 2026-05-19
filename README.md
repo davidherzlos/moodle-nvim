@@ -28,12 +28,15 @@ MoodleVim is a Neovim distribution focused on the **Moodle PHP development** wor
 
 Built on [lazy.nvim](https://github.com/folke/lazy.nvim), with sensible defaults, fully discoverable keymaps, and easy to extend.
 
+> **Note:** MoodleVim is a configuration layer, not a replacement for the tools it bundles. Neovim, all plugins, language servers, and external tools (phpcs, phpstan, Xdebug, etc.) are independent projects maintained by their own authors. This config wires them together for the Moodle workflow — for anything specific to a tool's behaviour, consult its own documentation. Links to each tool and plugin are provided throughout this README.
+
 ---
 
 ## Table of Contents
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Quick Start](#quick-start)
 - [Features & Workflows](#features--workflows)
 - [Plugins](#plugins)
 - [LSP & Tooling](#lsp--tooling)
@@ -81,6 +84,41 @@ nvim
 ```
 
 Mason will then install all LSP servers and tools in the background. Check progress with `:Mason`.
+
+---
+
+## Quick Start
+
+You don't need to read the full docs to get productive. Here's everything you need to know on day one:
+
+**Explore the config by pressing `Space`.** A popup shows all available actions grouped by category. Keep pressing keys to go deeper. Press `<Esc>` to cancel.
+
+| You want to… | Press |
+|--------------|-------|
+| See everything available | `Space` |
+| Find a file | `Space f f` |
+| Search text in the project | `Space g g` |
+| Open a recent file | `Space f l` |
+| Switch between pinned buffers | `Space g h/j/k/l` |
+| Go to definition | `Space s d` |
+| Find references | `Space s r` |
+| Rename a symbol | `Space r n` |
+| Code actions (refactor, fix) | `Space c a` |
+| Open a terminal | `Ctrl+\` |
+| Run tests on current file | `:MoodleTestBuffer` |
+| Toggle format on save | `:ConformToggle` |
+| Start debugging (Xdebug) | `F5` |
+| Toggle a breakpoint | `Space b r` |
+| Open AI assistant | `Space a t` |
+| Search all keymaps | `Space ?` |
+
+**Five things worth knowing:**
+
+1. `Space` is the leader key — it unlocks everything.
+2. The popup that appears after pressing `Space` is your map. You never need to memorise keymaps.
+3. Formatting is **off by default**. Run `:ConformToggle` once to turn it on for your session.
+4. If you're in a Moodle project, the config detects it automatically — the right formatter, linter, and search scope are applied without any setup.
+5. The `:Moodle*` commands (`:MoodleTestBuffer`, `:MoodlePurgeCaches`, etc.) are your shortcuts for the development loop. Type `:Moodle` and press `Tab` to see them all.
 
 ---
 
@@ -152,15 +190,28 @@ Snippets are short templates that expand into boilerplate code as you type. Powe
 
 ### AI Assistance
 
-Bring any CLI-based AI coding agent — [Claude Code](https://claude.ai/code), Gemini CLI, Codex, or others — into the editor as a side panel via [Sidekick](https://github.com/folke/sidekick.nvim). Send the current file, a visual selection, or the syntax node under the cursor to the agent with a single key. Edit suggestions from the agent appear inline and can be accepted with `<tab>`. For bigger tasks, `:MoodleCodingAgent` opens a full-tab Claude Code session.
+Bring any CLI-based AI coding agent — [Claude Code](https://claude.ai/code), Gemini CLI, Codex, or others — into the editor as a side panel via [Sidekick](https://github.com/folke/sidekick.nvim). Toggle the panel with `<leader>at`, send the current file or a visual selection to the agent's context, and accept or deny inline diffs from Claude with `<leader>aa` / `<leader>ad`. For bigger tasks, `:MoodleCodingAgent` opens a full-tab Claude Code session.
 
 ### Keymap Discovery
 
-Never memorise a keymap again. Press any prefix and a popup shows every available continuation with its description. Press `<leader>?` to open a searchable reference of every keymap in the config.
+**This is the recommended way to explore the config.** You do not need to memorise anything upfront.
+
+Every feature in MoodleVim is reachable through `<leader>` (Space). Press it and a popup appears showing all available keys grouped by category, each with a colour-coded icon and a plain-English description. Keep pressing to go deeper — the popup updates at every level.
+
+| What you press | What you see |
+|----------------|--------------|
+| `<Space>` | All top-level groups: Files, Git, Search, Debug, AI… |
+| `<Space>f` | All file-related actions |
+| `<Space>G` | All git actions, split into worktree / index / merge subgroups |
+| `<Space>d` | Diagnostics and debugger controls |
+
+Press `<leader>?` at any time to open a full searchable list of every keymap in the config — useful when you know roughly what you want but not the exact key.
 
 ---
 
 ## Plugins
+
+All plugins listed here are independent open source projects. MoodleVim only configures them — it does not maintain them. If you run into a bug or want a feature that is specific to a plugin's behaviour (not to how it is configured here), please refer to that plugin's own repository and documentation.
 
 <details>
 <summary>Full plugin list</summary>
@@ -168,7 +219,7 @@ Never memorise a keymap again. Press any prefix and a popup shows every availabl
 | Plugin | Role |
 |--------|------|
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager — loads plugins on demand to keep startup fast |
-| [which-key.nvim](https://github.com/folke/which-key.nvim) | Shows available keymaps as you type a prefix |
+| [which-key.nvim](https://github.com/folke/which-key.nvim) | Shows available keymaps as you type a prefix — **the primary way to discover this config** |
 | [snacks.nvim](https://github.com/folke/snacks.nvim) | All-in-one utility: file/grep picker, notifications, scratch buffers, word navigation |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder used for LSP pickers, keymaps, help tags, and custom pickers |
 | [harpoon](https://github.com/ThePrimeagen/harpoon) (v2) | Pin up to 4 buffers for instant switching |
@@ -270,7 +321,9 @@ All commands are available from the Neovim command line (`:CommandName`). Option
 
 `<leader>` is **Space**.
 
-Press `<leader>?` at any time to open a searchable keymap reference powered by which-key.
+> **The easiest way to use this config is to press `<Space>` and follow the popup.** Every group has an icon and a label. You never need to read this table to use the config — it is here as a reference if you want to see everything at once.
+
+Press `<leader>?` at any time for a full searchable list.
 
 ### General
 
@@ -430,16 +483,16 @@ Press `<leader>?` at any time to open a searchable keymap reference powered by w
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>aa` | n | Toggle Sidekick CLI panel |
-| `<leader>ac` | n | Toggle Claude via Sidekick |
-| `<leader>as` | n | Select Sidekick CLI tool |
-| `<leader>ad` | n | Detach CLI session |
-| `<leader>at` | n / x | Send current node to CLI |
-| `<leader>af` | n | Send current file to CLI |
-| `<leader>av` | x | Send visual selection to CLI |
-| `<leader>ap` | n / x | Select and run a Sidekick prompt |
-| `<c-.>` | n / i / x / t | Focus Sidekick CLI panel |
-| `<tab>` | n | Jump to / apply next edit suggestion |
+| `<leader>at` | n | Toggle Sidekick CLI panel |
+| `<leader>as` | n | Select Sidekick agent |
+| `<leader>aq` | n | Detach CLI session |
+| `<C-a>` | t / i / x | Toggle focus to Sidekick panel |
+| `<leader>ap` | n / x | Use a Sidekick prompt |
+| `<leader>af` | n | Add current file to Claude context |
+| `<leader>af` | n (file tree) | Add selected file(s) to Claude context |
+| `<leader>as` | x | Add visual selection to Claude context |
+| `<leader>aa` | n | Accept diff from Claude |
+| `<leader>ad` | n | Deny diff from Claude |
 
 ### Treesitter Selection
 
@@ -528,7 +581,9 @@ Contributions are welcome! Here is how to get involved:
 
 **Reporting a bug**
 
-Open an issue and include:
+Before opening an issue, check whether the problem comes from this config or from one of the bundled tools. A good way to tell: if disabling a plugin in `lua/plugins/` makes the problem go away, it is likely a configuration issue and belongs here. If the problem persists regardless of this config, report it to the relevant plugin or tool directly — links to every project are in the [Plugins](#plugins) section.
+
+If the bug is in this config, open an issue and include:
 - `nvim --version` output
 - OS, PHP version, and whether you are in a Moodle project or a generic PHP project
 - Steps to reproduce and any relevant error messages
