@@ -50,9 +50,9 @@ return {
     keys = {
       -- Terminal lifecycle
       { "<leader>at", function() require("sidekick.cli").toggle({ filter = { installed = true } }) end, desc = "Toggle agent" },
-      { "<leader>as", function() require("sidekick.cli").select() end, desc = "Select agent" },
+      { "<leader>al", function() require("sidekick.cli").select() end, desc = "List agents" },
       { "<leader>aq", function() require("sidekick.cli").close() end,                                   desc = "Detach session" },
-      { "<C-a>", function() require("sidekick.cli").focus() end, mode = { "t", "i", "x" }, desc = "Toggle focus" },
+      { "<C-s>", function() require("sidekick.cli").focus() end, mode = { "n", "t", "i", "x" }, desc = "Switch focus" },
       { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Use a prompt" },
     },
   },
