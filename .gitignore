@@ -3,4 +3,4 @@
 /.luarocks
 lazy-lock.json
 experimental.lua
-dev.lua
+nvimdev.lua
