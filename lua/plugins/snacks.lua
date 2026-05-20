@@ -114,7 +114,7 @@ return {
       vim.keymap.set('n', '<leader>gc', function() Snacks.picker.grep(picker_cfg('config')) end, { desc = 'Grep (config)' })
       vim.keymap.set('n', '<leader>gp', function() Snacks.picker.grep(picker_cfg('plugins')) end, { desc = 'Grep (plugins)' })
       vim.keymap.set('n', '<leader>gw', function() Snacks.picker.grep_word(picker_cfg()) end, { desc = 'Grep (word)' })
-      vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.lines() end, { desc = 'Buffer lines' })
+      vim.keymap.set('n', '<leader>sl', function() Snacks.picker.lines() end, { desc = 'Search lines' })
       vim.keymap.set('n', '<C-f>', function() Snacks.words.jump(vim.v.count1) end, { desc = 'Next Reference' })
       vim.keymap.set('n', '<C-b>', function() Snacks.words.jump(-(vim.v.count1 + 1)) end, { desc = 'Prev Reference' })
       vim.keymap.set('n', '<leader>..', function() Snacks.scratch() end, { desc = 'Scratch buffer' })

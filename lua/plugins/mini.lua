@@ -21,7 +21,7 @@ return {
 
       -- Open it from the current buffer.
       vim.keymap.set(
-        "n", "<leader>fm",
+        "n", "<leader>em",
         function()
           local buf_name = vim.api.nvim_buf_get_name(0)
           local path = (buf_name ~= "" and vim.fn.filereadable(buf_name) == 1)
@@ -29,7 +29,7 @@ return {
             or (vim.uv or vim.loop).cwd()
           MiniFiles.open(path, false)
         end,
-        { noremap = true, silent = true, desc = "Minifiles: [File] [M]anager open local" }
+        { noremap = true, silent = true, desc = "Mini files" }
       )
 
       -- Animated indent scope line.

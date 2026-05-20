@@ -138,13 +138,14 @@ return {
     local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
     -- Quick pick keymaps.
+    vim.keymap.set('n', '<leader><leader>', telescope.buffers, { desc = 'Buffers' })
     vim.keymap.set('n', '<leader>qb', telescope.buffers, { desc = 'Buffers' })
     vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Help' })
     vim.keymap.set('n', '<leader>qk', telescope.keymaps, { desc = 'Keymaps' })
     vim.keymap.set('n', '<leader>ql', telescope.resume, { desc = 'Resume last' })
     vim.keymap.set('n', '<leader>qp', telescope.pickers, { desc = 'Pickers' })
     vim.keymap.set('n', '<leader>qz', '<cmd>Telescope lazy<CR>', { desc = 'Lazy' })
-    vim.keymap.set('n', '<leader>qj', buffer_jump, { desc = 'Jump in buffer' })
+    vim.keymap.set('n', '<leader>sL', buffer_jump, { desc = 'Search lines' })
     vim.keymap.set('n', '<leader>qq', telescope.builtin, { desc = 'Open picker' })
 
     -- Language server Protocol.
