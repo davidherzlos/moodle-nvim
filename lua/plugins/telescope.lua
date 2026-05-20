@@ -137,19 +137,15 @@ return {
     local live_grep_args = require('telescope').extensions.live_grep_args.live_grep_args
     local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
-    -- Regular Keymaps.
-    vim.keymap.set('n', '<leader>ss', telescope.builtin, { desc = 'Telescope: open' })
-    vim.keymap.set('n', '<leader>kk', telescope.keymaps, { desc = 'Telescope: keymaps' })
-    vim.keymap.set('n', '<leader>ll', telescope.resume, { desc = 'Telescope: last' })
-    vim.keymap.set('n', '<leader>pp', telescope.pickers, { desc = 'Telescope: pickers' })
-    vim.keymap.set('n', '<leader>hh', telescope.help_tags, { desc = 'Telescope: help' })
-    vim.keymap.set('n', '<leader>bb', telescope.buffers, { desc = 'Telescope: buffers' })
-
-    -- Files.
-    vim.keymap.set('n', '<leader>ip', '<cmd>Telescope lazy<CR>', { desc = 'Telescope: inspect plugins' })
-
-    -- Buffer.
-    vim.keymap.set('n', '<leader>jj', buffer_jump, { desc = 'Telescope: jump on buffer' })
+    -- Quick pick keymaps.
+    vim.keymap.set('n', '<leader>qb', telescope.buffers, { desc = 'Buffers' })
+    vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Help' })
+    vim.keymap.set('n', '<leader>qk', telescope.keymaps, { desc = 'Keymaps' })
+    vim.keymap.set('n', '<leader>ql', telescope.resume, { desc = 'Resume last' })
+    vim.keymap.set('n', '<leader>qp', telescope.pickers, { desc = 'Pickers' })
+    vim.keymap.set('n', '<leader>qz', '<cmd>Telescope lazy<CR>', { desc = 'Lazy' })
+    vim.keymap.set('n', '<leader>qj', buffer_jump, { desc = 'Jump in buffer' })
+    vim.keymap.set('n', '<leader>qq', telescope.builtin, { desc = 'Open picker' })
 
     -- Language server Protocol.
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -158,15 +154,16 @@ return {
           opts.buffer = event.buf
           return opts
         end
-        vim.keymap.set('n', '<leader>sd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts({ desc = 'Telescope: lsp definitions' }))
-        vim.keymap.set('n', '<leader>si', telescope.lsp_implementations, opts({ desc = 'Telescope: lsp implementations' }))
-        vim.keymap.set('n', '<leader>sr', telescope.lsp_references, opts({ desc = 'Telescope: lsp references' }))
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts({ desc = 'Telescope: lsp rename symbol' }))
-        vim.keymap.set('n', '<leader>ds', telescope.lsp_document_symbols, opts({ desc = 'Telescope: lsp doc symbols' }))
-        vim.keymap.set('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, opts({ desc = 'Telescope: lsp workspace symbols' }))
-        vim.keymap.set({"n", "v", "s"}, '<leader>ca', vim.lsp.buf.code_action, opts({ desc = 'Telescope: code action' }))
+        vim.keymap.set('n', '<leader>sd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts({ desc = 'Definitions' }))
+        vim.keymap.set('n', '<leader>si', telescope.lsp_implementations, opts({ desc = 'Implementations' }))
+        vim.keymap.set('n', '<leader>sr', telescope.lsp_references, opts({ desc = 'References' }))
+        vim.keymap.set('n', '<leader>rs', vim.lsp.buf.rename, opts({ desc = 'Rename symbol' }))
+        vim.keymap.set({"n", "v", "s"}, '<leader>ra', vim.lsp.buf.code_action, opts({ desc = 'Code actions' }))
+        vim.keymap.set('n', '<leader>ss', telescope.lsp_document_symbols, opts({ desc = 'Document symbols' }))
+        vim.keymap.set('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, opts({ desc = 'Workspace symbols' }))
       end
     })
+
     -- Some autocommands.
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",

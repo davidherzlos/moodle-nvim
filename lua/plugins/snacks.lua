@@ -119,7 +119,7 @@ return {
       vim.keymap.set('n', '<C-b>', function() Snacks.words.jump(-(vim.v.count1 + 1)) end, { desc = 'Prev Reference' })
       vim.keymap.set('n', '<leader>..', function() Snacks.scratch() end, { desc = 'Scratch buffer' })
       vim.keymap.set('n', '<leader>.l', function() Snacks.scratch.select() end, { desc = 'List scratch buffers' })
-      vim.keymap.set('n', '<leader>rf', function() Snacks.rename.rename_file() end, { desc = 'LSP rename' })
+      vim.keymap.set('n', '<leader>rf', function() Snacks.rename.rename_file() end, { desc = 'Rename file' })
     end,
   },
 }
