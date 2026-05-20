@@ -99,16 +99,16 @@ You don't need to read the full docs to get productive. Here's everything you ne
 | Find a file | `Space f f` |
 | Search text in the project | `Space g g` |
 | Open a recent file | `Space f l` |
-| Switch between pinned buffers | `Space g h/j/k/l` |
+| Switch between open buffers | `Space Space` |
 | Go to definition | `Space s d` |
 | Find references | `Space s r` |
-| Rename a symbol | `Space r n` |
-| Code actions (refactor, fix) | `Space c a` |
+| Rename a symbol | `Space r s` |
+| Code actions (refactor, fix) | `Space r a` |
 | Open a terminal | `Ctrl+\` |
 | Run tests on current file | `:MoodleTestBuffer` |
 | Toggle format on save | `:ConformToggle` |
 | Start debugging (Xdebug) | `F5` |
-| Toggle a breakpoint | `Space b r` |
+| Toggle a breakpoint | `Space x b` |
 | Open AI assistant | `Space a t` |
 | Search all keymaps | `Space ?` |
 
@@ -321,220 +321,156 @@ All commands are available from the Neovim command line (`:CommandName`). Option
 
 `<leader>` is **Space**.
 
-> **The easiest way to use this config is to press `<Space>` and follow the popup.** Every group has an icon and a label. You never need to read this table to use the config — it is here as a reference if you want to see everything at once.
+### How keymap discovery works
 
-Press `<leader>?` at any time for a full searchable list.
+**Press `<Space>` and follow the popup.** You do not need to memorise anything.
 
-### General
+[which-key.nvim](https://github.com/folke/which-key.nvim) shows a popup after a short delay whenever you start a key sequence. Every group has an icon and a plain-English label. Keep pressing keys to go deeper — the popup updates at each level. Press `<Esc>` to cancel.
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>?` | n | Show all keymaps (which-key) |
-| `<leader>sf` | n | Source the current Lua file |
-| `<Esc>` | n | Clear search highlight |
-| `<leader>oo` | n | Close all other windows |
+```
+<Space>          → shows all groups: Find, Files, Search, Refactor, Debug, Git…
+<Space>f         → shows all file actions: find, recent, by scope…
+<Space>x         → shows all debug actions: breakpoints, step controls, UI…
+```
 
-### Quickfix & Location Lists
+Press `<leader>?` at any time to open a **full searchable list** of every keymap in the config — sorted by description, so you can find things by what they do rather than what key they're on.
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>co` | n | Open quickfix list |
-| `<leader>cc` | n | Close quickfix list |
-| `<leader>lo` | n | Open location list |
-| `<leader>lc` | n | Close location list |
-| `<C-h>` | n | First entry in active list |
-| `<C-j>` | n | Next entry in active list |
-| `<C-k>` | n | Previous entry in active list |
-| `<C-l>` | n | Last entry in active list |
+### Groups at a glance
 
-> `<C-h/j/k/l>` act on the location list when it is open, otherwise the quickfix list. Note these keys overlap with completion navigation (`<C-j>/<C-k>`) and treesitter selection (`<C-h/j/k/l>` in visual/operator mode) — a remapping is planned, see [Roadmap](#roadmap).
+| Prefix | Group | What lives here |
+|--------|-------|-----------------|
+| `<leader>f` | Find | File finders scoped by project, plugin, config |
+| `<leader>e` | Files | Oil and MiniFiles file managers |
+| `<leader>g` | Grep | Text search scoped by project, plugin, config |
+| `<leader>s` | Search (LSP) | Definitions, references, symbols, document/workspace search |
+| `<leader>r` | Refactor | Rename symbol, rename file, code actions |
+| `<leader>d` | Diagnostics | Project and file diagnostics, TODOs |
+| `<leader>x` | Debug | Breakpoints, DAP UI and view controls |
+| `<leader>w` | Working tree | Git diffs and changes for unstaged files |
+| `<leader>i` | Index | Git diffs and changes for staged files |
+| `<leader>m` | Merge | Git 3-way merge diff and conflict list |
+| `<leader>n` | Navigation | Harpoon — pin and jump to up to 4 buffers |
+| `<leader>q` | Quick pick | Buffers, keymaps, help, pickers, resume last |
+| `<leader>t` | Testing | Test runners (PHPUnit via `:Moodle*` commands) |
+| `<leader>.` | Scratch | Scratch buffers |
+| `<leader>a` | Agentic coding | Sidekick AI panel, Claude context, diff accept/deny |
 
-### Diagnostics & TODOs
+### Key reference
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>dc` | n | Send diagnostics to quickfix list |
-| `<leader>dl` | n | Send diagnostics to location list |
-| `<leader>td` | n | Open TODO comments in quickfix list |
+**Discovery**
 
-### Files
+| Key | Description |
+|-----|-------------|
+| `<leader>?` | Full searchable keymap list |
+| `<leader>qb` | Open buffer list |
+| `<leader>ql` | Resume last picker |
+| `<leader>qk` | Browse all keymaps |
+| `<leader>qh` | Search help tags |
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>e` | n | Open Oil file manager (floating) |
-| `<leader>fm` | n | Open MiniFiles at current buffer's directory |
-| `<leader>ff` | n | Find files (project root) |
-| `<leader>f.` | n | Find files (closest plugin/component root) |
-| `<leader>fc` | n | Find files (Neovim config) |
-| `<leader>fp` | n | Find files (plugins directory) |
-| `<leader>fl` | n | Recent files |
+**Files & search**
 
-### Grep
+| Key | Description |
+|-----|-------------|
+| `<leader>ff` | Find files (project root) |
+| `<leader>f.` | Find files (closest component root) |
+| `<leader>fc` / `<leader>fp` | Find files (Neovim config / plugins) |
+| `<leader>fr` | Recent files |
+| `<leader>gg` | Grep (project root) |
+| `<leader>g.` | Grep (closest component root) |
+| `<leader>gw` | Grep word under cursor |
+| `<leader>sl` | Search lines in current buffer |
+| `<leader>eo` | Open Oil file manager |
+| `<leader>em` | Open MiniFiles |
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>gg` | n | Grep (project root) |
-| `<leader>g.` | n | Grep (closest root) |
-| `<leader>gc` | n | Grep (Neovim config) |
-| `<leader>gp` | n | Grep (plugins directory) |
-| `<leader>gw` | n | Grep word under cursor |
-| `<leader><leader>` | n | Fuzzy search lines in current buffer |
+**Code intelligence (LSP)**
 
-### Telescope
+| Key | Description |
+|-----|-------------|
+| `<leader>sd` | Go to definition |
+| `<leader>si` | Go to implementations |
+| `<leader>sr` | Find references |
+| `<leader>sb` | Document symbols |
+| `<leader>sw` | Workspace symbols |
+| `<leader>rs` | Rename symbol |
+| `<leader>ra` | Code actions |
+| `<leader>rf` | Rename file (LSP-aware) |
+| `<leader>su` | Toggle symbol usage hints |
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>ss` | n | Open Telescope builtin picker |
-| `<leader>kk` | n | Browse all keymaps |
-| `<leader>ll` | n | Resume last Telescope picker |
-| `<leader>pp` | n | Browse recent pickers |
-| `<leader>hh` | n | Search help tags |
-| `<leader>bb` | n | Browse open buffers |
-| `<leader>ip` | n | Inspect installed plugins |
-| `<leader>jj` | n | Jump within current buffer |
+**Diagnostics**
 
-### LSP
+| Key | Description |
+|-----|-------------|
+| `<leader>dc` | Project diagnostics → quickfix |
+| `<leader>dl` | File diagnostics → loclist |
+| `<leader>dt` | TODOs → quickfix |
 
-> Active only when a language server is attached to the buffer.
+**Git**
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>sd` | n | Go to definition (split preview) |
-| `<leader>si` | n | Go to implementations |
-| `<leader>sr` | n | Find all references |
-| `<leader>rn` | n | Rename symbol |
-| `<leader>ds` | n | Document symbols |
-| `<leader>ws` | n | Workspace symbols |
-| `<leader>ca` | n / v | Code actions |
-| `<leader>rf` | n | Rename file (LSP-aware) |
+| Key | Description |
+|-----|-------------|
+| `<leader>wp` | Toggle inline diff overlay |
+| `<leader>wd` | Worktree diff split |
+| `<leader>wc` | Worktree changes → quickfix |
+| `<leader>id` | Index (staged) diff split |
+| `<leader>ic` | Index changes → quickfix |
+| `<leader>md` | 3-way merge diff split |
+| `<leader>mc` | Merge conflicts → quickfix |
 
-### Git
+**Navigation (Harpoon)**
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>Gp` | n | Toggle inline diff overlay |
-| `<leader>Gwd` | n | Diff split: worktree vs HEAD |
-| `<leader>Gid` | n | Diff split: index (staged) vs HEAD |
-| `<leader>Gmd` | n | 3-way merge diff split |
-| `<leader>Gwc` | n | Worktree changes → quickfix list |
-| `<leader>Gwl` | n | Worktree changes → location list |
-| `<leader>Gic` | n | Staged changes → quickfix list |
-| `<leader>Gil` | n | Staged changes → location list |
-| `<leader>Gmc` | n | Merge conflicts → quickfix list |
-| `<leader>Gml` | n | Merge conflicts → location list |
+| Key | Description |
+|-----|-------------|
+| `<leader>na` | Add current buffer |
+| `<leader>nm` | Open navigation menu |
+| `<leader>nh/nj/nk/nl` | Jump to pinned buffer 1/2/3/4 |
 
-### Harpoon
+**Debug**
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>ha` | n | Add current buffer to list |
-| `<leader>hl` | n | Toggle Harpoon quick menu |
-| `<leader>gh` | n | Jump to Harpoon buffer 1 |
-| `<leader>gj` | n | Jump to Harpoon buffer 2 |
-| `<leader>gk` | n | Jump to Harpoon buffer 3 |
-| `<leader>gl` | n | Jump to Harpoon buffer 4 |
+| Key | Description |
+|-----|-------------|
+| `<F5>` | Start / continue |
+| `<F6>` | Step over |
+| `<F7>` | Step into |
+| `<F8>` | Step out |
+| `<F9>` | Run to cursor |
+| `<F10>` | Terminate |
+| `<leader>xb` | Toggle breakpoint |
+| `<leader>xl` | Toggle logpoint |
+| `<leader>xuo` / `<leader>xuc` | Open / close debug UI |
+| `<leader>xvo` / `<leader>xvc` | Open / close debug view |
 
-### Scratch Buffers
+**AI (Agentic coding)**
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>..` | n | Open scratch buffer |
-| `<leader>.l` | n | List and select scratch buffers |
+| Key | Description |
+|-----|-------------|
+| `<leader>at` | Toggle AI panel |
+| `<leader>al` | List agents |
+| `<leader>af` | Add file to context |
+| `<leader>as` | Add selection to context (visual) |
+| `<leader>aa` / `<leader>ad` | Accept / deny diff |
+| `<leader>ap` | Prompt template |
+| `<leader>aq` | Detach session |
+| `<C-s>` | Toggle focus to AI panel |
 
-### Word Navigation
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<C-f>` | n | Jump to next reference of word under cursor |
-| `<C-b>` | n | Jump to previous reference of word under cursor |
-
-### Debugger (DAP + Xdebug)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<F5>` | n | Continue / start debugging |
-| `<F6>` | n | Step over |
-| `<F7>` | n | Step into |
-| `<F8>` | n | Step out |
-| `<F9>` | n | Run to cursor |
-| `<F10>` | n | Terminate session |
-| `<leader>br` | n | Toggle breakpoint |
-| `<leader>lp` | n | Toggle log point (prompts for message) |
-| `<leader>duo` | n | Open dap-ui panels |
-| `<leader>duc` | n | Close dap-ui panels |
-| `<leader>dvo` | n | Open dap-view |
-| `<leader>dvc` | n | Close dap-view |
-
-### Terminal (Termite)
+**Global keys**
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<C-\>` | n / t | Toggle terminal panel |
-| `<C-t>` | t | Create new terminal |
-| `<C-n>` | t | Focus next terminal |
-| `<C-p>` | t | Focus previous terminal |
-| `<C-e>` | t | Return focus to editor |
-| `<C-[>` | t | Exit terminal insert mode |
-| `<C-z>` | t | Maximize / restore terminal panel |
-| `<leader><Esc>` | t | Stop insert mode |
-| `q` | t (normal) | Close terminal window |
+| `<C-h/j/k/l>` | n | First/next/prev/last in active quickfix or loclist |
+| `<C-f>` / `<C-b>` | n | Next/prev reference of word under cursor |
+| `<C-p>` | n | Jump to parent scope (treesitter context) |
+| `<C-\>` | n/t | Toggle terminal panel |
+| `<C-s>` | n/t/i/x | Toggle AI panel focus |
 
-### AI / Sidekick
+**Treesitter node selection** (visual / operator-pending mode)
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>at` | n | Toggle Sidekick CLI panel |
-| `<leader>as` | n | Select Sidekick agent |
-| `<leader>aq` | n | Detach CLI session |
-| `<C-a>` | t / i / x | Toggle focus to Sidekick panel |
-| `<leader>ap` | n / x | Use a Sidekick prompt |
-| `<leader>af` | n | Add current file to Claude context |
-| `<leader>af` | n (file tree) | Add selected file(s) to Claude context |
-| `<leader>as` | x | Add visual selection to Claude context |
-| `<leader>aa` | n | Accept diff from Claude |
-| `<leader>ad` | n | Deny diff from Claude |
-
-### Treesitter Selection
-
-> These keys apply in **visual** and **operator-pending** mode only.
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<C-h>` | x / o | Select parent node |
-| `<C-j>` | x / o | Select next sibling node |
-| `<C-k>` | x / o | Select previous sibling node |
-| `<C-l>` | x / o | Select child node (shrink) |
-| `J` | x / o | Grow selection forward |
-| `K` | x / o | Grow selection backward |
-| `I` | x / o | Select current node (inner) |
-| `A` | x / o | Select parent node (around) |
-| `{{` | n | Jump to context |
-
-### Completion (insert mode)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<C-space>` | i | Trigger snippet completions |
-| `<C-j>` | i | Select next item |
-| `<C-k>` | i | Select previous item |
-| `<C-l>` / `<C-CR>` / `<CR>` | i | Accept completion |
-| `<C-f>` | i | Expand snippet / jump to next field |
-| `<C-b>` | i | Jump to previous snippet field |
-
-### Oil (inside file manager buffer)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<CR>` or `l` | n | Open file / enter directory |
-| `h` | n | Go to parent directory |
-| `<Esc>` | n | Close Oil |
-
-### MiniFiles (inside file manager buffer)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<ESC>` | n | Close MiniFiles |
-| `:w<CR>` | n | Apply filesystem changes |
+| Key | Description |
+|-----|-------------|
+| `<C-h>` | Select parent node |
+| `<C-j>` / `<C-k>` | Select next / previous sibling |
+| `<C-l>` | Select child node (shrink) |
+| `J` / `K` | Grow selection forward / backward |
+| `I` / `A` | Select inner / around node |
 
 ---
 
