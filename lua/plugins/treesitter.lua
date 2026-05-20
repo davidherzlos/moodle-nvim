@@ -55,9 +55,9 @@ return {
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
         mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
       }
-      vim.keymap.set("n", "{{", function()
+      vim.keymap.set("n", "<C-p>", function()
         require("treesitter-context").go_to_context(vim.v.count1)
-      end, { silent = true })
+      end, { silent = true, desc = "Go to parent scope" })
     end
   },
   {

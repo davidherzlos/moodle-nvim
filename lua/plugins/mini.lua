@@ -29,7 +29,7 @@ return {
             or (vim.uv or vim.loop).cwd()
           MiniFiles.open(path, false)
         end,
-        { noremap = true, silent = true, desc = "Mini files" }
+        { noremap = true, silent = true, desc = "Minifiles.nvim" }
       )
 
       -- Animated indent scope line.

@@ -19,7 +19,7 @@ return {
       vim.keymap.set('n', '<leader>wd', function ()
         vim.cmd('Gvdiffsplit')
         vim.opt.laststatus = 3
-      end, { desc = 'Worktree diff' })
+      end, { desc = 'Worktree diffsplit' })
 
       vim.keymap.set('n', '<leader>id', function ()
         vim.cmd('Gvdiffsplit HEAD')
@@ -29,7 +29,7 @@ return {
       vim.keymap.set('n', '<leader>md', function ()
         vim.cmd('Gvdiffsplit!')
         vim.opt.laststatus = 3
-      end, { desc = 'Merge conflict diff' })
+      end, { desc = 'Merge conflict diffsplit' })
 
       -- Changes to lists.
       vim.keymap.set('n', '<leader>wc', function()
@@ -42,7 +42,7 @@ return {
 
       vim.keymap.set('n', '<leader>mc', function()
         vim.cmd('Git mergetool')
-      end, { noremap = true, silent = true, desc = 'Merge conflicts' })
+      end, { noremap = true, silent = true, desc = 'Merging conflicts' })
     end
   },
 }

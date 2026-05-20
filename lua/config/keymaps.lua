@@ -3,18 +3,12 @@
 --[[Neovim utils]]--
 
 -- Source the current file.
-vim.keymap.set('n', '<leader>sf', function() vim.cmd('luafile %') vim.notify('File sourced!') end, { noremap = true, silent = true, desc = 'Neovim: source file' })
+vim.keymap.set('n', '<leader>%', function() vim.cmd('luafile %') vim.notify('File sourced!') end, { noremap = true, silent = true, desc = 'Source file' })
 
 -- Clear highlight search when pressing <Esc> in normal mode.
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true, silent = true, desc = "No hightlight search!"})
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true, silent = true, desc = "Clear highlight search"})
 
 --[[Quickfixlists]]--
-
--- Navigate easier in quickfixlists or location lists.
-vim.keymap.set("n", "<leader>co", "<cmd>copen<CR>", { noremap = true, silent = true, desc = "QuickList: Open" })
-vim.keymap.set("n", "<leader>cc", "<cmd>cclose<CR>", { noremap = true, silent = true, desc = "QuickList: Close" })
-vim.keymap.set("n", "<leader>lo", "<cmd>lopen<CR>", { noremap = true, silent = true, desc = "LocationList: Open" })
-vim.keymap.set("n", "<leader>lc", "<cmd>lclose<CR>", { noremap = true, silent = true, desc = "LocationList: Close" })
 
 -- Utility function to check if quickfix list is open
 local function is_qf_open()
@@ -90,19 +84,19 @@ end
 
 -- Navigate on quickfixlists and locationlists.
 -- TODO: redefine this keymaps with a new layer.
-vim.keymap.set("n", "<C-h>", first_on_list, { noremap = true, silent = true, desc = "Quickfixlists: first" })
-vim.keymap.set("n", "<C-j>", next_on_list, { noremap = true, silent = true, desc = "Quickfixlists: next" })
-vim.keymap.set("n", "<C-k>", prev_on_list, { noremap = true, silent = true, desc = "Quickfixlists: prev" })
-vim.keymap.set("n", "<C-l>", last_on_list, { noremap = true, silent = true, desc = "Quickfixlists: last" })
+vim.keymap.set("n", "<C-h>", first_on_list, { noremap = true, silent = true, desc = "Qflist firs" })
+vim.keymap.set("n", "<C-j>", next_on_list, { noremap = true, silent = true, desc = "Qflist last" })
+vim.keymap.set("n", "<C-k>", prev_on_list, { noremap = true, silent = true, desc = "Qflist prev" })
+vim.keymap.set("n", "<C-l>", last_on_list, { noremap = true, silent = true, desc = "Qflist last" })
 
 --[[Diagnostics]]--
 
--- Open/close diagnostics quickfixlists and locationlists.
-vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Diagnostics: Open quickfixlist" })
-vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Diagnostics: Open locationlist" })
+-- LSP diagnostics for the project and the current file.
+vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Project list (qflist)" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Bufffer list (loclist)" })
 
--- Open/close todo-comments quickfixlists and locationlists.
-vim.keymap.set("n", "<leader>dc", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "Project comments" })
+-- Todo comments to quickfix.
+vim.keymap.set("n", "<leader>dt", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "Todo list" })
 
 --[[Windows and Buffers]]--
 

@@ -62,15 +62,16 @@ return {
       "neovim/nvim-lspconfig",
     },
     keys = {
-      '<leader>su',
+      { '<leader>su', function() require('symbol-usage').toggle() end, desc = 'Symbol usage' },
     },
     config = function()
       -- hl-groups can have any name
-      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Comment').fg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Function').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
+      local dim = h('NonText').fg
+      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('Normal').bg, italic = false })
+      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { fg = dim, italic = false })
+      vim.api.nvim_set_hl(0, 'SymbolUsageRef',     { fg = dim, italic = false })
+      vim.api.nvim_set_hl(0, 'SymbolUsageDef',     { fg = dim, italic = false })
+      vim.api.nvim_set_hl(0, 'SymbolUsageImpl',    { fg = dim, italic = false })
 
       local SymbolKind = vim.lsp.protocol.SymbolKind
       require('symbol-usage').setup({

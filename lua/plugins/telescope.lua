@@ -138,15 +138,14 @@ return {
     local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
     -- Quick pick keymaps.
-    vim.keymap.set('n', '<leader><leader>', telescope.buffers, { desc = 'Buffers' })
     vim.keymap.set('n', '<leader>qb', telescope.buffers, { desc = 'Buffers' })
-    vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Help' })
+    vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Neovim Help' })
     vim.keymap.set('n', '<leader>qk', telescope.keymaps, { desc = 'Keymaps' })
-    vim.keymap.set('n', '<leader>ql', telescope.resume, { desc = 'Resume last' })
-    vim.keymap.set('n', '<leader>qp', telescope.pickers, { desc = 'Pickers' })
-    vim.keymap.set('n', '<leader>qz', '<cmd>Telescope lazy<CR>', { desc = 'Lazy' })
-    vim.keymap.set('n', '<leader>sL', buffer_jump, { desc = 'Search lines' })
-    vim.keymap.set('n', '<leader>qq', telescope.builtin, { desc = 'Open picker' })
+    vim.keymap.set('n', '<leader>ql', telescope.resume, { desc = 'Last picker' })
+    vim.keymap.set('n', '<leader>qr', telescope.pickers, { desc = 'Recent pickers' })
+    vim.keymap.set('n', '<leader>qz', '<cmd>Telescope lazy<CR>', { desc = 'Lazy repos' })
+    -- vim.keymap.set('n', '<leader>sL', buffer_jump, { desc = 'Search lines' })
+    vim.keymap.set('n', '<leader>qp', telescope.builtin, { desc = 'Pickers' })
 
     -- Language server Protocol.
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -159,9 +158,9 @@ return {
         vim.keymap.set('n', '<leader>si', telescope.lsp_implementations, opts({ desc = 'Implementations' }))
         vim.keymap.set('n', '<leader>sr', telescope.lsp_references, opts({ desc = 'References' }))
         vim.keymap.set('n', '<leader>rs', vim.lsp.buf.rename, opts({ desc = 'Rename symbol' }))
-        vim.keymap.set({"n", "v", "s"}, '<leader>ra', vim.lsp.buf.code_action, opts({ desc = 'Code actions' }))
-        vim.keymap.set('n', '<leader>ss', telescope.lsp_document_symbols, opts({ desc = 'Document symbols' }))
+        vim.keymap.set('n', '<leader>sb', telescope.lsp_document_symbols, opts({ desc = 'Buffer symbols' }))
         vim.keymap.set('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, opts({ desc = 'Workspace symbols' }))
+        vim.keymap.set({"n", "v", "s"}, '<leader>ra', vim.lsp.buf.code_action, opts({ desc = 'Code actions' }))
       end
     })
 
