@@ -96,22 +96,22 @@ return {
       dapui.setup({})
 
       -- Open Dap interfaces.
-      vim.keymap.set('n', '<Leader>duo', function() dapui.open() end, { desc = 'Dapui: Open dap-ui' })
-      vim.keymap.set('n', '<Leader>duc', function() dapui.close() end, { desc = 'Dapui: Close dap-ui' })
-      vim.keymap.set('n', '<Leader>dvo', function() dapview.open() end, { desc = 'Dapview: Open dap-view' })
-      vim.keymap.set('n', '<Leader>dvc', function() dapview.close() end, { desc = 'Dapview: Close dap-view' })
+      vim.keymap.set('n', '<Leader>xuo', function() dapui.open() end, { desc = 'Open debug UI' })
+      vim.keymap.set('n', '<Leader>xuc', function() dapui.close() end, { desc = 'Close debug UI' })
+      vim.keymap.set('n', '<Leader>xvo', function() dapview.open() end, { desc = 'Open debug view' })
+      vim.keymap.set('n', '<Leader>xvc', function() dapview.close() end, { desc = 'Close debug view' })
 
       -- Breakpoints management.
-      vim.keymap.set('n', '<Leader>br', dap.toggle_breakpoint, { desc = 'Dap: Breakpoint' })
-      vim.keymap.set('n', '<Leader>lp', function()dap.toggle_breakpoint(nil, nil, vim.fn.input('Logpoint: '))end, { desc = 'Dap: Logpoint' })
+      vim.keymap.set('n', '<Leader>xb', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+      vim.keymap.set('n', '<Leader>xl', function()dap.toggle_breakpoint(nil, nil, vim.fn.input('Logpoint: '))end, { desc = 'Toggle logpoint' })
 
       -- Dap UI controls.
-      vim.keymap.set('n', '<F5>', function() dap.continue() end, { desc = 'Dap: Continue' })
-      vim.keymap.set('n', '<F6>', dap.step_over, { desc = 'Dap: Step Over' })
-      vim.keymap.set('n', '<F7>', dap.step_into, { desc = 'Dap: Step Into' })
-      vim.keymap.set('n', '<F8>', dap.step_out, { desc = 'Debugger: Step Out' })
-      vim.keymap.set('n', '<F9>', dap.run_to_cursor, { desc = 'Dap: Run to Cursor' })
-      vim.keymap.set('n', '<F10>', function() dap.terminate() end, { desc = 'Dap: Terminate' })
+      vim.keymap.set('n', '<F5>', function() dap.continue() end, { desc = 'Start/Continue' })
+      vim.keymap.set('n', '<F6>', dap.step_over, { desc = 'Step over' })
+      vim.keymap.set('n', '<F7>', dap.step_into, { desc = 'Step into' })
+      vim.keymap.set('n', '<F8>', dap.step_out, { desc = 'Step out' })
+      vim.keymap.set('n', '<F9>', dap.run_to_cursor, { desc = 'Run to cursor' })
+      vim.keymap.set('n', '<F10>', function() dap.terminate() end, { desc = 'Terminate' })
 
       -- Define DAP signs with icons
       vim.fn.sign_define("DapBreakpoint", {
