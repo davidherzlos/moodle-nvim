@@ -102,14 +102,9 @@ vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, si
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Diagnostics: Open locationlist" })
 
 -- Open/close todo-comments quickfixlists and locationlists.
-vim.keymap.set("n", "<leader>td", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "TodoComments: TodoQuickFix" })
+vim.keymap.set("n", "<leader>dc", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "Project comments" })
 
 --[[Windows and Buffers]]--
-
-vim.keymap.set('n', '<leader>oo', function ()
-  vim.cmd('only')
-  vim.opt.laststatus = 2
-end, { desc = 'Only this window' })
 
 --[[Terminal]]--
 

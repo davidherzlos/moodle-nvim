@@ -13,53 +13,36 @@ return {
           signs = { add = '█', change = '█', delete = '█' },
         },
       })
-      vim.keymap.set('n', '<leader>Gp', "<cmd>lua MiniDiff.toggle_overlay()<CR>", { desc = '[G]it [p]review worktree'})
+      vim.keymap.set('n', '<leader>wp', "<cmd>lua MiniDiff.toggle_overlay()<CR>", { desc = 'Preview changes' })
 
       -- Add Keymaps to open diff split views for changes and conflicts.
-      vim.keymap.set('n', '<leader>Gwd', function ()
+      vim.keymap.set('n', '<leader>wd', function ()
         vim.cmd('Gvdiffsplit')
         vim.opt.laststatus = 3
-      end, { desc = '[G]it [w]orktree [d]iffsplit' })
+      end, { desc = 'Worktree diff' })
 
-      vim.keymap.set('n', '<leader>Gid', function ()
+      vim.keymap.set('n', '<leader>id', function ()
         vim.cmd('Gvdiffsplit HEAD')
         vim.opt.laststatus = 3
-      end, { desc = '[G]it [i]ndex [d]iffsplit' })
+      end, { desc = 'Index diff' })
 
-      vim.keymap.set('n', '<leader>Gmd', function ()
-       vim.cmd('Gvdiffsplit!')
+      vim.keymap.set('n', '<leader>md', function ()
+        vim.cmd('Gvdiffsplit!')
         vim.opt.laststatus = 3
-      end, { desc = '[G]it [m]erge [d]iffsplit' })
+      end, { desc = 'Merge conflict diff' })
 
-      -- Add keymaps to open qflists and loclists of changes to the worktree.
-      vim.keymap.set('n', '<leader>Gwc', function()
+      -- Changes to lists.
+      vim.keymap.set('n', '<leader>wc', function()
         vim.cmd('Git difftool')
-      end, { noremap = true, silent = true, desc = '[G]it [w]orktree [c]open' })
+      end, { noremap = true, silent = true, desc = 'Worktree changes' })
 
-      vim.keymap.set("n", "<leader>Gwl", function()
-        vim.cmd('Git difftool %') vim.cmd("cclose")
-        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
-      end, { noremap = true, silent = true, desc = '[G]it [w]orktree [l]open' })
-
-      -- Add keymaps to open qflists and loclists of changes to the index.
-      vim.keymap.set('n', '<leader>Gic', function()
+      vim.keymap.set('n', '<leader>ic', function()
         vim.cmd('Git difftool --staged')
-      end, { noremap = true, silent = true, desc = '[G]it [i]ndex [c]open' })
+      end, { noremap = true, silent = true, desc = 'Index changes' })
 
-      vim.keymap.set("n", "<leader>Gil", function()
-        vim.cmd('Git difftool --staged %') vim.cmd("cclose")
-        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
-      end, { noremap = true, silent = true, desc = '[G]it [i]ndex [l]open' })
-
-      -- Keymaps to open qflists and loclists of merge conflicts.
-      vim.keymap.set('n', '<leader>Gmc', function()
+      vim.keymap.set('n', '<leader>mc', function()
         vim.cmd('Git mergetool')
-      end, { noremap = true, silent = true, desc = '[G]it [m]erge [c]open' })
-
-      vim.keymap.set("n", "<leader>Gml", function()
-        vim.cmd('Git mergetool %') vim.cmd("cclose")
-        vim.fn.setloclist(0, vim.fn.getqflist()) vim.cmd("lopen")
-      end, { noremap = true, silent = true, desc = '[G]it [m]erge [l]open' })
+      end, { noremap = true, silent = true, desc = 'Merge conflicts' })
     end
   },
 }
