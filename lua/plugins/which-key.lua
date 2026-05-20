@@ -20,7 +20,7 @@ return {
         { '<leader>e', group = 'Explorer', icon = { icon = '' } },
 
         -- LSP / Code intelligence.
-        { '<leader>s', group = 'Search (LSP)', icon = { icon = '' } },
+        { '<leader>s', group = 'Search(lsp)', icon = { icon = '' } },
         { '<leader>r', group = 'Refactor', icon = { icon = '󰁨' } },
 
         -- Diagnostics.
