@@ -48,6 +48,7 @@ return {
           -- Mini
           highlights.MiniFilesNormal= { bg = colors.bg }
           highlights.MiniFilesTitleFocused = { bg = colors.bg, fg = colors.yellow, } -- We may not need this one.
+          highlights.MiniIndentscopeSymbol = { bg = colors.none, fg = colors.comment, }
 
           -- Snacks
           highlights.SnacksPickerInputBorder = { bg = colors.none, fg = colors.yellow }
@@ -149,16 +150,16 @@ return {
           local set_hl = vim.fn['gruvbox_material#highlight']
 
           -- Float highlights.
-          set_hl('NormalFloat', palette.none, palette.none) 
-          set_hl('FloatBorder', palette.grey0, palette.none) 
-          set_hl('FloatTitle', palette.none, palette.none) 
+          set_hl('NormalFloat', palette.none, palette.none)
+          set_hl('FloatBorder', palette.grey0, palette.none)
+          set_hl('FloatTitle', palette.none, palette.none)
 
           -- Telescope highlights.
-          set_hl('TelescopeBorder', palette.grey0, palette.none) 
+          set_hl('TelescopeBorder', palette.grey0, palette.none)
 
           -- Git highlights.
-          set_hl('diffAdded', palette.none, palette.bg_visual_green) 
-          set_hl('diffRemoved', palette.none, palette.bg_visual_red) 
+          set_hl('diffAdded', palette.none, palette.bg_visual_green)
+          set_hl('diffRemoved', palette.none, palette.bg_visual_red)
 
           -- Dap highlights.
           set_hl('DapBreakpoint', palette.red, palette.none, 'bold')
