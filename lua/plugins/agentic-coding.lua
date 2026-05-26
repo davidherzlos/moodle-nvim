@@ -1,10 +1,10 @@
 return {
   {
     -- MCP server: exposes editor state (open files, selection, diagnostics, diffs) to claudecode cli
-    "coder/claudecode.nvim",
-    event = "User SidekickCliAttach",
+    'coder/claudecode.nvim',
+    event = 'User SidekickCliAttach',
     opts = {
-      log_level = "info", -- 'trace', 'debug', 'info', 'error'
+      log_level = 'info', -- 'trace', 'debug', 'info', 'error'
       terminal = {
         -- Terminal provider is intentionally disabled (sidekick owns the terminal session)
         provider = 'none',
@@ -17,25 +17,25 @@ return {
     },
     keys = {
       -- Context sharing.
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>",    mode = "v", desc = "Add selection" },
-      { "<leader>af", "<cmd>ClaudeCodeAdd %:p<cr>", desc = "Add file" },
+      { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Add selection to chat' },
+      { '<leader>af', '<cmd>ClaudeCodeAdd %:p<cr>', desc = 'Add file to chat' },
       -- File tree: add selected file(s) to Claude context
       {
-        "<leader>af",
-        "<cmd>ClaudeCodeTreeAdd<cr>",
-        desc = "Add file",
-        ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+        '<leader>af',
+        '<cmd>ClaudeCodeTreeAdd<cr>',
+        desc = 'Add file',
+        ft = { 'NvimTree', 'neo-tree', 'oil', 'minifiles', 'netrw' },
       },
       -- Diff management
-      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+      { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
+      { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
     },
   },
   {
     -- Terminal runs Claude Code CLI, watches modified files,
     -- and reloads buffers  when claudecode writes to disk.
-    "folke/sidekick.nvim",
-    dependencies = { "snacks.nvim" },
+    'folke/sidekick.nvim',
+    dependencies = { 'snacks.nvim' },
     opts = {
       cli = {
         watch = true,
@@ -49,11 +49,43 @@ return {
     },
     keys = {
       -- Terminal lifecycle
-      { "<leader>at", function() require("sidekick.cli").toggle({ filter = { installed = true } }) end, desc = "Toggle agent" },
-      { "<leader>al", function() require("sidekick.cli").select() end, desc = "List agents" },
-      { "<leader>aq", function() require("sidekick.cli").close() end,                                   desc = "Detach session" },
-      { "<C-s>", function() require("sidekick.cli").focus() end, mode = { "n", "t", "i", "x" }, desc = "Switch focus" },
-      { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Prompt template" },
+      {
+        '<leader>at',
+        function()
+          require('sidekick.cli').toggle({ filter = { installed = true } })
+        end,
+        desc = 'Agent toggle',
+      },
+      {
+        '<leader>al',
+        function()
+          require('sidekick.cli').select()
+        end,
+        desc = 'Agents list',
+      },
+      {
+        '<leader>aq',
+        function()
+          require('sidekick.cli').close()
+        end,
+        desc = 'Quit session',
+      },
+      {
+        '<C-s>',
+        function()
+          require('sidekick.cli').focus()
+        end,
+        mode = { 'n', 't', 'i', 'x' },
+        desc = 'Switch focus',
+      },
+      {
+        '<leader>ap',
+        function()
+          require('sidekick.cli').prompt()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Prompt templates',
+      },
     },
   },
 }
