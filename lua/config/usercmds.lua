@@ -160,3 +160,47 @@ vim.api.nvim_create_user_command('PhpStan', function ()
   vim.notify("Running phpstan")
   require('config.phpstan.lint').try_lint()
 end, { desc = "Run phpstan for the given php file" })
+
+-- Add a usercmd to reset the version of a plugin.
+vim.api.nvim_create_user_command("MoodleResetPlugin", function (opts)
+  local component = opts.args ~= "" and opts.args or nil
+
+  -- Parameter was passed from the cmdline.
+  -- TODO: validate component exists.(needs component discovery feature or indexing)
+  if component then
+    term.open_term()
+    vim.cmd("startinsert")
+    local job_id = vim.bo.channel
+    local run_cmd = table.concat({
+      "current=$(php -d xdebug.mode=off admin/cli/cfg.php --component=" .. component .. " --name=version)",
+      "previous=$((current - 1))",
+      "php -d xdebug.mode=off admin/cli/cfg.php --component=" .. component .. " --name=version --set=$previous",
+      "php -d xdebug.mode=off admin/cli/cfg.php --name=allversionshash --unset",
+      "php -d xdebug.mode=off admin/cli/upgrade.php --non-interactive",
+      ""
+    }, "\n")
+    vim.fn.chansend(job_id, run_cmd)
+    return
+  end
+
+  -- Parameter was not passed, so receive it with an input.
+  vim.ui.input({ prompt = "Component:"}, function (input)
+    if not input or input == "" then
+      vim.notify("No component provided", vim.log.levels.WARN)
+      return
+    end
+    term.open_term()
+    vim.cmd("startinsert")
+    local job_id = vim.bo.channel
+    local run_cmd = table.concat({
+      "current=$(php -d xdebug.mode=off admin/cli/cfg.php --component=" .. input .. " --name=version)",
+      "previous=$((current - 1))",
+      "php -d xdebug.mode=off admin/cli/cfg.php --component=" .. input .. " --name=version --set=$previous",
+      "php -d xdebug.mode=off admin/cli/cfg.php --name=allversionshash --unset",
+      "php -d xdebug.mode=off admin/cli/upgrade.php --non-interactive",
+      ""
+    }, "\n")
+    vim.fn.chansend(job_id, run_cmd)
+  end)
+
+end, { nargs = "?", desc = "Moodle reset Plugin" })
