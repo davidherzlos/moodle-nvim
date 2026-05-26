@@ -62,7 +62,7 @@ return {
       "neovim/nvim-lspconfig",
     },
     keys = {
-      { '<leader>su', function() require('symbol-usage').toggle() end, desc = 'Symbol usage' },
+      { '<leader>su', function() require('symbol-usage').toggle() end, desc = 'Symbols usage (toggle)' },
     },
     config = function()
       -- hl-groups can have any name

@@ -1,6 +1,5 @@
 local term = require('config.terminal')
 local utils = require('config.utils')
-local lint = require('lint')
 
 -- Formatting and linting commands.
 
@@ -13,6 +12,7 @@ end, { desc = "Toggle formatting for the current buffer." })
 
 -- Add a usercmd to print available linters for this buffer.
 vim.api.nvim_create_user_command("LintInfo", function ()
+  local lint = require('lint')
   local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
   local linters_str = ''
   for _, value in ipairs(linters) do
@@ -44,15 +44,9 @@ vim.api.nvim_create_user_command("MoodlePsysh", function ()
 end, { desc = "Moodle run Psysh" })
 
 -- Run Moodle Claude Code
-vim.api.nvim_create_user_command("MoodleCodingAgent", function ()
-  vim.cmd("tab split")
-  vim.cmd("let t:tab_name = 'Agent'")
-  term.open_term()
-  vim.cmd('only')
-  vim.cmd("startinsert")
-  local job_id = vim.bo.channel
-  vim.fn.chansend(job_id, "claude\n")
-end, { desc = "Moodle run Codint Agent" })
+vim.api.nvim_create_user_command("MoodleAgent", function ()
+  require('sidekick.cli').toggle({ name = 'claude', focus = true })
+end, { desc = "Moodle run Agent" })
 
 -- Run Moodle test buffer.
 -- TODO: validate test file before running.

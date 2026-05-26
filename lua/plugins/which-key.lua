@@ -9,46 +9,45 @@ return {
       wk.setup({
         preset = 'classic',
         icons = {
-          group = ' ',
+          group = ' +',
         },
-        sort = { 'desc' },
+        sort = { 'manual' },
       })
 
       wk.add({
-        -- Files.
-        { '<leader>f', group = 'Fuzzy find', icon = { icon = '' } },
-        { '<leader>e', group = 'Explorer', icon = { icon = '' } },
+        -- Agentic coding.
+        { '<leader>a', group = 'Agentic coding', icon = { icon = '󱙺' } },
 
-        -- LSP / Code intelligence.
-        { '<leader>s', group = 'Search(lsp)', icon = { icon = '' } },
-        { '<leader>r', group = 'Refactor', icon = { icon = '󰁨' } },
-
-        -- Diagnostics.
-        { '<leader>d', group = 'Diagnostics', icon = { icon = '' } },
-
-        -- Debugger.
-        { '<leader>x', group = 'Debug', icon = { icon = '' } },
-        { '<leader>xu', group = 'Debug UI', icon = { icon = '' } },
-        { '<leader>xv', group = 'Debug view', icon = { icon = '' } },
+        -- Files/Navigation.
+        { '<leader>b', group = 'Bookmarks', icon = { icon = '󰆤' } },
+        { '<leader>f', group = 'Files', icon = { icon = '' } },
 
         -- Grep
         { '<leader>g', group = 'Grep', icon = { icon = '󰑑' } },
+
+        -- LSP/Pickers.
+        { '<leader>s', group = 'Symbols (lsp)', icon = { icon = '' } },
+        { '<leader>r', group = 'Refactor', icon = { icon = '󰁨' } },
+        { '<leader>q', group = 'Quick pick', icon = { icon = '' } },
+
+        -- Diagnostics.
+        { '<leader>d', group = 'Diagnostics', icon = { icon = '' } },
 
         -- Git contexts.
         { '<leader>w', group = 'Git worktree', icon = { icon = '' } },
         { '<leader>i', group = 'Git index', icon = { icon = '' } },
         { '<leader>m', group = 'Git merge', icon = { icon = '' } },
 
-        -- Navigation.
-        { '<leader>n', group = 'Navigation', icon = { icon = '󰆤' } },
-        { '<leader>q', group = 'Quick pick', icon = { icon = '' } },
+        -- Debugger.
+        { '<leader>x', group = 'Debug', icon = { icon = '' } },
+        { '<leader>xu', group = 'Debug UI', icon = { icon = '' } },
+        { '<leader>xv', group = 'Debug view', icon = { icon = '' } },
 
         -- Editor utilities.
         { '<leader>t', group = 'Testing', icon = { icon = '' } },
         { '<leader>.', group = 'Scratch buffer', icon = { icon = '󰇘' } },
 
-        -- Agentic coding.
-        { '<leader>a', group = 'Agentic coding', icon = { icon = '󱙺' } },
+
       })
     end,
     keys = {
@@ -57,7 +56,7 @@ return {
         function()
           require('which-key').show({ global = true })
         end,
-        desc = 'Keymaps',
+        desc = 'Keymaps (all)',
       },
     },
   },

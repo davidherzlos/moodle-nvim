@@ -92,18 +92,18 @@ vim.keymap.set("n", "<C-l>", last_on_list, { noremap = true, silent = true, desc
 --[[Diagnostics]]--
 
 -- LSP diagnostics for the project and the current file.
-vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Project list (qflist)" })
-vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Bufffer list (loclist)" })
+vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Quickfixlist (cwd)" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Locationlist (file)" })
 
 -- Todo comments to quickfix.
-vim.keymap.set("n", "<leader>dt", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "Todo list" })
+vim.keymap.set("n", "<leader>qt", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "TODO comments" })
 
 --[[Windows and Buffers]]--
 
 --[[Terminal]]--
 
 -- Return to Terminal Normal mode.
-vim.keymap.set('t', '<C-q>', function()
+vim.keymap.set('t', '<Esc><Esc>', function()
   local chan_id = vim.b.terminal_job_id
   if chan_id then
     local proc_name = vim.fn.jobpid(chan_id)

@@ -139,13 +139,13 @@ return {
 
     -- Quick pick keymaps.
     vim.keymap.set('n', '<leader>qb', telescope.buffers, { desc = 'Buffers' })
-    vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Neovim Help' })
+    vim.keymap.set('n', '<leader>qh', telescope.help_tags, { desc = 'Help' })
     vim.keymap.set('n', '<leader>qk', telescope.keymaps, { desc = 'Keymaps' })
     vim.keymap.set('n', '<leader>ql', telescope.resume, { desc = 'Last picker' })
-    vim.keymap.set('n', '<leader>qr', telescope.pickers, { desc = 'Recent pickers' })
-    vim.keymap.set('n', '<leader>qz', '<cmd>Telescope lazy<CR>', { desc = 'Lazy repos' })
+    vim.keymap.set('n', '<leader>qo', telescope.pickers, { desc = 'Old pickers' })
+    vim.keymap.set('n', '<leader>qr', '<cmd>Telescope lazy<CR>', { desc = 'Repos (lazy)' })
     -- vim.keymap.set('n', '<leader>sL', buffer_jump, { desc = 'Search lines' })
-    vim.keymap.set('n', '<leader>qp', telescope.builtin, { desc = 'Pickers' })
+    vim.keymap.set('n', '<leader>qp', telescope.builtin, { desc = 'Pickers (all)' })
 
     -- Language server Protocol.
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -154,13 +154,13 @@ return {
           opts.buffer = event.buf
           return opts
         end
-        vim.keymap.set('n', '<leader>sd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts({ desc = 'Definitions' }))
-        vim.keymap.set('n', '<leader>si', telescope.lsp_implementations, opts({ desc = 'Implementations' }))
-        vim.keymap.set('n', '<leader>sr', telescope.lsp_references, opts({ desc = 'References' }))
+        vim.keymap.set('n', '<leader>sd', function() telescope.lsp_definitions({ jump_type = 'never' }) end, opts({ desc = 'Search definitions' }))
+        vim.keymap.set('n', '<leader>si', telescope.lsp_implementations, opts({ desc = 'Search implementations' }))
+        vim.keymap.set('n', '<leader>sr', telescope.lsp_references, opts({ desc = 'Search references' }))
         vim.keymap.set('n', '<leader>rs', vim.lsp.buf.rename, opts({ desc = 'Rename symbol' }))
-        vim.keymap.set('n', '<leader>sb', telescope.lsp_document_symbols, opts({ desc = 'Buffer symbols' }))
-        vim.keymap.set('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, opts({ desc = 'Workspace symbols' }))
-        vim.keymap.set({"n", "v", "s"}, '<leader>ra', vim.lsp.buf.code_action, opts({ desc = 'Code actions' }))
+        vim.keymap.set('n', '<leader>sb', telescope.lsp_document_symbols, opts({ desc = 'Search on Buffer' }))
+        vim.keymap.set('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, opts({ desc = 'Search on workspace' }))
+        vim.keymap.set({"n", "v", "s"}, '<leader>ra', vim.lsp.buf.code_action, opts({ desc = 'Actions available' }))
       end
     })
 

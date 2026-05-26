@@ -11,12 +11,12 @@ return {
       harpoon:setup()
 
       -- Define custom keymaps.
-      vim.keymap.set("n", "<leader>nh", function() harpoon:list():select(1) end, { desc = "Show item 1" })
-      vim.keymap.set("n", "<leader>nj", function() harpoon:list():select(2) end, { desc = "Show item 2" })
-      vim.keymap.set("n", "<leader>nk", function() harpoon:list():select(3) end, { desc = "Show item 3" })
-      vim.keymap.set("n", "<leader>nl", function() harpoon:list():select(4) end, { desc = "Show item 4" })
-      vim.keymap.set("n", "<leader>na", function() harpoon:list():add() end, { desc = "Add to menu" })
-      vim.keymap.set("n", "<leader>nm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Menu" })
+      vim.keymap.set("n", "<leader>bh", function() harpoon:list():select(1) end, { desc = "Bookmark 1" })
+      vim.keymap.set("n", "<leader>bj", function() harpoon:list():select(2) end, { desc = "Bookmark 2" })
+      vim.keymap.set("n", "<leader>bk", function() harpoon:list():select(3) end, { desc = "Bookmark 3" })
+      vim.keymap.set("n", "<leader>bl", function() harpoon:list():select(4) end, { desc = "Bookmark 4" })
+      vim.keymap.set("n", "<leader>ba", function() harpoon:list():add() end, { desc = "Add to bookmarks" })
+      vim.keymap.set("n", "<leader>bb", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Show bookmarks" })
       end
       }
     }
