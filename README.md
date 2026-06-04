@@ -163,7 +163,7 @@ Two extra pickers make navigating large files effortless:
 
 ### Git
 
-Review, stage, and resolve conflicts without leaving Neovim. Toggle an inline diff overlay to see what changed in the current file, open side-by-side diff splits against the worktree or the index, or launch a 3-way merge view for conflict resolution. Any diff can be sent to the quickfix or location list so you can walk through every changed file with `<C-j>/<C-k>`.
+Review, stage, and resolve conflicts without leaving Neovim. Toggle an inline diff overlay to see what changed in the current file, open side-by-side diff splits against the worktree or the index, or launch a 3-way merge view for conflict resolution. Any diff can be sent to the quickfix or location list so you can walk through every changed file with `<C-j>/<C-k>`. For a full interactive Git UI, `:LazyGit` opens [Lazygit](https://github.com/jesseduffield/lazygit) in a floating window.
 
 ### Terminal
 
@@ -224,6 +224,7 @@ All plugins listed here are independent open source projects. MoodleVim only con
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder used for LSP pickers, keymaps, help tags, and custom pickers |
 | [harpoon](https://github.com/ThePrimeagen/harpoon) (v2) | Pin up to 4 buffers for instant switching |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive) | Full Git integration: diffs, staging, merge tool, blame |
+| [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | Neovim integration for [Lazygit](https://github.com/jesseduffield/lazygit) — a terminal UI for Git |
 | [mini.nvim](https://github.com/echasnovski/mini.nvim) | Collection of small focused plugins: file manager, diff signs, indent guides, auto-pairs |
 | [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug Adapter Protocol client — connects Neovim to debuggers like Xdebug |
 | [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) | Classic split-panel debug UI (variables, call stack, watches) |
@@ -272,6 +273,16 @@ A Language Server (LSP) is a background process that gives the editor deep under
 ## Commands
 
 All commands are available from the Neovim command line (`:CommandName`). Optional arguments are shown in `[brackets]`.
+
+### Git
+
+| Command | Description |
+|---------|-------------|
+| `:LazyGit` | Open Lazygit in a floating window |
+| `:LazyGitConfig` | Open the Lazygit config file |
+| `:LazyGitCurrentFile` | Open Lazygit filtered to the current file's history |
+| `:LazyGitFilter` | Open Lazygit commit log for a specific path |
+| `:LazyGitFilterCurrentFile` | Open Lazygit commit log for the current file |
 
 ### Terminal
 
