@@ -18,6 +18,9 @@ return {
         },
         on_highlights = function (highlights, colors)
 
+          -- Windows
+          highlights.WinSeparator = { bg = colors.none, fg = colors.bg_dark }
+
           -- Blink-cmp
           highlights.BlinkCmpMenu = { bg = colors.bg_dark }
           highlights.BlinkCmpDoc = { bg = colors.bg_dark }

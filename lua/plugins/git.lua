@@ -18,17 +18,14 @@ return {
       -- Add Keymaps to open diff split views for changes and conflicts.
       vim.keymap.set('n', '<leader>wd', function ()
         vim.cmd('Gvdiffsplit')
-        vim.opt.laststatus = 3
       end, { desc = 'Worktree diffsplit' })
 
       vim.keymap.set('n', '<leader>id', function ()
         vim.cmd('Gvdiffsplit HEAD')
-        vim.opt.laststatus = 3
       end, { desc = 'Index diff' })
 
       vim.keymap.set('n', '<leader>md', function ()
         vim.cmd('Gvdiffsplit!')
-        vim.opt.laststatus = 3
       end, { desc = 'Merge conflict diffsplit' })
 
       -- Changes to lists.
