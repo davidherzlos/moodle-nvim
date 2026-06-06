@@ -7,8 +7,8 @@ M.definitions.telescope_inspired_horizontal = {
   layout = {
     box = "vertical",
     backdrop = false,
-    width = 0.85,
-    height = 0.85,
+    width = 0.8,
+    height = 0.8,
     border = "none",
     {
       win = "input",
@@ -46,8 +46,8 @@ M.definitions.telescope_inspired_vertical = {
   layout = {
     box = "vertical",
     backdrop = false,
-    width = 0.85,
-    height = 0.85,
+    width = 0.8,
+    height = 0.8,
     border = "none",
     {
       win = "input",

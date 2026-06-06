@@ -96,7 +96,7 @@ vim.keymap.set("n", "<leader>dc", vim.diagnostic.setqflist, { noremap = true, si
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Locationlist (file)" })
 
 -- Todo comments to quickfix.
-vim.keymap.set("n", "<leader>qt", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "TODO comments" })
+vim.keymap.set("n", "<leader>qc", '<cmd>TodoQuickFix<CR>', { noremap = true, silent = true, desc = "TODO comments" })
 
 --[[Windows and Buffers]]--
 

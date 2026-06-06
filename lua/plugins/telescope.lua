@@ -145,7 +145,7 @@ return {
     vim.keymap.set('n', '<leader>qo', telescope.pickers, { desc = 'Old pickers' })
     vim.keymap.set('n', '<leader>qr', '<cmd>Telescope lazy<CR>', { desc = 'Repos (lazy)' })
     -- vim.keymap.set('n', '<leader>sL', buffer_jump, { desc = 'Search lines' })
-    vim.keymap.set('n', '<leader>qp', telescope.builtin, { desc = 'Pickers (all)' })
+    vim.keymap.set('n', '<leader>qt', telescope.builtin, { desc = 'Quick pickers (telescope)' })
 
     -- Language server Protocol.
     vim.api.nvim_create_autocmd('LspAttach', {
