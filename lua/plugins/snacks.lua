@@ -36,7 +36,6 @@ return {
         picker = {
           enabled = true,
           layouts = custom_layouts.definitions,
-          layout = custom_layouts.definitions.telescope_inspired_horizontal,
           win = {
             input = {
               keys = {
