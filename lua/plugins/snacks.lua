@@ -52,6 +52,7 @@ return {
           formatters = {
             file = {
               truncate = 'center',
+              icon_width = 3,
             },
           },
         },
