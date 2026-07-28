@@ -42,3 +42,6 @@ require("config.keymaps")
 
 -- Set the colorscheme.
 vim.cmd("colorscheme "..vim.g.default_colorscheme)
+
+-- Make clipboard work.
+require('config.clipboard')

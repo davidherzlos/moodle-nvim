@@ -7,8 +7,8 @@ vim.opt.shiftwidth = 4
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Sync clipboard between OS and Neovim (you need to install a clipboard tool).
-vim.opt.clipboard = 'unnamedplus'
+-- Set false to keep your OS clipboard independent
+vim.g.sync_clipboard = true
 
 -- Decrease mapped sequence wait time (Displays which-key popup sooner).
 vim.opt.updatetime = 250
