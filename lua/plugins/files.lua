@@ -91,9 +91,9 @@ return {
     },
     lazy = false, -- the plugin lazy-initialises itself
     keys = {
-      { "<leader>ff", function() require('fff').find_files() end, desc = 'Find files (cwd)' },
-      { "<leader>gg", function() require('fff').live_grep({ grep = { modes = { 'regex', 'plain', 'fuzzy' } } }) end, desc = 'Grep (cwd)', },
-      { "<leader>gw", function() require('fff').live_grep({ query = vim.fn.expand("<cword>") }) end, desc = 'Grep (word on cursor)', }, },
+      { "<leader>fF", function() require('fff').find_files() end, desc = 'Find files (cwd)' },
+      { "<leader>gG", function() require('fff').live_grep({ grep = { modes = { 'regex', 'plain', 'fuzzy' } } }) end, desc = 'Grep (cwd)', },
+    },
   },
   {
     -- Files management the Vim way.
