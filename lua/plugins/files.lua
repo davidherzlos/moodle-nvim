@@ -28,7 +28,7 @@ return {
         anchor = 'bottom',
       },
       preview = {
-        enabled = true,
+        enabled = false,
         max_size = 10 * 1024 * 1024,
         chunk_size = 8192,
         binary_file_threshold = 1024,
