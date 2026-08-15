@@ -16,16 +16,6 @@ return {
       },
     },
     keys = {
-      -- Context sharing.
-      { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Add selection to chat' },
-      { '<leader>af', '<cmd>ClaudeCodeAdd %:p<cr>', desc = 'Add file to chat' },
-      -- File tree: add selected file(s) to Claude context
-      {
-        '<leader>af',
-        '<cmd>ClaudeCodeTreeAdd<cr>',
-        desc = 'Add file',
-        ft = { 'NvimTree', 'neo-tree', 'oil', 'minifiles', 'netrw' },
-      },
       -- Diff management
       { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
       { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
@@ -50,25 +40,12 @@ return {
     keys = {
       -- Terminal lifecycle
       {
-        '<leader>at',
+        '<C-a>',
         function()
           require('sidekick.cli').toggle({ filter = { installed = true } })
         end,
-        desc = 'Agent toggle',
-      },
-      {
-        '<leader>al',
-        function()
-          require('sidekick.cli').select()
-        end,
+        mode = { 'n', 't', 'i', 'x' },
         desc = 'Agents list',
-      },
-      {
-        '<leader>aq',
-        function()
-          require('sidekick.cli').close()
-        end,
-        desc = 'Quit session',
       },
       {
         '<C-s>',
@@ -85,6 +62,28 @@ return {
         end,
         mode = { 'n', 'x' },
         desc = 'Prompt templates',
+      },
+      {
+        "<leader>al",
+        function() require("sidekick.cli").send({ msg = "{position}" }) end,
+        mode = { 'x' },
+        desc = "Add lines to prompt",
+      },
+      {
+        "<leader>af",
+        function() require("sidekick.cli").send({ msg = "{file}" }) end,
+        desc = "Add file to prompt",
+      },
+      {
+        "<leader>as",
+        function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+        mode = { "x" },
+        desc = "Add selection to prompt",
+      },
+      {
+        "<leader>ab",
+        function() require("sidekick.cli").send({ msg = "{buffers}" }) end,
+        desc = "Add buffers to prompt",
       },
     },
   },
