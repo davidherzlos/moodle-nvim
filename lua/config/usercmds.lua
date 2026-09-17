@@ -114,7 +114,7 @@ vim.api.nvim_create_user_command("MoodleTestSuite", function (opts)
 
 end, { nargs = "?", desc = "Moodle run TestSuite" })
 
--- Add a usercmd to purge Moodle cache.
+-- Add a usercmd to purge Moodle caches.
 vim.api.nvim_create_user_command("MoodlePurgeCaches", function ()
   term.open_term()
   vim.cmd("startinsert")
@@ -122,6 +122,15 @@ vim.api.nvim_create_user_command("MoodlePurgeCaches", function ()
   local run_cmd = "php -d xdebug.mode=off admin/cli/purge_caches.php\n"
   vim.fn.chansend(job_id, run_cmd)
 end, { desc = "Purge Moodle caches" })
+
+-- Add a usercmd to initialize phpunit.
+vim.api.nvim_create_user_command("MoodlePhpunitInit", function ()
+  term.open_term()
+  vim.cmd("startinsert")
+  local job_id = vim.bo.channel
+  local run_cmd = "php -d xdebug.mode=off admin/tool/phpunit/cli/init.php\n"
+  vim.fn.chansend(job_id, run_cmd)
+end, { desc = "Initialize phpunit" })
 
 -- Add a usercmd to run the Moodle upgrade script with no user interaction.
 vim.api.nvim_create_user_command("MoodleUpgrade", function ()

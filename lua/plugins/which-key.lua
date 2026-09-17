@@ -47,7 +47,6 @@ return {
         { '<leader>t', group = 'Testing', icon = { icon = '' } },
         { '<leader>.', group = 'Scratch buffer', icon = { icon = '󰇘' } },
 
-
       })
     end,
     keys = {
