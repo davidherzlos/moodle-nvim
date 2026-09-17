@@ -101,8 +101,8 @@ return {
         signs = {
           error = { text = ' ', hl = 'DiagnosticSignError' },
           warning = { text = ' ', hl = 'DiagnosticSignWarn' },
-          info = { text = ' ', hl = 'DiagnosticSignInfo' },
-          hint = { text = ' ', hl = 'DiagnosticSignHint' },
+          info = { text = '󰌵 ', hl = 'DiagnosticSignInfo' },
+          hint = { text = '󰌵 ', hl = 'DiagnosticSignHint' },
         },
       })
     end

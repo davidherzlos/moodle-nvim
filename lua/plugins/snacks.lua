@@ -14,7 +14,7 @@ return {
           icons = {
             error = ' ',
             warn = ' ',
-            info = ' ',
+            info = '󰌵 ',
             debug = ' ',
             trace = ' ',
           },
