@@ -98,6 +98,14 @@ function M.get_project_root_markers()
   return { '.git', 'composer.json' }
 end
 
+-- Get the project root markers for javascript/typescript development.
+function M.get_js_root_markers()
+  if _moodle_root_markers_exists() then
+    return { 'version.php', 'package.json', 'composer.json' }
+  end
+  return { 'package.json', 'jsconfig.json', 'tsconfig.json', '.git' }
+end
+
 -- Get the closest plugin root.
 function M.get_plugin_root(path)
   return _get_closest_root(path)

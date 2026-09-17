@@ -24,7 +24,6 @@ formatters['php-cs-fixer'] = {
 }
 formatters['biome'] = {}
 formatters['stylua'] = {}
-formatters['typescript-language-server'] = {}
 
 -- Add here any custom config to linters.
 local linters = {}
@@ -49,9 +48,8 @@ end
 function M.linters_by_ft()
   return {
     php = { 'phpcs' },
-    javascript = { 'biome' },
-    json = { 'biome' },
-    typescript = { 'typescript-language-server' },
+    javascript = { 'biomejs' },
+    json = { 'biomejs' },
     lua = { 'selene' },
   }
 end

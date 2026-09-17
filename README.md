@@ -63,7 +63,7 @@ Built on [lazy.nvim](https://github.com/folke/lazy.nvim), with sensible defaults
 
 The following tools are installed automatically via [Mason](https://github.com/williamboman/mason.nvim) (Neovim's tool installer) on first launch:
 
-`intelephense` · `phpactor` · `phpcs` / `phpcbf` · `php-cs-fixer` · `phpstan` · `php-debug-adapter` · `lua-language-server` · `bash-language-server` · `stylua` · `selene` · `biome` · `beautysh`
+`intelephense` · `phpactor` · `phpcs` / `phpcbf` · `php-cs-fixer` · `phpstan` · `php-debug-adapter` · `lua-language-server` · `bash-language-server` · `typescript-language-server` · `stylua` · `selene` · `biome` · `beautysh`
 
 ---
 
@@ -258,6 +258,7 @@ A Language Server (LSP) is a background process that gives the editor deep under
 |--------|----------|
 | [**Intelephense**](https://intelephense.com) | Completions, go-to-definition, references, symbols, hover, rename, code lens |
 | [**PHPActor**](https://phpactor.readthedocs.io) | Code actions only (extract method, introduce variable, etc.) |
+| [**typescript-language-server**](https://github.com/typescript-language-server/typescript-language-server) | Completions, go-to-definition, references, hover, diagnostics for JS/TS |
 
 **Formatting** is off by default. Enable with `:ConformToggle`.
 

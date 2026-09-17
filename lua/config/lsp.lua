@@ -142,6 +142,15 @@ lsp_configs['phpactor'] = {
   end,
 }
 
+-- Setup LSP for javascript/typescript programming.
+
+-- https://github.com/typescript-language-server/typescript-language-server
+lsp_configs['typescript-language-server'] = {
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  root_markers = utils.get_js_root_markers(),
+}
+
 -- Expose as module so it can be handled externally.
 local M = {}
 
